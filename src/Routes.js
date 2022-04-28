@@ -11,7 +11,7 @@ import HomePage from "./components/Body/HomePage2";
 import ArtExplore from "./components/Header/Explores/Art_Explore/ArtExplore";
 import MusicExplore from "./components/Header/Explores/Music_Explore/MusicExplore";
 import SportsExplore from "./components/Header/Explores/Sports_Explore/SportsExplore";
-import DetailsPage from "./components/DetailsPage/DetailsPage";
+
 import ProfilePage from "./components/ProfilePage/ProfilePage";
 import MyWallet from "./components/ProfilePage/MyWallet";
 import HowItWorks from "./components/Header/HowItWorks/HowITworks";
@@ -19,20 +19,22 @@ import CreateNft from "./components/Create/Create";
 
 import Home from "./Pages/Home";
 import PublishArt from "./Pages/PublishArt";
+import DetailsPage from "./Pages/DetailsPage";
 
 class Routes extends React.Component {
   render() {
     return (
       <Switch>
         <Route exact path="/" component={Home} />
-        <Route exact path="/home" component={HomePage} />
         <Route exact path="/publishArt" component={PublishArt} />
+        <Route exact path="/details/:id" component={DetailsPage} />
+
+        <Route exact path="/home" component={HomePage} />
         <Route exact path="/HowItWorks" component={HowItWorks} />
         <Route exact path="/myWallet" component={ProfilePage} />
         <Route exact path="/myTransactions" component={Wallettransactions} />
         <Route exact path="/UploadtoIPFS" component={UploadIPFS} />
         <Route exact path="/loadIPFS" component={loadIPFS} />
-        <Route exact path="/descPage/:id" component={DetailsPage} />
         <Route exact path="/artPage" component={ArtExplore} />
         <Route exact path="/sportsPage" component={SportsExplore} />
         <Route exact path="/musicPage" component={MusicExplore} />

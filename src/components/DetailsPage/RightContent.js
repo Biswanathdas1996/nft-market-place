@@ -17,35 +17,20 @@ import EthIcon from "../../assets/icons/eth_icon.svg";
 import Bid from "./Bid";
 import Attributes from "./Attributes";
 import TransactionHistory from "./TransactionHistory";
-import { useFindArtTokens, useBuySellArt } from "../../hooks/DigitalArtHooks";
 
 const countData = ["05", "08", "35", "12"];
 
-const RightContent = (props) => {
-  console.log("right content props:", props);
-  const artTokens = useFindArtTokens({ filter: "pending" });
-  const { response: buyArtResponse, buyArt } = useBuySellArt();
+const RightContent = () => {
   const [value, setValue] = React.useState("1");
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
-  const handleBuyArt = async (tokenId, price) => {
-    await buyArt({ tokenId, price });
-    console.log(buyArtResponse);
 
-    if (buyArtResponse?.error !== null) {
-      window.location.reload();
-    }
-  };
-
-  // const handleChange = (event, newValue) => {
-  //   setValue(newValue);
-  // };
   return (
     <Container>
       <Typography sx={{ fontSize: 30, fontWeight: "bold" }}>
-        {props.rightitem.title}
+        Nft Title
       </Typography>
       <Stack direction="row" spacing={12} marginTop="20px">
         <Stack direction="row">
@@ -107,9 +92,10 @@ const RightContent = (props) => {
               height="20px"
               src={EthIcon}
               style={{ marginTop: "4px" }}
+              alt="nft"
             />
             <Typography sx={{ fontWeight: "bold", fontSize: "18px" }}>
-              {props.rightitem.price} ETH
+              0.001 ETH
             </Typography>
           </Stack>
         </Grid>
@@ -146,11 +132,8 @@ const RightContent = (props) => {
             textAlign: "center",
             margin: 1,
           }}
-          onClick={() =>
-            handleBuyArt(props.rightitem.id, props.rightitem.price)
-          }
         >
-          Buy for {props.rightitem.price} ETH
+          Buy for 0.002 ETH
         </Button>
         <Button
           variant="outlined"
@@ -179,7 +162,6 @@ const RightContent = (props) => {
             <TabList onChange={handleChange} aria-label="lab API tabs example">
               <Tab
                 label="Attributes"
-                disabled
                 value="2"
                 sx={{
                   textTransform: "none",
@@ -207,17 +189,9 @@ const RightContent = (props) => {
               />
             </TabList>
           </Box>
-          {/* <TabPanel value="1" sx={{ mt: "20px" }}>
-            Attributes
-          </TabPanel> */}
           <Attributes />
           <TransactionHistory />
-
           <Bid />
-
-          {/* <Attributes />
-          <TransactionHistory />
-          <Bid /> */}
         </TabContext>
       </Box>
     </Container>

@@ -114,10 +114,16 @@ export default function NFTCard({ tokenId }) {
         <CardContent style={{ paddingBottom: 0 }}>
           <Avatars />
           <Typography
-            gutterBottom
-            variant="h7"
-            component="h4"
-            style={{ fontSize: 14, fontWeight: "bold" }}
+            style={{ fontSize: 14 }}
+            variant="body2"
+            paragraph
+            item
+            fontWeight="600"
+            sx={{
+              overflow: "hidden",
+              textOverflow: "ellipsis",
+              width: "11rem",
+            }}
           >
             {nftData?.name} #{tokenId}
           </Typography>
