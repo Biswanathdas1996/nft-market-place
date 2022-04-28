@@ -47,7 +47,7 @@ export default function HomePage() {
           variant="h7"
           textAlign="left"
           color="text.primary"
-          // gutterBottom
+          style={{ fontSize: 17, fontWeight: "bold" }}
         >
           Top Selling
         </Typography>
@@ -95,7 +95,7 @@ export default function HomePage() {
           variant="h7"
           textAlign="left"
           color="text.primary"
-          // gutterBottom
+          style={{ fontSize: 17, fontWeight: "bold" }}
         >
           Recent Activity
         </Typography>

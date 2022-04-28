@@ -1,13 +1,13 @@
 import React from "react";
 import { Route, Switch } from "react-router-dom";
 import ArtHome from "./ArtHome";
-import PublishArt from "./PublishArt2";
+
 // import MyWallet from "./components/ProfilePage/MyWallet";
 import Wallettransactions from "./Wallettransactions";
 import UploadIPFS from "./UploadIPFS";
 import loadIPFS from "./loadIPFS";
 import DescriptionCard from "./DescriptionCard";
-import HomePage from "./components/Body/HomePage";
+import HomePage from "./components/Body/HomePage2";
 import ArtExplore from "./components/Header/Explores/Art_Explore/ArtExplore";
 import MusicExplore from "./components/Header/Explores/Music_Explore/MusicExplore";
 import SportsExplore from "./components/Header/Explores/Sports_Explore/SportsExplore";
@@ -18,6 +18,7 @@ import HowItWorks from "./components/Header/HowItWorks/HowITworks";
 import CreateNft from "./components/Create/Create";
 
 import Home from "./Pages/Home";
+import PublishArt from "./Pages/PublishArt";
 
 class Routes extends React.Component {
   render() {

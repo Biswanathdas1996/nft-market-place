@@ -26,7 +26,7 @@ const Mint = () => {
   const [file, setFile] = useState(null);
   const [selectedFile, setSelectedFile] = useState();
   const [preview, setPreview] = useState();
-//   let history = useNavigate();
+  //   let history = useNavigate();
 
   const saveData = async ({ name, text, attributes, price, royelty }) => {
     setStart(true);
@@ -73,11 +73,8 @@ const Mint = () => {
     setSelectedFile(event.target.files[0]);
   };
 
- 
-
   return (
     <>
-
       <div>
         <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
           <Grid item lg={3} md={3} sm={12} xs={12}></Grid>
@@ -95,7 +92,7 @@ const Mint = () => {
                       <h4>Create NFT</h4>
                       <Formik
                         initialValues={{
-                        authorname:"",
+                          authorname: "",
                           name: "",
                           text: "",
                           royelty: "",
@@ -116,7 +113,7 @@ const Mint = () => {
                       >
                         {({ touched, errors, isSubmitting, values }) => (
                           <Form>
-                               <div
+                            <div
                               className="form-group"
                               style={{ marginLeft: 10, marginTop: 10 }}
                             >

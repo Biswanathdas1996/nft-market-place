@@ -111,9 +111,14 @@ export default function NFTCard({ tokenId }) {
             </Grid>
           </div>
         </Tooltip>
-        <CardContent sx={{ flexGrow: 1 }}>
+        <CardContent style={{ paddingBottom: 0 }}>
           <Avatars />
-          <Typography gutterBottom variant="h7" component="h4">
+          <Typography
+            gutterBottom
+            variant="h7"
+            component="h4"
+            style={{ fontSize: 14, fontWeight: "bold" }}
+          >
             {nftData?.name} #{tokenId}
           </Typography>
 
@@ -127,32 +132,36 @@ export default function NFTCard({ tokenId }) {
               <img
                 alt="nft"
                 width="10px"
-                height="20px"
+                height="17px"
                 src={`https://ethereum.org/static/a183661dd70e0e5c70689a0ec95ef0ba/cdbe4/eth-diamond-purple.webp`}
-                style={{
-                  color: "black",
-                  marginTop: 12,
-                  marginRight: 8,
-                }}
+                style={{ marginRight: 5 }}
               ></img>
             </Tooltip>
             <p>
               <span className="text-secondary" style={{ color: "grey" }}>
                 Price{" "}
               </span>
-              <strong>{price / 1000000000000000000} ETH</strong>
+              <strong style={{ fontSize: 12, fontWeight: "bold" }}>
+                {price / 1000000000000000000} ETH
+              </strong>
             </p>
           </div>
         </CardContent>
 
         <Button
           variant="outlined"
-          size="medium"
+          size="small"
           sx={{
             marginX: "15px",
             marginBottom: "15px",
           }}
           onClick={() => buynow()}
+          style={{
+            border: "2px solid #1976d2",
+            fontSize: 10,
+            fontWeight: "bold",
+            padding: 8,
+          }}
         >
           Buy Now
         </Button>
