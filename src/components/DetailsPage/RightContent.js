@@ -7,6 +7,8 @@ import {
   Grid,
   Container,
   Tab,
+  Link,
+  Tooltip,
 } from "@mui/material";
 import React from "react";
 import TabContext from "@mui/lab/TabContext";
@@ -20,18 +22,17 @@ import TransactionHistory from "./TransactionHistory";
 
 const countData = ["05", "08", "35", "12"];
 
-const RightContent = () => {
-  const [value, setValue] = React.useState("1");
+const RightContent = ({ nftData, owner, price }) => {
+  const [value, setValue] = React.useState("2");
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
 
+  const { name, attributes } = nftData;
   return (
     <Container>
-      <Typography sx={{ fontSize: 30, fontWeight: "bold" }}>
-        Nft Title
-      </Typography>
+      <Typography sx={{ fontSize: 30, fontWeight: "bold" }}>{name}</Typography>
       <Stack direction="row" spacing={12} marginTop="20px">
         <Stack direction="row">
           <Avatar
@@ -63,9 +64,28 @@ const RightContent = () => {
             >
               Owner
             </Typography>
-            <Typography sx={{ fontSize: 11, fontWeight: "bold" }}>
-              Paul Sharp
-            </Typography>
+            <Tooltip title="Contrct Address">
+              <Link
+                href="https://rinkeby.etherscan.io/address/0xdfc34335664a0c2c548cf0c837e9b0a9315eeda2"
+                target="_blank"
+                sx={{ textDecoration: "none" }}
+              >
+                <Typography
+                  variant="body2"
+                  paragraph
+                  item
+                  fontWeight="600"
+                  sx={{
+                    overflow: "hidden",
+                    textOverflow: "ellipsis",
+                    width: "11rem",
+                  }}
+                  style={{ fontSize: 10 }}
+                >
+                  {owner}
+                </Typography>
+              </Link>
+            </Tooltip>
           </div>
         </Stack>
       </Stack>
@@ -95,7 +115,7 @@ const RightContent = () => {
               alt="nft"
             />
             <Typography sx={{ fontWeight: "bold", fontSize: "18px" }}>
-              0.001 ETH
+              {price / 1000000000000000000} ETH
             </Typography>
           </Stack>
         </Grid>
@@ -120,7 +140,7 @@ const RightContent = () => {
           ))}
         </Grid>
       </Grid>
-      {/* =============BUTTON======================================================== */}
+
       <div style={{ marginTop: "30px", marginBottom: "30px" }}>
         <Button
           variant="contained"
@@ -133,7 +153,7 @@ const RightContent = () => {
             margin: 1,
           }}
         >
-          Buy for 0.002 ETH
+          Buy for {price / 1000000000000000000} ETH
         </Button>
         <Button
           variant="outlined"
@@ -189,7 +209,7 @@ const RightContent = () => {
               />
             </TabList>
           </Box>
-          <Attributes />
+          <Attributes attributes={attributes} />
           <TransactionHistory />
           <Bid />
         </TabContext>

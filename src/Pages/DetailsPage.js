@@ -73,7 +73,7 @@ export default function DetailsPage({ match }) {
               </Grid>
 
               <Grid item xs={12} md={7}>
-                <RightContent nftData={nftData} />
+                <RightContent nftData={nftData} owner={owner} price={price} />
               </Grid>
             </Grid>
           </main>

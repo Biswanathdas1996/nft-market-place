@@ -3,9 +3,7 @@ import { TabPanel } from "@mui/lab";
 import Box from "@mui/material/Box";
 import { Stack, Typography } from "@mui/material";
 
-const boxes = [1, 2, 3, 4, 5, 6, 7, 8];
-
-const Attributes = () => {
+const Attributes = ({ attributes }) => {
   return (
     <TabPanel
       value="2"
@@ -28,27 +26,27 @@ const Attributes = () => {
           alignContent: "center",
         }}
       >
-        {boxes.map((box) => (
+        {attributes?.map((attribute, index) => (
           <Stack
-            key={box}
+            key={index}
             sx={{
               backgroundColor: "white",
-              height: 70,
+
               display: "flex",
               alignItems: "flex-start",
               justifyContent: "Center",
               width: "26%",
               marginX: 2,
               marginBottom: 3,
-              padding: 5,
+              padding: 2,
               borderRadius: 1,
             }}
           >
             <Typography sx={{ color: "#797979", fontSize: 13 }}>
-              Eye Color
+              {attribute?.trait_type}
             </Typography>
             <Typography sx={{ fontSize: 15, fontWeight: "bold", mt: 1 }}>
-              Purple
+              {attribute?.value}
             </Typography>
           </Stack>
         ))}
