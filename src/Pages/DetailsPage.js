@@ -4,6 +4,7 @@ import { CssBaseline, Container, Grid } from "@mui/material";
 import RightContent from "../components/DetailsPage/RightContent";
 import LeftConrent from "../components/DetailsPage/LeftConrent";
 import { _fetch, _account, _paid_transction } from "../abi2/connect";
+import { useParams } from "react-router-dom";
 
 const theme = createTheme();
 
@@ -15,7 +16,7 @@ export default function DetailsPage({ match }) {
   const [price, setPrice] = useState(null);
   const [response, setResponse] = useState(null);
 
-  const tokenId = match.params.id;
+  const { tokenId } = useParams();
 
   useEffect(() => {
     fetchNftInfo();

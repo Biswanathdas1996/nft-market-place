@@ -9,7 +9,7 @@ import { IconButton, Tooltip } from "@mui/material";
 import Avatars from "./Avatars";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import FavoriteBorderRoundedIcon from "@mui/icons-material/FavoriteBorderRounded";
-
+import { useNavigate } from "react-router-dom";
 import { _fetch, _account, _paid_transction } from "../../abi2/connect";
 
 export default function NFTCard({ tokenId }) {
@@ -19,6 +19,7 @@ export default function NFTCard({ tokenId }) {
   const [account, setAccount] = useState(null);
   const [price, setPrice] = useState(null);
   const [response, setResponse] = useState(null);
+  let history = useNavigate();
 
   useEffect(() => {
     fetchNftInfo();
@@ -59,7 +60,13 @@ export default function NFTCard({ tokenId }) {
   };
 
   return (
-    <Grid item xs={12} sm={6} md={2.4}>
+    <Grid
+      item
+      xs={12}
+      sm={6}
+      md={2.4}
+      onClick={() => history(`/details/${tokenId}`)}
+    >
       <Card
         sx={{
           height: "100%",

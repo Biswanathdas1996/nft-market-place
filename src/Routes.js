@@ -1,5 +1,5 @@
 import React from "react";
-import { Route, Switch } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 import ArtHome from "./ArtHome";
 
 // import MyWallet from "./components/ProfilePage/MyWallet";
@@ -21,32 +21,32 @@ import Home from "./Pages/Home";
 import PublishArt from "./Pages/PublishArt";
 import DetailsPage from "./Pages/DetailsPage";
 
-class Routes extends React.Component {
+class Routing extends React.Component {
   render() {
     return (
-      <Switch>
-        <Route exact path="/" component={Home} />
-        <Route exact path="/publishArt" component={PublishArt} />
-        <Route exact path="/details/:id" component={DetailsPage} />
+      <Routes>
+        <Route exact path="/" element={<Home />} />
+        <Route exact path="/publishArt" element={<PublishArt />} />
+        <Route exact path="/details/:tokenId" element={<DetailsPage />} />
 
-        <Route exact path="/home" component={HomePage} />
-        <Route exact path="/HowItWorks" component={HowItWorks} />
-        <Route exact path="/myWallet" component={ProfilePage} />
-        <Route exact path="/myTransactions" component={Wallettransactions} />
-        <Route exact path="/UploadtoIPFS" component={UploadIPFS} />
-        <Route exact path="/loadIPFS" component={loadIPFS} />
-        <Route exact path="/artPage" component={ArtExplore} />
-        <Route exact path="/sportsPage" component={SportsExplore} />
-        <Route exact path="/musicPage" component={MusicExplore} />
+        <Route exact path="/home" element={<HomePage />} />
+        <Route exact path="/HowItWorks" element={<HowItWorks />} />
+        <Route exact path="/myWallet" element={<ProfilePage />} />
+        <Route exact path="/myTransactions" element={<Wallettransactions />} />
+        <Route exact path="/UploadtoIPFS" element={<UploadIPFS />} />
+        <Route exact path="/loadIPFS" element={<loadIPFS />} />
+        <Route exact path="/artPage" element={<ArtExplore />} />
+        <Route exact path="/sportsPage" element={<SportsExplore />} />
+        <Route exact path="/musicPage" element={<MusicExplore />} />
 
         <Route
           render={function () {
             return <h1>Not Found</h1>;
           }}
         />
-      </Switch>
+      </Routes>
     );
   }
 }
 
-export default Routes;
+export default Routing;
