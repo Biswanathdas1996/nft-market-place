@@ -15,17 +15,17 @@ const MyCollections = () => {
 
   async function fetchAllPosts() {
     setLoading(true);
-
-    const myFev = JSON.parse(localStorage.getItem("myFevTokens"));
-    setToken(myFev);
+    await setToken([]);
+    const myFev = await JSON.parse(localStorage.getItem("myFevTokens"));
+    await setToken(myFev);
     setLoading(false);
   }
 
   return (
     <Grid container spacing={4}>
       {tokens?.length > 0 ? (
-        tokens?.map((item) => (
-          <Grid item xs={12} sm={6} md={4}>
+        tokens?.map((item, key) => (
+          <Grid item xs={12} sm={6} md={4} key={`feb_${key}`}>
             <NftCard tokenId={item} reload={fetchAllPosts} />
           </Grid>
         ))
