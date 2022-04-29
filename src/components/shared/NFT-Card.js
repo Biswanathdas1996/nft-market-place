@@ -13,7 +13,7 @@ import { _fetch, _account } from "../../abi2/connect";
 import { buyNft } from "../../functions/buyNft";
 import TransctionModal from "./TransctionModal";
 
-export default function NFTCard({ tokenId }) {
+export default function NFTCard({ tokenId, reload = () => null }) {
   const [nftData, setNftData] = useState(null);
   const [start, setStart] = useState(false);
   const [price, setPrice] = useState(null);
@@ -77,6 +77,7 @@ export default function NFTCard({ tokenId }) {
     }
     setFevToken(tokens);
     localStorage.setItem("myFevTokens", JSON.stringify(tokens));
+    reload();
   };
 
   return (

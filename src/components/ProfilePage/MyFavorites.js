@@ -26,7 +26,7 @@ const MyCollections = () => {
       {tokens?.length > 0 ? (
         tokens?.map((item) => (
           <Grid item xs={12} sm={6} md={4}>
-            <NftCard tokenId={item} />
+            <NftCard tokenId={item} reload={fetchAllPosts} />
           </Grid>
         ))
       ) : loading ? (
