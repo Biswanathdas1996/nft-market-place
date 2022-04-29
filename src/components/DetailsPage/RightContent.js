@@ -22,7 +22,7 @@ import TransactionHistory from "./TransactionHistory";
 
 const countData = ["05", "08", "35", "12"];
 
-const RightContent = ({ nftData, owner, price }) => {
+const RightContent = ({ nftData, owner, price, buynow }) => {
   const [value, setValue] = React.useState("2");
 
   const handleChange = (event, newValue) => {
@@ -152,6 +152,7 @@ const RightContent = ({ nftData, owner, price }) => {
             textAlign: "center",
             margin: 1,
           }}
+          onClick={buynow}
         >
           Buy for {price / 1000000000000000000} ETH
         </Button>

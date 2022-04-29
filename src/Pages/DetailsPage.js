@@ -7,6 +7,9 @@ import { _fetch, _account, _paid_transction } from "../abi2/connect";
 import { useParams } from "react-router-dom";
 import RecentActivity from "../components/shared/RecentActivity";
 
+import { buyNft } from "../functions/buyNft";
+import TransctionModal from "../components/shared/TransctionModal";
+
 const theme = createTheme();
 
 export default function DetailsPage({ match }) {
@@ -42,13 +45,7 @@ export default function DetailsPage({ match }) {
 
   const buynow = async () => {
     setStart(true);
-    const responseData = await _paid_transction(
-      Number(price),
-      "buyNft",
-      owner,
-      account,
-      Number(tokenId)
-    );
+    const responseData = await buyNft(Number(tokenId));
     setResponse(responseData);
   };
 
@@ -57,9 +54,9 @@ export default function DetailsPage({ match }) {
     setResponse(null);
   };
 
-  console.log("--nftData-->", nftData);
   return (
     <ThemeProvider theme={theme}>
+      {start && <TransctionModal response={response} modalClose={modalClose} />}
       <CssBaseline />
       <Container>
         <main style={{ marginBottom: 30 }}>
@@ -75,7 +72,12 @@ export default function DetailsPage({ match }) {
               </Grid>
 
               <Grid item xs={12} md={7}>
-                <RightContent nftData={nftData} owner={owner} price={price} />
+                <RightContent
+                  nftData={nftData}
+                  owner={owner}
+                  price={price}
+                  buynow={buynow}
+                />
               </Grid>
             </Grid>
           )}
