@@ -69,10 +69,7 @@ export default function NFTCard({ tokenId }) {
           border: "0.01px solid rgba(0, 0, 0, 0.09)",
         }}
       >
-        <Tooltip
-          title="Nefrofeel by Pablo Picasso"
-          onClick={() => history(`/details/${tokenId}`)}
-        >
+        <Tooltip title="Nefrofeel by Pablo Picasso">
           <div
             style={{
               backgroundImage: `url(${nftData?.image})`,
@@ -81,7 +78,9 @@ export default function NFTCard({ tokenId }) {
               backgroundSize: "cover",
               backgroundRepeat: "no-repeat",
               margin: "15px 15px 0px 15px",
+              cursor: "pointer",
             }}
+            onClick={() => history(`/details/${tokenId}`)}
           >
             <Grid container>
               <Grid xs={2}>

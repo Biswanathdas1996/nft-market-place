@@ -9,19 +9,20 @@ import FilterAltOutlinedIcon from "@mui/icons-material/FilterAltOutlined";
 import NftCard from "../components/shared/NFT-Card";
 import RecentActivity from "../components/shared/RecentActivity";
 import { _fetch } from "../abi2/connect";
+import Loader from "../components/shared/Loader";
 
 export default function HomePage() {
   const [tokens, setToken] = useState([]);
-  // const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     fetchAllPosts();
   }, []);
 
   async function fetchAllPosts() {
-    // setLoading(true);
+    setLoading(true);
     const getAllToken = await _fetch("getToken");
-    // setLoading(false);
+    setLoading(false);
     setToken(getAllToken);
   }
 
@@ -63,11 +64,21 @@ export default function HomePage() {
       </Toolbar>
 
       <Grid container spacing={4}>
-        {tokens?.map((item) => (
-          <Grid item xs={12} sm={6} md={2.4}>
-            <NftCard tokenId={item} />
+        {tokens && tokens?.length > 0 ? (
+          tokens?.map((item) => (
+            <Grid item xs={12} sm={6} md={2.4}>
+              <NftCard tokenId={item} />
+            </Grid>
+          ))
+        ) : loading ? (
+          <Grid item xs={12} sm={12} md={12}>
+            <Loader count="10" xs={12} sm={6} md={2.4} />
           </Grid>
-        ))}
+        ) : (
+          <Grid item xs={12} sm={12} md={12}>
+            <h3>No NFT available</h3>
+          </Grid>
+        )}
       </Grid>
 
       <RecentActivity />

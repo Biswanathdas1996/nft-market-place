@@ -1,34 +1,26 @@
 import * as React from "react";
-import CircularProgress from "@mui/material/CircularProgress";
-import { Stack } from "@mui/material";
-import { TabPanel } from "@mui/lab";
+import Skeleton from "@mui/material/Skeleton";
+import Stack from "@mui/material/Stack";
+import { Grid } from "@mui/material";
 
-const Loader = ({ text }) => {
+export default function Variants({ count, itemPerRow, xs, sm, md, lg }) {
+  let items = [];
+  for (let i = 0; i < count; i++) {
+    items.push(i);
+  }
   return (
-    <TabPanel value="3" sx={{ width: "100%", height: "auto" }}>
-      <Stack
-        direction="Column"
-        sx={{
-          display: "flex",
-          flexWrap: "wrap",
-          alignItems: "center",
-          justifyContent: "Center",
-          p: 5,
-        }}
-      >
-        <div
-          style={{
-            color: "#ABB2B9",
-            fontSize: 14,
-            fontWeight: "bold",
-            marginTop: 5,
-          }}
-        >
-          <CircularProgress />
-        </div>
-      </Stack>
-    </TabPanel>
+    <Grid container spacing={4}>
+      {items.map((data, index) => (
+        <Grid item xs={xs} sm={sm} md={md} lg={lg} key={index}>
+          <Stack spacing={1}>
+            <Skeleton variant="text" animation="wave" />
+            <Skeleton variant="rectangular" animation="wave" height={118} />
+            <Skeleton animation="wave" />
+            <Skeleton animation="wave" />
+            <Skeleton animation="wave" />
+          </Stack>
+        </Grid>
+      ))}
+    </Grid>
   );
-};
-
-export default Loader;
+}

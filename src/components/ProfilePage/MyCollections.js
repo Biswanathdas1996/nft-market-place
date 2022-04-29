@@ -42,7 +42,7 @@ const MyCollections = () => {
             </Grid>
           ))
         ) : loading ? (
-          <Loader />
+          <Loader count="8" xs={12} sm={3} md={3} lg={3} />
         ) : (
           <NoData text="You does noy have any NFT" />
         )}

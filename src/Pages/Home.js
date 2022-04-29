@@ -10,10 +10,12 @@ import NftCard from "../components/shared/NFT-Card";
 import RecentActivity from "../components/shared/RecentActivity";
 import { _fetch } from "../abi2/connect";
 import { useNavigate } from "react-router-dom";
+import Loader from "../components/shared/Loader";
+import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 
 export default function HomePage() {
   const [tokens, setToken] = useState([]);
-  // const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(false);
   let history = useNavigate();
 
   useEffect(() => {
@@ -21,10 +23,11 @@ export default function HomePage() {
   }, []);
 
   async function fetchAllPosts() {
-    // setLoading(true);
+    setLoading(true);
     const getAllToken = await _fetch("getToken");
-    // setLoading(false);
-    setToken(getAllToken);
+
+    await setToken(getAllToken);
+    setLoading(false);
   }
 
   return (
@@ -74,26 +77,39 @@ export default function HomePage() {
       </Toolbar>
 
       <Grid container spacing={4}>
-        {tokens?.map((item) => (
-          <Grid item xs={12} sm={6} md={2.4}>
-            <NftCard tokenId={item} />
+        {tokens && tokens?.length > 0 ? (
+          tokens?.map((item) => (
+            <Grid item xs={12} sm={6} md={2.4}>
+              <NftCard tokenId={item} />
+            </Grid>
+          ))
+        ) : loading ? (
+          <Grid item xs={12} sm={12} md={12}>
+            <Loader count="10" xs={12} sm={6} md={2.4} />
           </Grid>
-        ))}
+        ) : (
+          <Grid item xs={12} sm={12} md={12}>
+            <h3>No NFT available</h3>
+          </Grid>
+        )}
       </Grid>
 
       <center>
-        <Button
-          onClick={() => history(`/top-selling`)}
-          variant="contained"
-          type="button"
-          sx={{
-            marginRight: "20px",
-            textTransform: "none",
-          }}
-          style={{ margin: 20, width: "8rem" }}
-        >
-          View All
-        </Button>
+        {!loading && (
+          <Button
+            onClick={() => history(`/top-selling`)}
+            variant="contained"
+            type="button"
+            sx={{
+              marginRight: "20px",
+              textTransform: "none",
+            }}
+            style={{ margin: 20, width: "8rem" }}
+            endIcon={<ChevronRightIcon />}
+          >
+            View All
+          </Button>
+        )}
       </center>
 
       <RecentActivity />
