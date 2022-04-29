@@ -1,25 +1,25 @@
 import React, { useEffect, useState } from "react";
-import Button from "@mui/material/Button";
+
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
-import Container from "@mui/material/Container";
-import { Toolbar, ButtonGroup } from "@mui/material";
-import FilterAltOutlinedIcon from "@mui/icons-material/FilterAltOutlined";
+
+import { Toolbar } from "@mui/material";
+
 import NftCard from "./NFT-Card";
 import { _fetch } from "../../abi2/connect";
 
 export default function HomePage() {
   const [tokens, setToken] = useState([]);
-  const [loading, setLoading] = useState(false);
+  // const [loading, setLoading] = useState(false);
   useEffect(() => {
     fetchAllPosts();
   }, []);
 
   async function fetchAllPosts() {
-    setLoading(true);
+    // setLoading(true);
     const getAllToken = await _fetch("getToken");
-    setLoading(false);
+    // setLoading(false);
     setToken(getAllToken);
   }
 

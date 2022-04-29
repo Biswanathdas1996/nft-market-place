@@ -8,13 +8,7 @@ import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import MusicImg from "../../../../assets/images/music1.jpeg";
-import {
-  IconButton,
-  Toolbar,
-  ButtonGroup,
-  Divider,
-  Tooltip,
-} from "@mui/material";
+import { IconButton, Toolbar, ButtonGroup, Tooltip } from "@mui/material";
 import Avatars from "../../../Body/Avatars";
 import EthIcon from "../../../../assets/icons/eth_icon.svg";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
@@ -158,6 +152,7 @@ export default function MusicExplore() {
                       <Tooltip title="Ethereum">
                         <img
                           width="10px"
+                          alt="img"
                           height="20px"
                           src={EthIcon}
                           style={{

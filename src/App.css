@@ -1,10 +1,10 @@
 .App {
-  text-align: center;
+  /* text-align: center; */
+  font-family: Georgia, serif;
 }
 
 .Description {
- text-align: right;
-
+  text-align: right;
 }
 .align {
   text-align: left;
@@ -31,13 +31,10 @@
   width: 100px;
   height: 100px;
   background-size: cover;
-  border: 1px solid #3F729B;
+  border: 1px solid #3f729b;
   margin-top: 10px;
 }
 
 .leftHeader {
-  
   background: linear-gradient(180deg, #4aaebd 0%, rgba(108, 12, 184, 0) 100%);
-  
-
 }

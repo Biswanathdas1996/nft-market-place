@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { Avatar, Tooltip, Stack, Typography } from "@mui/material";
 import {
   Card,
@@ -11,12 +11,9 @@ import {
 } from "@mui/material";
 import { TabPanel } from "@mui/lab";
 import MaleImg from "../../assets/images/male1.png";
-import FemaleImg from "../../assets/images/female1.png";
 import EthIcon from "../../assets/icons/eth_icon.svg";
 import CustomButton from "./CustomButton";
 import MonetizationOnOutlined from "@mui/icons-material/MonetizationOnOutlined";
-import Axios from "axios";
-import axios from "axios";
 
 const columns = [
   { id: "img" },

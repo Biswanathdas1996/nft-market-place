@@ -115,6 +115,7 @@ const MyFavorites = () => {
                         height="20px"
                         src={EthIcon}
                         style={{ color: "black", marginTop: "1px" }}
+                        alt="img"
                       ></img>
                     </Grid>
                     <Grid item xs={10}>

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
-import { Formik, Form, Field, ErrorMessage, FieldArray } from "formik";
-import * as Yup from "yup";
+import { Formik, Form, Field, FieldArray } from "formik";
+// import * as Yup from "yup";
 import { Card, Grid } from "@mui/material";
 import { _transction } from "../../src/abi2/connect";
 import { create } from "ipfs-http-client";
@@ -18,12 +18,12 @@ const web3 = new Web3(window.ethereum);
 
 const client = create("https://ipfs.infura.io:5001/api/v0");
 
-const VendorSchema = Yup.object().shape({
-  name: Yup.string().required("Name is required"),
-  authorname: Yup.string().required("Authorname is required"),
-  price: Yup.string().required("Price is required"),
-  royelty: Yup.string().required("Royelty amount is required"),
-});
+// const VendorSchema = Yup.object().shape({
+//   name: Yup.string().required("Name is required"),
+//   authorname: Yup.string().required("Authorname is required"),
+//   price: Yup.string().required("Price is required"),
+//   royelty: Yup.string().required("Royelty amount is required"),
+// });
 
 const Mint = () => {
   const [start, setStart] = useState(false);

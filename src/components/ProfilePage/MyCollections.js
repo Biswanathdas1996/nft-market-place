@@ -6,11 +6,11 @@ import {
   Card,
   CardMedia,
 } from "@mui/material";
-import React, { useState, useContext } from "react";
+import React, { useState } from "react";
 import { useFindArtTokens, useResellArt } from "../../hooks/DigitalArtHooks";
 import { TabPanel } from "@mui/lab";
 import "../../App.css";
-import Web3Context from "../../Web3Context";
+
 // import Avatars from "../../components/Body/Avatars";
 import EthIcon from "../../assets/icons/eth_icon.svg";
 
@@ -25,7 +25,6 @@ import {
 import { Alert } from "@material-ui/lab";
 
 const MyCollections = (props) => {
-  const web3Context = useContext(Web3Context);
   const [state, setState] = useState({
     message: "",
     tokenId: "",
@@ -112,6 +111,7 @@ const MyCollections = (props) => {
                         height="20px"
                         src={EthIcon}
                         style={{ color: "black", marginTop: "1px" }}
+                        alt="img"
                       ></img>
                     </Grid>
                     <Grid item xs={10}>

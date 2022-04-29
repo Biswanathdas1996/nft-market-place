@@ -1,34 +1,20 @@
-import React, { useState, useEffect } from "react";
-import axios from "axios";
-
+import React from "react";
 import Button from "@mui/material/Button";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
-import { createTheme } from "@mui/material/styles";
-import { Tab, Tabs, Stack } from "@mui/material";
+import { Stack } from "@mui/material";
 import HomeCard from "./HomeCard";
 import { useFindArtTokens, useBuySellArt } from "../../hooks/DigitalArtHooks";
 import { Alert } from "@material-ui/lab";
-import CustomCard from "./CustomCard";
 import FilterListIcon from "@mui/icons-material/FilterList";
 
-const cards = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
-
 export default function HomePage() {
-  const [value, setValue] = React.useState(0);
-
-  const handleChange = (event, newValue) => {
-    setValue(newValue);
-  };
   const artTokens = useFindArtTokens({ filter: "pending" });
   const { response: buyArtResponse, buyArt } = useBuySellArt();
-
   const handleBuyArt = async (tokenId, price) => {
     await buyArt({ tokenId, price });
-    console.log(buyArtResponse);
-
     if (buyArtResponse?.error !== null) {
       window.location.reload();
     }

@@ -7,7 +7,6 @@ import {
   Typography,
   Button,
 } from "@mui/material";
-import LocationOnOutlinedIcon from "@mui/icons-material/LocationOnOutlined";
 import CalendarMonthOutlinedIcon from "@mui/icons-material/CalendarMonthOutlined";
 import Facebook from "../../assets/images/fb.png";
 import Twitter from "../../assets/images/twitter.png";

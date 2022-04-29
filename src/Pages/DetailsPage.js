@@ -3,7 +3,7 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { CssBaseline, Container, Grid } from "@mui/material";
 import RightContent from "../components/DetailsPage/RightContent";
 import LeftConrent from "../components/DetailsPage/LeftConrent";
-import { _fetch, _account, _paid_transction } from "../abi2/connect";
+import { _fetch } from "../abi2/connect";
 import { useParams } from "react-router-dom";
 import RecentActivity from "../components/shared/RecentActivity";
 
@@ -16,7 +16,7 @@ export default function DetailsPage({ match }) {
   const [nftData, setNftData] = useState(null);
   const [start, setStart] = useState(false);
   const [owner, setOwner] = useState(null);
-  const [account, setAccount] = useState(null);
+  // const [account, setAccount] = useState(null);
   const [price, setPrice] = useState(null);
   const [response, setResponse] = useState(null);
 
@@ -24,14 +24,15 @@ export default function DetailsPage({ match }) {
 
   useEffect(() => {
     fetchNftInfo();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   async function fetchNftInfo() {
     const getAllTokenUri = await _fetch("tokenURI", tokenId);
     const getOwner = await _fetch("ownerOf", tokenId);
     setOwner(getOwner);
-    const account = await _account();
-    setAccount(account);
+    // const account = await _account();
+    // setAccount(account);
     const price = await _fetch("getNftPrice", tokenId);
     setPrice(price);
 

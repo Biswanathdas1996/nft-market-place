@@ -1,4 +1,5 @@
 import React from "react";
+
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
@@ -8,13 +9,15 @@ import Menu from "@mui/material/Menu";
 import MoreIcon from "@mui/icons-material/MoreVert";
 import { Button } from "@mui/material";
 import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
-import PwcLogo from "../../assets/images/nft.png";
+
 import SportsSoccerIcon from "@mui/icons-material/SportsSoccer";
 import MusicNoteIcon from "@mui/icons-material/MusicNote";
 import ColorLensIcon from "@mui/icons-material/ColorLens";
 import GridViewIcon from "@mui/icons-material/GridView";
 import Link from "@material-ui/core/Link";
-import SearchBar from "./Search Bar/SearchBar";
+import { useNavigate } from "react-router-dom";
+import SearchBar from "../shared/SearchBar";
+import PwcLogo from "../../assets/images/nft.png";
 
 const pages = [
   {
@@ -35,7 +38,7 @@ const Header = () => {
   // const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
-
+  let history = useNavigate();
   const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
 
@@ -52,9 +55,10 @@ const Header = () => {
     setMobileMoreAnchorEl(null);
   };
 
-  const handleMenuClose = () => {
+  const handleMenuClose = (category = "") => {
     setAnchorEl(null);
     handleMobileMenuClose();
+    history(`/category/${category.toLowerCase()}`);
   };
 
   const handleMobileMenuOpen = (event) => {
@@ -78,19 +82,35 @@ const Header = () => {
       open={isMenuOpen}
       onClose={handleMenuClose}
     >
-      <MenuItem onClick={handleMenuClose} component="a" href="/">
+      <MenuItem
+        onClick={() => {
+          handleMenuClose();
+        }}
+      >
         <GridViewIcon sx={{ marginRight: "10px" }} />
         All
       </MenuItem>
-      <MenuItem onClick={handleMenuClose} component="a" href="/artPage">
+      <MenuItem
+        onClick={() => {
+          handleMenuClose("Arts");
+        }}
+      >
         <ColorLensIcon sx={{ marginRight: "10px" }} />
         Arts
       </MenuItem>
-      <MenuItem onClick={handleMenuClose} component="a" href="/musicPage">
+      <MenuItem
+        onClick={() => {
+          handleMenuClose("Music");
+        }}
+      >
         <MusicNoteIcon sx={{ marginRight: "10px" }} />
         Music
       </MenuItem>
-      <MenuItem onClick={handleMenuClose} component="a" href="/sportsPage">
+      <MenuItem
+        onClick={() => {
+          handleMenuClose("Sports");
+        }}
+      >
         <SportsSoccerIcon sx={{ marginRight: "10px" }} />
         Sports
       </MenuItem>
@@ -143,9 +163,14 @@ const Header = () => {
         //   color="red"
       >
         <Toolbar>
-          <Link href="/">
-            <img src={PwcLogo} height={"60px"} width={"60px"} alt="logo" />
-          </Link>
+          <img
+            src={PwcLogo}
+            height={"60px"}
+            width={"60px"}
+            alt="logo"
+            onClick={() => history("/")}
+          />
+
           <Button disabled>
             <SearchBar />
           </Button>

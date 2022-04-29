@@ -1,5 +1,4 @@
-import React, { useState, useEffect } from "react";
-import axios from "axios";
+import React from "react";
 import { Container, Typography, Grid } from "@mui/material";
 import BackgroundImg from "../../assets/images/bckimg.png";
 import MyProfileCard from "./MyProfileCard";
@@ -7,7 +6,6 @@ import Box from "@mui/material/Box";
 import Tab from "@mui/material/Tab";
 import TabContext from "@mui/lab/TabContext";
 import TabList from "@mui/lab/TabList";
-import TabPanel from "@mui/lab/TabPanel";
 import MyTransaction from "./MyTransaction";
 import MyWallet from "./MyWallet";
 import MyCollections from "./MyCollections";
@@ -16,7 +14,7 @@ import MyFavorites from "./MyFavorites";
 const ProfilePage = () => {
   const [value, setValue] = React.useState("1");
 
-  const handleChange = (event, newValue) => {
+  const handleChange = (newValue) => {
     setValue(newValue);
   };
 

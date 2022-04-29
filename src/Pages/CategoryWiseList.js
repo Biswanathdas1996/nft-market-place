@@ -9,13 +9,13 @@ import FilterAltOutlinedIcon from "@mui/icons-material/FilterAltOutlined";
 import NftCard from "../components/shared/NFT-Card";
 import RecentActivity from "../components/shared/RecentActivity";
 import { _fetch } from "../abi2/connect";
-import { useNavigate } from "react-router-dom";
+import { useParams } from "react-router-dom";
 
 export default function HomePage() {
   const [tokens, setToken] = useState([]);
   // const [loading, setLoading] = useState(false);
-  let history = useNavigate();
-
+  const { category } = useParams();
+  console.log("---category====>", category);
   useEffect(() => {
     fetchAllPosts();
   }, []);
@@ -23,6 +23,7 @@ export default function HomePage() {
   async function fetchAllPosts() {
     // setLoading(true);
     const getAllToken = await _fetch("getToken");
+    console.log("========>", getAllToken);
     // setLoading(false);
     setToken(getAllToken);
   }
@@ -42,19 +43,10 @@ export default function HomePage() {
           color="text.primary"
           fontSize="40px"
         >
-          Buy/Sell Digital Art on our Art Gallery
+          Top Selling Art on our Art Gallery
         </Typography>
       </Box>
       <Toolbar style={{ padding: 0 }}>
-        <Typography
-          component="h3"
-          variant="h7"
-          textAlign="left"
-          color="text.primary"
-          style={{ fontSize: 17, fontWeight: "bold" }}
-        >
-          Top Selling
-        </Typography>
         <Box sx={{ flexGrow: 1 }} />
         <ButtonGroup size="small">
           <Button>
@@ -78,21 +70,6 @@ export default function HomePage() {
           <NftCard tokenId={item} />
         ))}
       </Grid>
-
-      <center>
-        <Button
-          onClick={() => history(`/top-selling`)}
-          variant="contained"
-          type="button"
-          sx={{
-            marginRight: "20px",
-            textTransform: "none",
-          }}
-          style={{ margin: 20, width: "8rem" }}
-        >
-          View All
-        </Button>
-      </center>
 
       <RecentActivity />
     </Container>

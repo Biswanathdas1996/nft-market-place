@@ -1,9 +1,5 @@
 import React from "react";
 import { Grid, Card, Typography, Tooltip } from "@material-ui/core";
-import Wifi from "@material-ui/icons/Wifi";
-import PermIdentity from "@material-ui/icons/PermIdentity";
-import AccountBalance from "@material-ui/icons/AccountBalance";
-import Lock from "@material-ui/icons/Lock";
 import Box from "@mui/material/Box";
 
 const styles = {

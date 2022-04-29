@@ -1,74 +1,8 @@
 import React from "react";
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableContainer,
-  TableRow,
-  Typography,
-  Avatar,
-  Tooltip,
-  Stack,
-} from "@mui/material";
+import { Typography, Stack } from "@mui/material";
 import { TabPanel } from "@mui/lab";
-import MaleImg from "../../assets/images/male1.png";
 import SpeakerNotesOffIcon from "@mui/icons-material/SpeakerNotesOff";
 // import FemaleImg from '../../assets/images/female.jpg';
-
-function createData(amount, from, date, timeElapsed) {
-  return { amount, from, date, timeElapsed };
-}
-
-const rows = [
-  createData(
-    "0.0025 ETH",
-    "0x1a331b312143621dc86...bdfd",
-    "19/3/2022, 2:15 pm",
-    "3 Days ago"
-  ),
-  createData(
-    "0.0025 ETH",
-    "0x1a331b312143621dc86...bdfd",
-    "On 24/3/2022, 2:06 pm",
-    "2h 3m 20s"
-  ),
-  createData(
-    "0.0025 ETH",
-    "0x1a331b312143621dc86...bdfd",
-    "19/3/2022, 2:15 pm",
-    "3 Days ago"
-  ),
-  createData(
-    "0.0025 ETH",
-    "0x1a331b312143621dc86...bdfd",
-    "On 24/3/2022, 2:06 pm",
-    "2h 3m 20s"
-  ),
-  createData(
-    "0.0025 ETH",
-    "0x1a331b312143621dc86...bdfd",
-    "19/3/2022, 2:15 pm",
-    "3 Days ago"
-  ),
-  createData(
-    "0.0025 ETH",
-    "0x1a331b312143621dc86...bdfd",
-    "On 24/3/2022, 2:06 pm",
-    "2h 3m 20s"
-  ),
-  createData(
-    "0.0025 ETH",
-    "0x1a331b312143621dc86...bdfd",
-    "19/3/2022, 2:15 pm",
-    "3 Days ago"
-  ),
-  createData(
-    "0.0025 ETH",
-    "0x1a331b312143621dc86...bdfd",
-    "On 24/3/2022, 2:06 pm",
-    "2h 3m 20s"
-  ),
-];
 
 const Bid = () => {
   return (

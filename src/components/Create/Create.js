@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-// import "../../App.css";
 import {
   Container,
   Typography,
@@ -8,13 +7,8 @@ import {
   Card,
   CardActions,
   CardContent,
-  CardHeader,
-  //   TextField,
 } from "@material-ui/core";
 
-import axios from "axios";
-import fs from "fs";
-import FormData from "form-data";
 import { Alert } from "@material-ui/lab";
 import { useCreateTokenAndSellArt } from "../../hooks/DigitalArtHooks";
 import { create } from "ipfs-http-client";
@@ -23,8 +17,7 @@ import { TextField, Stack } from "@mui/material";
 const CreateNft = (props) => {
   const { response: createTokenAndSellArtResponse, createTokenAndSellArt } =
     useCreateTokenAndSellArt();
-  const [file, setFile] = useState("");
-  const [buffer, setBuffer] = useState("");
+
   const [state, setState] = useState({
     isFetching: false,
     imageValue: "",
@@ -86,10 +79,6 @@ const CreateNft = (props) => {
     await createTokenAndSellArt(tokenArt);
     props.history.push(`/home`);
     window.location.reload();
-  };
-
-  const handleFile = (e) => {
-    setFile(e.target.files[0]);
   };
 
   return (

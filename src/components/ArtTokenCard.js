@@ -10,7 +10,6 @@ import {
   CardHeader,
   Typography,
 } from "@material-ui/core";
-import { Route, Routes } from "react-router-dom";
 
 const ArtTokenCard = (props) => {
   return (
@@ -23,7 +22,7 @@ const ArtTokenCard = (props) => {
         // action={"Pro" === "Pro" ? "StarIcon" : null}
         //  className={classes.cardHeader}
       ></CardHeader>
-     <CardActionArea>
+      <CardActionArea>
         <CardMedia
           // className={classes.media}
           className="img-fluid"
@@ -36,39 +35,41 @@ const ArtTokenCard = (props) => {
           </Typography> */}
           <div className="dark-grey-text">{props.price} (ETH)</div>
           <Typography variant="body2" color="textSecondary" component="p">
-            by{" "} <span className="font-weight-bold">{props.author}</span>,{" "}{props.publishDate}
+            by <span className="font-weight-bold">{props.author}</span>,{" "}
+            {props.publishDate}
           </Typography>
           <Alert severity="info">{props.desc}</Alert>
         </CardContent>
       </CardActionArea>
       <CardActions>
-      { props.onBuyArt && 
-        <Button variant="contained" fullWidth color="primary"
-          onClick={(e) => {
-            e.preventDefault();
-            props.onBuyArt(props.tokenId, props.price);
-          }}>
-          Buy
-        </Button>
-        }  
-        { (props.status==='Publish' || props.onSellArt) && 
-                <Button
-                variant="contained"
-                fullWidth
-                color="primary"
-                onClick={(e) => {
-                  e.preventDefault();
-                  props.onSellArt(props.tokenId);
-                }
-                }
-                data-target=".sell-modal"
-                data-toggle="modal" 
-              >
-                {props.status}
-              </Button>
-        }                           
-
-
+        {props.onBuyArt && (
+          <Button
+            variant="contained"
+            fullWidth
+            color="primary"
+            onClick={(e) => {
+              e.preventDefault();
+              props.onBuyArt(props.tokenId, props.price);
+            }}
+          >
+            Buy
+          </Button>
+        )}
+        {(props.status === "Publish" || props.onSellArt) && (
+          <Button
+            variant="contained"
+            fullWidth
+            color="primary"
+            onClick={(e) => {
+              e.preventDefault();
+              props.onSellArt(props.tokenId);
+            }}
+            data-target=".sell-modal"
+            data-toggle="modal"
+          >
+            {props.status}
+          </Button>
+        )}
       </CardActions>
     </Card>
   );

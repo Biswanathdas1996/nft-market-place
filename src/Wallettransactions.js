@@ -1,41 +1,18 @@
+import React, { useContext } from "react";
+import Table from "@mui/material/Table";
+import TableBody from "@mui/material/TableBody";
+import TableCell from "@mui/material/TableCell";
+import TableContainer from "@mui/material/TableContainer";
+import TableHead from "@mui/material/TableHead";
+import TableRow from "@mui/material/TableRow";
+import Paper from "@mui/material/Paper";
+import "./App.css";
+import { useFindArtTokens } from "./hooks/DigitalArtHooks";
+import Web3Context from "./Web3Context";
 
-
-import React ,{useState, useContext}from 'react';
-import Table from '@mui/material/Table';
-import TableBody from '@mui/material/TableBody';
-import TableCell from '@mui/material/TableCell';
-import TableContainer from '@mui/material/TableContainer';
-import TableHead from '@mui/material/TableHead';
-import TableRow from '@mui/material/TableRow';
-import Paper from '@mui/material/Paper';
-import './App.css';
-import { ArtTokenCard, WalletCard } from "./components/";
-import {useFindArtTokens, useResellArt} from "./hooks/DigitalArtHooks";
-import Web3Context  from "./Web3Context";
-
-
-
-export default function Wallettransactions(props) {
-    const web3Context = useContext(Web3Context);
-    console.log(web3Context)
-  const [state, setState] =  useState({
-    message: "",
-    tokenId: "",
-    price: 0,
-    showModal: false,
-  });
-
-  const artTokens  = useFindArtTokens({filter: 'mine'});
-  const {response: resellArtResponse , resellArt } = useResellArt();
-
-
-
-
-
-
-
-
-
+export default function Wallettransactions() {
+  const web3Context = useContext(Web3Context);
+  const artTokens = useFindArtTokens({ filter: "mine" });
   return (
     <TableContainer component={Paper}>
       <Table sx={{ minWidth: 650 }} size="small" aria-label="a dense table">
@@ -52,12 +29,10 @@ export default function Wallettransactions(props) {
           </TableRow>
         </TableHead>
         <TableBody>
-
-          
-          { artTokens.map((row) => (
+          {artTokens.map((row) => (
             <TableRow
               key={web3Context.id}
-              sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+              sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
             >
               <TableCell component="th" scope="row">
                 {row.id}
@@ -74,10 +49,10 @@ export default function Wallettransactions(props) {
               <TableCell component="th" scope="row">
                 {row.authorName}
               </TableCell>
-           
-              <TableCell >{row.status}</TableCell>
-              <TableCell >{row.owner}</TableCell>
-              <TableCell >{row.price}</TableCell>
+
+              <TableCell>{row.status}</TableCell>
+              <TableCell>{row.owner}</TableCell>
+              <TableCell>{row.price}</TableCell>
             </TableRow>
           ))}
         </TableBody>
@@ -85,5 +60,3 @@ export default function Wallettransactions(props) {
     </TableContainer>
   );
 }
-
-

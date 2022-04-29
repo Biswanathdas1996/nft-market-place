@@ -16,7 +16,6 @@ import TransctionModal from "./TransctionModal";
 export default function NFTCard({ tokenId }) {
   const [nftData, setNftData] = useState(null);
   const [start, setStart] = useState(false);
-
   const [price, setPrice] = useState(null);
   const [response, setResponse] = useState(null);
 
@@ -24,6 +23,7 @@ export default function NFTCard({ tokenId }) {
 
   useEffect(() => {
     fetchNftInfo();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   async function fetchNftInfo() {
@@ -34,7 +34,6 @@ export default function NFTCard({ tokenId }) {
     await fetch(getAllTokenUri)
       .then((response) => response.json())
       .then((data) => {
-        console.log(data);
         setNftData(data);
       });
   }

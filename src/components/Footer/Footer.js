@@ -43,7 +43,7 @@ function Footer(props) {
             href="https://www.pwc.com/"
             style={{ textDecoration: "none", marginRight: "30px" }}
           >
-            <img src={PwcLogo} height={"60px"} width={"60px"} />
+            <img src={PwcLogo} height={"60px"} width={"60px"} alt="img" />
           </Link>
           <Typography variant="h6" align="center" gutterBottom>
             {title}

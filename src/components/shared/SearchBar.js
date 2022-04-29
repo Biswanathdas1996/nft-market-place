@@ -4,7 +4,7 @@ import InputBase from "@mui/material/InputBase";
 import { styled, alpha } from "@mui/material/styles";
 import FormControl from "@mui/material/FormControl";
 
-const SearchBar = ({ history }) => {
+const SearchBar = () => {
   const Search = styled("div")(({ theme }) => ({
     position: "relative",
     borderRadius: theme.shape.borderRadius,
@@ -47,20 +47,8 @@ const SearchBar = ({ history }) => {
     },
   }));
 
-  // const [keyword, setKeyword] = useState("");
-  const keyword = "";
-  const searchHandler = (e) => {
-    e.preventDefault();
-
-    if (keyword.trim()) {
-      history.pushState(`/search/${keyword}`);
-    } else {
-      history.pushState("/");
-    }
-  };
-
   return (
-    <FormControl onSubmit={searchHandler}>
+    <FormControl>
       <Search>
         <SearchIconWrapper>
           <SearchIcon></SearchIcon>

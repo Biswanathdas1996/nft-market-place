@@ -5,13 +5,7 @@ import CardContent from "@mui/material/CardContent";
 import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
 import ButterImg from "../../assets/images/coolimg.png";
-import {
-  IconButton,
-  CardActionArea,
-  Tooltip,
-  Box,
-  CardMedia,
-} from "@mui/material";
+import { IconButton, Box, CardMedia } from "@mui/material";
 import Avatars from "./Avatars";
 import EthIcon from "../../assets/icons/eth_icon.svg";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
@@ -19,12 +13,7 @@ import FavoriteBorderRoundedIcon from "@mui/icons-material/FavoriteBorderRounded
 
 const CustomCard = ({ item }) => {
   return (
-    <Grid
-      item
-      key={item}
-      // spacing={{ xs: 2, md: 2 }}
-      // columns={{ xs: 4, sm: 8, md: 12 }}
-    >
+    <Grid item key={item}>
       <Card
         sx={{
           maxWidth: 200,
@@ -40,7 +29,6 @@ const CustomCard = ({ item }) => {
               bottom: 130,
               left: 0,
               width: "94%",
-              // bgcolor: 'rgba(0, 0, 0, 0.54)',
               color: "white",
               padding: "10px",
             }}

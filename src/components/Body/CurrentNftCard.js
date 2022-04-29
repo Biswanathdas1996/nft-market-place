@@ -1,24 +1,16 @@
 import React, { useEffect, useState } from "react";
-import { styled } from "@mui/material/styles";
+
 import Card from "@mui/material/Card";
 import CardHeader from "@mui/material/CardHeader";
 import CardMedia from "@mui/material/CardMedia";
 import CardContent from "@mui/material/CardContent";
 import CardActions from "@mui/material/CardActions";
-import Collapse from "@mui/material/Collapse";
+
 import Avatar from "@mui/material/Avatar";
 import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
-import { red } from "@mui/material/colors";
-import FavoriteIcon from "@mui/icons-material/Favorite";
-import ShareIcon from "@mui/icons-material/Share";
-import DescriptionIcon from "@mui/icons-material/Description";
 import OfflineShareIcon from "@mui/icons-material/OfflineShare";
-import {
-  _fetch,
-  _account,
-  _paid_transction,
-} from "../../abi2/connect";
+import { _fetch, _account, _paid_transction } from "../../abi2/connect";
 import Address from "../../abi2/Address.json";
 import Button from "@mui/material/Button";
 import { Link } from "react-router-dom";
@@ -26,14 +18,14 @@ import { Link } from "react-router-dom";
 
 export default function RecipeReviewCard({ data, fetchAllPosts }) {
   const [nftData, setNftData] = useState(null);
-  const [start, setStart] = useState(false);
+
   const [owner, setOwner] = useState(null);
   const [account, setAccount] = useState(null);
   const [price, setPrice] = useState(null);
-  const [response, setResponse] = useState(null);
 
   useEffect(() => {
     fetchNftInfo();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   async function fetchNftInfo() {
@@ -54,28 +46,20 @@ export default function RecipeReviewCard({ data, fetchAllPosts }) {
   }
 
   const buynow = async () => {
-    setStart(true);
-    const responseData = await _paid_transction(
+    await _paid_transction(
       Number(price),
       "buyNft",
       owner,
       account,
       Number(data)
     );
-    setResponse(responseData);
-    fetchAllPosts();
-  };
 
-  const modalClose = () => {
-    setStart(false);
-    setResponse(null);
+    fetchAllPosts();
   };
 
   if (nftData) {
     return (
       <>
-       
-
         <Card style={{ marginTop: 20 }}>
           <CardHeader
             avatar={

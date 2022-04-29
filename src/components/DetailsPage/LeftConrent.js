@@ -26,13 +26,12 @@ const useStyles = makeStyles({
     minHeight: 100,
     borderRadius: "30px",
     maxHeight: 577,
-    // objectFit: "cover",
     padding: 20,
   },
 });
 
 export default function LeftConrent({ nftData, tokenId }) {
-  const { description, image, author } = nftData;
+  const { description, image } = nftData;
   const classes = useStyles();
 
   return (
