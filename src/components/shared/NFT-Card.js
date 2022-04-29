@@ -9,7 +9,7 @@ import Avatars from "./Avatars";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import FavoriteBorderRoundedIcon from "@mui/icons-material/FavoriteBorderRounded";
 import { useNavigate } from "react-router-dom";
-import { _fetch } from "../../abi2/connect";
+import { _fetch, _account } from "../../abi2/connect";
 import { buyNft } from "../../functions/buyNft";
 import TransctionModal from "./TransctionModal";
 
@@ -18,6 +18,8 @@ export default function NFTCard({ tokenId }) {
   const [start, setStart] = useState(false);
   const [price, setPrice] = useState(null);
   const [response, setResponse] = useState(null);
+  const [owner, setOwner] = useState(null);
+  const [account, setAccount] = useState(null);
 
   let history = useNavigate();
 
@@ -30,6 +32,10 @@ export default function NFTCard({ tokenId }) {
     const getAllTokenUri = await _fetch("tokenURI", tokenId);
     const price = await _fetch("getNftPrice", tokenId);
     setPrice(price);
+    const getOwner = await _fetch("ownerOf", tokenId);
+    setOwner(getOwner);
+    const account = await _account();
+    setAccount(account);
 
     await fetch(getAllTokenUri)
       .then((response) => response.json())
@@ -150,23 +156,25 @@ export default function NFTCard({ tokenId }) {
           </div>
         </CardContent>
 
-        <Button
-          variant="outlined"
-          size="small"
-          sx={{
-            marginX: "15px",
-            marginBottom: "15px",
-          }}
-          onClick={() => buynow()}
-          style={{
-            border: "2px solid #1976d2",
-            fontSize: 10,
-            fontWeight: "bold",
-            padding: 8,
-          }}
-        >
-          Buy Now
-        </Button>
+        {owner !== account && (
+          <Button
+            variant="outlined"
+            size="small"
+            sx={{
+              marginX: "15px",
+              marginBottom: "15px",
+            }}
+            onClick={() => buynow()}
+            style={{
+              border: "2px solid #1976d2",
+              fontSize: 10,
+              fontWeight: "bold",
+              padding: 8,
+            }}
+          >
+            Buy Now
+          </Button>
+        )}
       </Card>
     </>
   );

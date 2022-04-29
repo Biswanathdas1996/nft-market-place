@@ -22,7 +22,7 @@ import TransactionHistory from "./TransactionHistory";
 
 const countData = ["05", "08", "35", "12"];
 
-const RightContent = ({ nftData, owner, price, buynow }) => {
+const RightContent = ({ nftData, owner, price, buynow, account }) => {
   const [value, setValue] = React.useState("2");
 
   const handleChange = (event, newValue) => {
@@ -140,37 +140,42 @@ const RightContent = ({ nftData, owner, price, buynow }) => {
           ))}
         </Grid>
       </Grid>
-
-      <div style={{ marginTop: "30px", marginBottom: "30px" }}>
-        <Button
-          variant="contained"
-          sx={{
-            textTransform: "none",
-            width: "220px",
-            height: "40px",
-            fontSize: "12px",
-            textAlign: "center",
-            margin: 1,
-          }}
-          onClick={buynow}
-        >
-          Buy for {price / 1000000000000000000} ETH
-        </Button>
-        <Button
-          variant="outlined"
-          sx={{
-            textTransform: "none",
-            width: "220px",
-            height: "40px",
-            fontSize: "12px",
-            textAlign: "center",
-            margin: 1,
-          }}
-          disabled
-        >
-          Make an Offer
-        </Button>
-      </div>
+      {owner !== account ? (
+        <div style={{ marginTop: "30px", marginBottom: "30px" }}>
+          <Button
+            variant="contained"
+            sx={{
+              textTransform: "none",
+              width: "220px",
+              height: "40px",
+              fontSize: "12px",
+              textAlign: "center",
+              margin: 1,
+            }}
+            onClick={buynow}
+          >
+            Buy for {price / 1000000000000000000} ETH
+          </Button>
+          <Button
+            variant="outlined"
+            sx={{
+              textTransform: "none",
+              width: "220px",
+              height: "40px",
+              fontSize: "12px",
+              textAlign: "center",
+              margin: 1,
+            }}
+            disabled
+          >
+            Make an Offer
+          </Button>
+        </div>
+      ) : (
+        <div style={{ marginTop: "30px", marginBottom: "30px" }}>
+          You Own this NFT
+        </div>
+      )}
 
       <Box sx={{ width: "100%", typography: "body1" }}>
         <TabContext value={value}>
