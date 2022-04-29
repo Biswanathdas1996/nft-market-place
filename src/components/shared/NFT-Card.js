@@ -52,123 +52,122 @@ export default function NFTCard({ tokenId }) {
   return (
     <>
       {start && <TransctionModal response={response} modalClose={modalClose} />}
-      <Grid item xs={12} sm={6} md={2.4}>
-        <Card
+
+      <Card
+        sx={{
+          height: "100%",
+          // width: "100%",
+          display: "flex",
+          flexDirection: "column",
+          backgroundColor: "white",
+          border: "0.01px solid rgba(0, 0, 0, 0.09)",
+        }}
+      >
+        <Tooltip
+          title="Nefrofeel by Pablo Picasso"
+          onClick={() => history(`/details/${tokenId}`)}
+        >
+          <div
+            style={{
+              backgroundImage: `url(${nftData?.image})`,
+              height: "150px",
+              borderRadius: 5,
+              backgroundSize: "cover",
+              backgroundRepeat: "no-repeat",
+              margin: "15px 15px 0px 15px",
+            }}
+          >
+            <Grid container>
+              <Grid xs={2}>
+                <IconButton>
+                  <FavoriteBorderRoundedIcon
+                    style={{
+                      color: "#FD6412",
+                      backgroundColor: "white",
+                      borderRadius: "50%",
+                      padding: "5px",
+                      //   fontSize: "15px",
+                    }}
+                  />
+                </IconButton>
+              </Grid>
+              <Grid xs={10} sx={{ textAlign: "right" }}>
+                <IconButton>
+                  <MoreVertIcon
+                    style={{
+                      color: "#0578EC",
+                      backgroundColor: "white",
+                      borderRadius: "50%",
+                      padding: "5px",
+                      //   fontSize: "15px",
+                    }}
+                  />
+                </IconButton>
+              </Grid>
+            </Grid>
+          </div>
+        </Tooltip>
+        <CardContent style={{ paddingBottom: 0 }}>
+          <Avatars />
+          <Typography
+            style={{ fontSize: 14 }}
+            variant="body2"
+            paragraph
+            item
+            fontWeight="600"
+            sx={{
+              overflow: "hidden",
+              textOverflow: "ellipsis",
+              width: "11rem",
+            }}
+          >
+            {nftData?.name} #{tokenId}
+          </Typography>
+
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "flex-start",
+            }}
+          >
+            <Tooltip title="Ethereum">
+              <img
+                alt="nft"
+                width="10px"
+                height="17px"
+                src={`https://ethereum.org/static/a183661dd70e0e5c70689a0ec95ef0ba/cdbe4/eth-diamond-purple.webp`}
+                style={{ marginRight: 5 }}
+              ></img>
+            </Tooltip>
+            <p>
+              <span className="text-secondary" style={{ color: "grey" }}>
+                Price{" "}
+              </span>
+              <strong style={{ fontSize: 12, fontWeight: "bold" }}>
+                {price / 1000000000000000000} ETH
+              </strong>
+            </p>
+          </div>
+        </CardContent>
+
+        <Button
+          variant="outlined"
+          size="small"
           sx={{
-            height: "100%",
-            // width: "100%",
-            display: "flex",
-            flexDirection: "column",
-            backgroundColor: "white",
-            border: "0.01px solid rgba(0, 0, 0, 0.09)",
+            marginX: "15px",
+            marginBottom: "15px",
+          }}
+          onClick={() => buynow()}
+          style={{
+            border: "2px solid #1976d2",
+            fontSize: 10,
+            fontWeight: "bold",
+            padding: 8,
           }}
         >
-          <Tooltip
-            title="Nefrofeel by Pablo Picasso"
-            onClick={() => history(`/details/${tokenId}`)}
-          >
-            <div
-              style={{
-                backgroundImage: `url(${nftData?.image})`,
-                height: "150px",
-                borderRadius: 5,
-                backgroundSize: "cover",
-                backgroundRepeat: "no-repeat",
-                margin: "15px 15px 0px 15px",
-              }}
-            >
-              <Grid container>
-                <Grid xs={2}>
-                  <IconButton>
-                    <FavoriteBorderRoundedIcon
-                      style={{
-                        color: "#FD6412",
-                        backgroundColor: "white",
-                        borderRadius: "50%",
-                        padding: "5px",
-                        //   fontSize: "15px",
-                      }}
-                    />
-                  </IconButton>
-                </Grid>
-                <Grid xs={10} sx={{ textAlign: "right" }}>
-                  <IconButton>
-                    <MoreVertIcon
-                      style={{
-                        color: "#0578EC",
-                        backgroundColor: "white",
-                        borderRadius: "50%",
-                        padding: "5px",
-                        //   fontSize: "15px",
-                      }}
-                    />
-                  </IconButton>
-                </Grid>
-              </Grid>
-            </div>
-          </Tooltip>
-          <CardContent style={{ paddingBottom: 0 }}>
-            <Avatars />
-            <Typography
-              style={{ fontSize: 14 }}
-              variant="body2"
-              paragraph
-              item
-              fontWeight="600"
-              sx={{
-                overflow: "hidden",
-                textOverflow: "ellipsis",
-                width: "11rem",
-              }}
-            >
-              {nftData?.name} #{tokenId}
-            </Typography>
-
-            <div
-              style={{
-                display: "flex",
-                justifyContent: "flex-start",
-              }}
-            >
-              <Tooltip title="Ethereum">
-                <img
-                  alt="nft"
-                  width="10px"
-                  height="17px"
-                  src={`https://ethereum.org/static/a183661dd70e0e5c70689a0ec95ef0ba/cdbe4/eth-diamond-purple.webp`}
-                  style={{ marginRight: 5 }}
-                ></img>
-              </Tooltip>
-              <p>
-                <span className="text-secondary" style={{ color: "grey" }}>
-                  Price{" "}
-                </span>
-                <strong style={{ fontSize: 12, fontWeight: "bold" }}>
-                  {price / 1000000000000000000} ETH
-                </strong>
-              </p>
-            </div>
-          </CardContent>
-
-          <Button
-            variant="outlined"
-            size="small"
-            sx={{
-              marginX: "15px",
-              marginBottom: "15px",
-            }}
-            onClick={() => buynow()}
-            style={{
-              border: "2px solid #1976d2",
-              fontSize: 10,
-              fontWeight: "bold",
-              padding: 8,
-            }}
-          >
-            Buy Now
-          </Button>
-        </Card>
-      </Grid>
+          Buy Now
+        </Button>
+      </Card>
     </>
   );
 }

@@ -86,7 +86,7 @@ const ProfilePage = () => {
                         fontWeight: "bold",
                         color: "#000000",
                       }}
-                      disabled
+                      //   disabled
                     />
                   </TabList>
                 </Box>
