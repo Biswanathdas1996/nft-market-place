@@ -6,7 +6,7 @@ import LeftConrent from "../components/DetailsPage/LeftConrent";
 import { _fetch, _account } from "../abi2/connect";
 import { useParams } from "react-router-dom";
 import RecentActivity from "../components/shared/RecentActivity";
-
+import Loader from "../components/shared/Loader";
 import { buyNft } from "../functions/buyNft";
 import TransctionModal from "../components/shared/TransctionModal";
 
@@ -61,7 +61,7 @@ export default function DetailsPage({ match }) {
       <CssBaseline />
       <Container>
         <main style={{ marginBottom: 30 }}>
-          {nftData && (
+          {nftData ? (
             <Grid
               justifyContent="space-between"
               container
@@ -81,6 +81,15 @@ export default function DetailsPage({ match }) {
                   account={account}
                 />
               </Grid>
+            </Grid>
+          ) : (
+            <Grid
+              justifyContent="space-between"
+              container
+              spacing={4}
+              marginY="50px"
+            >
+              <Loader count="2" xs={12} sm={12} md={6} lg={6} />
             </Grid>
           )}
           <RecentActivity />
