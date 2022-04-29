@@ -65,7 +65,7 @@ const AppNav = (props) => {
         <Link
           variant="button"
           color="textPrimary"
-          to="/myWallet"
+          to="/profile"
           className={classes.link}
         >
           My Profile

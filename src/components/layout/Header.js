@@ -22,7 +22,7 @@ import PwcLogo from "../../assets/images/nft.png";
 const pages = [
   {
     label: "My profile",
-    href: "/myWallet",
+    href: "/profile",
   },
   {
     label: "Activity",
@@ -135,7 +135,7 @@ const Header = () => {
       onClose={handleMobileMenuClose}
     >
       <MenuItem>
-        <Link to="/myWallet">My Profile</Link>
+        <Link to="/profile">My Profile</Link>
       </MenuItem>
       <MenuItem disabled>
         <Link href="/mentors">Activity</Link>

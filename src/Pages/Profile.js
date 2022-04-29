@@ -1,20 +1,21 @@
 import React from "react";
 import { Container, Typography, Grid } from "@mui/material";
-import BackgroundImg from "../../assets/images/bckimg.png";
-import MyProfileCard from "./MyProfileCard";
 import Box from "@mui/material/Box";
 import Tab from "@mui/material/Tab";
 import TabContext from "@mui/lab/TabContext";
 import TabList from "@mui/lab/TabList";
-import MyTransaction from "./MyTransaction";
-import MyWallet from "./MyWallet";
-import MyCollections from "./MyCollections";
-import MyFavorites from "./MyFavorites";
+import BackgroundImg from "../assets/images/bckimg.png";
+import MyProfileCard from "../components/ProfilePage/MyProfileCard";
+import MyTransaction from "../components/ProfilePage/MyTransaction";
+import MyWallet from "../components/ProfilePage/MyWallet";
+import MyCollections from "../components/ProfilePage/MyCollections";
+import MyFavorites from "../components/ProfilePage/MyFavorites";
+import TabPanel from "@mui/lab/TabPanel";
 
 const ProfilePage = () => {
-  const [value, setValue] = React.useState("1");
+  const [value, setValue] = React.useState("2");
 
-  const handleChange = (newValue) => {
+  const handleChange = (event, newValue) => {
     setValue(newValue);
   };
 
@@ -89,14 +90,21 @@ const ProfilePage = () => {
                     />
                   </TabList>
                 </Box>
-                {/* <TabPanel value="1">My Wallet</TabPanel> */}
-                <MyWallet />
-                {/* <TabPanel value="2">My Transactions</TabPanel> */}
-                <MyTransaction />
-                {/* <TabPanel value="3">My Collections</TabPanel> */}
-                <MyCollections />
-                {/* <TabPanel value="4">My Favourites</TabPanel> */}
-                <MyFavorites />
+                <TabPanel value="1">
+                  <MyWallet />
+                </TabPanel>
+                <TabPanel value="2">
+                  {" "}
+                  <MyTransaction />
+                </TabPanel>
+                <TabPanel value="3">
+                  {" "}
+                  <MyCollections />
+                </TabPanel>
+                <TabPanel value="4">
+                  {" "}
+                  <MyFavorites />
+                </TabPanel>
               </TabContext>
             </Box>
           </Grid>

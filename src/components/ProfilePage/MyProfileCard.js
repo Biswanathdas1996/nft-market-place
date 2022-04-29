@@ -15,14 +15,10 @@ import Linkedin from "../../assets/images/ldin.png";
 import myprofile from "../../assets/images/profilepic.png";
 import EmailOutlinedIcon from "@mui/icons-material/EmailOutlined";
 import MoreHorizOutlinedIcon from "@mui/icons-material/MoreHorizOutlined";
-import Web3Context from "../../Web3Context";
-import { useContext } from "react";
 import { Tooltip } from "@mui/material";
 import { Link } from "@mui/material";
 
 const MyProfileCard = () => {
-  const web3Context = useContext(Web3Context);
-
   return (
     <Card
       sx={{
@@ -93,7 +89,7 @@ const MyProfileCard = () => {
         <Typography marginBottom="10px" sx={{ fontSize: 22, fontWeight: 700 }}>
           Hideo Oostenbroek
         </Typography>
-        <Tooltip title={web3Context.user}>
+        <Tooltip title={`web3Context.user`}>
           <Typography
             marginBottom="25px"
             className="address"
@@ -103,7 +99,7 @@ const MyProfileCard = () => {
               width: "10rem",
             }}
           >
-            {web3Context.user}
+            {`web3Context.user`}
           </Typography>
         </Tooltip>
         <Typography sx={{ fontSize: 14 }} marginBottom="25px">

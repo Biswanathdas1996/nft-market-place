@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React from "react";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
@@ -8,10 +8,8 @@ import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import "./App.css";
 import { useFindArtTokens } from "./hooks/DigitalArtHooks";
-import Web3Context from "./Web3Context";
 
 export default function Wallettransactions() {
-  const web3Context = useContext(Web3Context);
   const artTokens = useFindArtTokens({ filter: "mine" });
   return (
     <TableContainer component={Paper}>
@@ -29,9 +27,9 @@ export default function Wallettransactions() {
           </TableRow>
         </TableHead>
         <TableBody>
-          {artTokens.map((row) => (
+          {artTokens.map((row, index) => (
             <TableRow
-              key={web3Context.id}
+              key={index}
               sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
             >
               <TableCell component="th" scope="row">

@@ -43,6 +43,7 @@ export const _paid_transction = async (cost, service, ...props) => {
 };
 
 export const _account = async () => {
+  // const accounts = await web3?.eth.accounts._provider.selectedAddress;
   const accounts = await web3.eth.getAccounts();
   return accounts[0];
 };
