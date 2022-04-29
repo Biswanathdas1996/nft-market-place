@@ -5,6 +5,7 @@ import RightContent from "../components/DetailsPage/RightContent";
 import LeftConrent from "../components/DetailsPage/LeftConrent";
 import { _fetch, _account, _paid_transction } from "../abi2/connect";
 import { useParams } from "react-router-dom";
+import RecentActivity from "../components/shared/RecentActivity";
 
 const theme = createTheme();
 
@@ -60,9 +61,9 @@ export default function DetailsPage({ match }) {
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
-      {nftData && (
-        <Container>
-          <main style={{ marginBottom: 30 }}>
+      <Container>
+        <main style={{ marginBottom: 30 }}>
+          {nftData && (
             <Grid
               justifyContent="space-between"
               container
@@ -77,9 +78,10 @@ export default function DetailsPage({ match }) {
                 <RightContent nftData={nftData} owner={owner} price={price} />
               </Grid>
             </Grid>
-          </main>
-        </Container>
-      )}
+          )}
+          <RecentActivity />
+        </main>
+      </Container>
     </ThemeProvider>
   );
 }
