@@ -24,6 +24,7 @@ const client = create("https://ipfs.infura.io:5001/api/v0");
 //   price: Yup.string().required("Price is required"),
 //   royelty: Yup.string().required("Royelty amount is required"),
 // });
+// WCVDU52748WW4F7EKDEDB89HKH41BIA4N2
 
 const Mint = () => {
   const [start, setStart] = useState(false);

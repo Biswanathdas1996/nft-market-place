@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { TabPanel } from "@mui/lab";
 import {
   Card,
@@ -8,19 +8,18 @@ import {
   TableContainer,
   TableHead,
   TableRow,
-  Avatar,
   Tooltip,
   Stack,
   Typography,
 } from "@mui/material";
-import MonetizationOnOutlined from "@mui/icons-material/MonetizationOnOutlined";
-import MaleImg from "../../assets/images/female1.png";
+// import MonetizationOnOutlined from "@mui/icons-material/MonetizationOnOutlined";
+// import MaleImg from "../../assets/images/female1.png";
 import EthIcon from "../../assets/icons/eth_icon.svg";
 import CustomButton from "../DetailsPage/CustomButton";
-import CustomTransactionStat from "./CustomTransactionStat";
+// import CustomTransactionStat from "./CustomTransactionStat";
+import { _account } from "../../abi2/connect";
 
 const columns = [
-  { id: "img" },
   { id: "from", label: "FROM", minWidth: 170 },
   { id: "to", label: "TO", minWidth: 100 },
   { id: "status", label: "STATUS", minWidth: 100 },
@@ -38,86 +37,31 @@ const columns = [
   },
 ];
 
-function createData(from, date, to, status, priceEth, priceDol, type) {
-  return { from, date, to, status, priceEth, priceDol, type };
-}
-
-const rows = [
-  createData(
-    "0x06F94D875F57822886143c033cf17C461423096b",
-    "On 24/3/2022, 2:06 pm",
-    "0x06F94D875F57822886143c033cf17C461423095c",
-    "Completed",
-    "1.166",
-    "120.99",
-    "Transfer"
-  ),
-  createData(
-    "0x06F94D875F57822886143c033cf17C461423096b",
-    "On 24/3/2022, 2:06 pm",
-    "0x06F94D875F57822886143c033cf17C461423095c",
-    "Pending",
-    "1.166",
-    "120.99",
-    "Offered"
-  ),
-  createData(
-    "0x06F94D875F57822886143c033cf17C461423096b",
-    "On 24/3/2022, 2:06 pm",
-    "0x06F94D875F57822886143c033cf17C461423095c",
-    "Cancelled",
-    "1.166",
-    "120.99",
-    "Bid"
-  ),
-  createData(
-    "0x06F94D875F57822886143c033cf17C461423096b",
-    "On 24/3/2022, 2:06 pm",
-    "0x06F94D875F57822886143c033cf17C461423095c",
-    "Completed",
-    "1.166",
-    "120.99",
-    "Sold"
-  ),
-  createData(
-    "0x06F94D875F57822886143c033cf17C461423096b",
-    "On 24/3/2022, 2:06 pm",
-    "0x06F94D875F57822886143c033cf17C461423095c",
-    "Completed",
-    "1.166",
-    "120.99",
-    "Transfer"
-  ),
-  createData(
-    "0x06F94D875F57822886143c033cf17C461423096b",
-    "On 24/3/2022, 2:06 pm",
-    "0x06F94D875F57822886143c033cf17C461423095c",
-    "Completed",
-    "1.166",
-    "120.99",
-    "Transfer"
-  ),
-  createData(
-    "0x06F94D875F57822886143c033cf17C461423096b",
-    "On 24/3/2022, 2:06 pm",
-    "0x06F94D875F57822886143c033cf17C461423095c",
-    "Pendind",
-    "1.166",
-    "120.99",
-    "Offered"
-  ),
-  createData(
-    "0x06F94D875F57822886143c033cf17C461423096b",
-    "On 24/3/2022, 2:06 pm",
-    "0x06F94D875F57822886143c033cf17C461423095c",
-    "Completed",
-    "1.166",
-    "120.99",
-    "Transfer"
-  ),
-];
-
 const MyTransaction = () => {
+  const [transctions, settransctions] = useState([]);
+
+  useEffect(() => {
+    fetchData();
+  }, []);
+  const fetchData = async () => {
+    const account = await _account();
+    var requestOptions = {
+      method: "GET",
+      redirect: "follow",
+    };
+
+    fetch(
+      `https://api-rinkeby.etherscan.io/api?module=account&action=txlist&address=${account}&sort=desc&page=1&offset=10&apikey=WCVDU52748WW4F7EKDEDB89HKH41BIA4N2`,
+      requestOptions
+    )
+      .then((response) => response.json())
+      .then((result) => {
+        settransctions(result.result);
+        console.log(result.result);
+      })
+      .catch((error) => console.log("error", error));
+  };
+
   return (
     <TabPanel
       value="2"
@@ -126,7 +70,7 @@ const MyTransaction = () => {
       <Card>
         <TableContainer
           sx={{
-            maxHeight: 390,
+            maxHeight: "auto",
             width: "100%",
             // border: "1px solid #EDEDED",
           }}
@@ -150,35 +94,14 @@ const MyTransaction = () => {
               </TableRow>
             </TableHead>
             <TableBody>
-              {rows.map((row) => (
+              {transctions?.map((data, i) => (
                 <TableRow
-                  key={row.from}
+                  key={i}
                   sx={{
                     "&:last-child td, &:last-child th": { marginBottom: 10 },
                   }}
                 >
-                  {/* Avatar */}
-                  <TableCell
-                    component="th"
-                    scope="row"
-                    sx={{ fontWeight: "bold" }}
-                  >
-                    <Avatar
-                      alt="Remy Sharp"
-                      sx={{
-                        width: 30,
-                        height: 30,
-                        border: "1px solid green",
-                        borderRadius: "50%",
-                      }}
-                      src={MaleImg}
-                    >
-                      {/* <MaleImg /> */}
-                    </Avatar>
-                  </TableCell>
-                  {/* From================= */}
                   <TableCell align="center" sx={{ fontWeight: "bold" }}>
-                    {/* {row.from} */}
                     <Stack
                       direction="column"
                       sx={{
@@ -187,7 +110,7 @@ const MyTransaction = () => {
                         display: "flex",
                       }}
                     >
-                      <Tooltip title={row.from}>
+                      <Tooltip>
                         <Typography
                           sx={{
                             fontWeight: "bold",
@@ -198,18 +121,17 @@ const MyTransaction = () => {
                             color: "#0578EC",
                           }}
                         >
-                          {row.from}
+                          {data?.from}
                         </Typography>
                       </Tooltip>
                       <Typography sx={{ fontSize: "11px" }}>
-                        {row.date}
+                        {data?.timeStamp}
                       </Typography>
                     </Stack>
                   </TableCell>
-                  {/* To================= */}
 
                   <TableCell align="center">
-                    <Tooltip title={row.to}>
+                    <Tooltip>
                       <Typography
                         sx={{
                           fontWeight: "bold",
@@ -220,15 +142,14 @@ const MyTransaction = () => {
                           color: "#0578EC",
                         }}
                       >
-                        {row.to}
+                        {data?.to}
                       </Typography>
                     </Tooltip>
                   </TableCell>
                   {/* Status================= */}
                   <TableCell align="left">
-                    <Tooltip title={row.status}>
-                      <CustomTransactionStat txtType={row.status} />
-                    </Tooltip>
+                    {/* <CustomTransactionStat txtType={row.status} /> */}
+                    {data?.isError === "1" ? "Error" : "Success"}
                   </TableCell>
 
                   <TableCell align="left">
@@ -253,29 +174,13 @@ const MyTransaction = () => {
                         }}
                       />
                       <Typography sx={{ fontWeight: 600 }}>
-                        {row.priceEth}
-                      </Typography>
-                    </Stack>
-                    <Stack
-                      direction="row"
-                      spacing={1}
-                      sx={{
-                        alignItems: "flex-start",
-                        justifyContent: "start",
-                        display: "flex",
-                      }}
-                    >
-                      <MonetizationOnOutlined
-                        fontSize="12px"
-                        sx={{ marginTop: "4px" }}
-                      />
-                      <Typography sx={{ fontWeight: 600 }}>
-                        {row.priceDol}
+                        {" "}
+                        {data?.value / 1000000000000000000}
                       </Typography>
                     </Stack>
                   </TableCell>
                   <TableCell align="center">
-                    <CustomButton type={row.type} />
+                    <CustomButton type={`Transfer`} />
                   </TableCell>
                 </TableRow>
               ))}
