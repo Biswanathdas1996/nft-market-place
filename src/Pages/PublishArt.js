@@ -49,6 +49,29 @@ const Mint = () => {
   }) => {
     setStart(true);
     let responseData;
+
+    const dummyAttrribute = [
+      {
+        display_type: "boost_number",
+        trait_type: "Aqua Power",
+        value: 40,
+      },
+      {
+        display_type: "boost_percentage",
+        trait_type: "Stamina Increase",
+        value: 10,
+      },
+      {
+        display_type: "number",
+        trait_type: "Generation",
+        value: 2,
+      },
+      {
+        display_type: "date",
+        trait_type: "birthday",
+        value: 1546360800,
+      },
+    ];
     if (file) {
       const results = await await client.add(file);
       console.log("--img fingerpring-->", results.path);
@@ -58,13 +81,7 @@ const Mint = () => {
         category: category,
         image: `https://ipfs.infura.io/ipfs/${results.path}`,
         description: description,
-        attributes: attributes,
-        seller_fee_basis_points: 100,
-        fee_recipient: "0xA97F337c39cccE66adfeCB2BF99C1DdC54C2D721",
-        // traits:
-        // external_url
-        // background_color
-        // youtube_url
+        attributes: attributes.concat(dummyAttrribute),
       };
 
       const resultsSaveMetaData = await await client.add(

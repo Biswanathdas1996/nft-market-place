@@ -7,7 +7,7 @@ export default function RedirectToOpenSea({ tokenId }) {
   return (
     <>
       <a
-        href={`https://testnets.opensea.io/assets/${Address}/${tokenId}`}
+        href={`https://testnets.opensea.io/assets/${Address}/${tokenId}/?force_update=true`}
         target="_blank"
         rel="noreferrer"
         title="View on OpenSea"

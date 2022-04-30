@@ -1,7 +1,6 @@
 import {
   Typography,
   Box,
-  Avatar,
   Stack,
   Button,
   Grid,
@@ -13,12 +12,12 @@ import {
 import React from "react";
 import TabContext from "@mui/lab/TabContext";
 import TabList from "@mui/lab/TabList";
-import Profile1 from "../../assets/images/profile1.jpg";
-import Profile2 from "../../assets/images/profile2.jpg";
 import EthIcon from "../../assets/icons/eth_icon.svg";
 import Bid from "./Bid";
 import Attributes from "./Attributes";
 import TransactionHistory from "./TransactionHistory";
+import AccountCircleIcon from "@mui/icons-material/AccountCircle";
+import ManageAccountsIcon from "@mui/icons-material/ManageAccounts";
 
 const countData = ["05", "08", "35", "12"];
 
@@ -35,29 +34,21 @@ const RightContent = ({ nftData, owner, price, buynow, account }) => {
       <Typography sx={{ fontSize: 30, fontWeight: "bold" }}>{name}</Typography>
       <Stack direction="row" spacing={12} marginTop="20px">
         <Stack direction="row">
-          <Avatar
-            alt="Remy Sharp"
-            sx={{ width: 30, height: 30 }}
-            src={Profile1}
-          />
+          <ManageAccountsIcon alt="Creator" sx={{ width: 30, height: 30 }} />
           <div style={{ marginLeft: 10 }}>
             <Typography
               sx={{ fontSize: 10, fontWeight: "bold", color: "#858585" }}
             >
-              Creator
+              Author
             </Typography>
             <Typography sx={{ fontSize: 11, fontWeight: "bold" }}>
-              Remy Sharp
+              {nftData?.author}
             </Typography>
           </div>
         </Stack>
 
         <Stack direction="row">
-          <Avatar
-            alt="Paul Sharp"
-            sx={{ width: 30, height: 30 }}
-            src={Profile2}
-          />
+          <AccountCircleIcon alt="Owner" sx={{ width: 30, height: 30 }} />
           <div style={{ marginLeft: 10 }}>
             <Typography
               sx={{ fontSize: 10, fontWeight: "bold", color: "#858585" }}
