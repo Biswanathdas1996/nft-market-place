@@ -88,6 +88,22 @@ const MyTransaction = ({ tokenId }) => {
             </TableHead>
             <TableBody>
               {transctions?.map((data, i) => {
+                var unixTimestamp = data?.timeStamp;
+                var date = new Date(unixTimestamp * 1000);
+
+                const txnDate =
+                  date.getDate() +
+                  "/" +
+                  (date.getMonth() + 1) +
+                  "/" +
+                  date.getFullYear() +
+                  " " +
+                  date.getHours() +
+                  ":" +
+                  date.getMinutes() +
+                  ":" +
+                  date.getSeconds();
+
                 if (data?.tokenID === tokenId) {
                   return (
                     <TableRow
@@ -121,7 +137,7 @@ const MyTransaction = ({ tokenId }) => {
                           </Typography>
 
                           <Typography sx={{ fontSize: "11px" }}>
-                            {data?.timeStamp}
+                            {txnDate}
                           </Typography>
                         </Stack>
                       </TableCell>

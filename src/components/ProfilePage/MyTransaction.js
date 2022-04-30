@@ -141,23 +141,60 @@ const MyTransaction = () => {
               </TableRow>
             </TableHead>
             <TableBody>
-              {transctions?.map((data, i) => (
-                <TableRow
-                  key={i}
-                  sx={{
-                    "&:last-child td, &:last-child th": { marginBottom: 10 },
-                  }}
-                >
-                  <TableCell align="center" sx={{ fontWeight: "bold" }}>
-                    <Stack
-                      direction="column"
-                      sx={{
-                        alignItems: "flex-start",
-                        justifyContent: "start",
-                        display: "flex",
-                      }}
-                    >
-                      <Tooltip title={data?.from}>
+              {transctions?.map((data, i) => {
+                var unixTimestamp = data?.timeStamp;
+                var date = new Date(unixTimestamp * 1000);
+
+                const txnDate =
+                  date.getDate() +
+                  "/" +
+                  (date.getMonth() + 1) +
+                  "/" +
+                  date.getFullYear() +
+                  " " +
+                  date.getHours() +
+                  ":" +
+                  date.getMinutes() +
+                  ":" +
+                  date.getSeconds();
+                return (
+                  <TableRow
+                    key={i}
+                    sx={{
+                      "&:last-child td, &:last-child th": { marginBottom: 10 },
+                    }}
+                  >
+                    <TableCell align="center" sx={{ fontWeight: "bold" }}>
+                      <Stack
+                        direction="column"
+                        sx={{
+                          alignItems: "flex-start",
+                          justifyContent: "start",
+                          display: "flex",
+                        }}
+                      >
+                        <Tooltip title={data?.from}>
+                          <Typography
+                            sx={{
+                              fontWeight: "bold",
+                              fontSize: "14px",
+                              overflow: "hidden",
+                              textOverflow: "ellipsis",
+                              width: "6rem",
+                              color: "#0578EC",
+                            }}
+                          >
+                            {data?.from}
+                          </Typography>
+                        </Tooltip>
+                        <Typography sx={{ fontSize: "11px" }}>
+                          {txnDate}
+                        </Typography>
+                      </Stack>
+                    </TableCell>
+
+                    <TableCell align="center">
+                      <Tooltip title={data?.to}>
                         <Typography
                           sx={{
                             fontWeight: "bold",
@@ -168,84 +205,64 @@ const MyTransaction = () => {
                             color: "#0578EC",
                           }}
                         >
-                          {data?.from}
+                          {data?.to}
                         </Typography>
                       </Tooltip>
-                      <Typography sx={{ fontSize: "11px" }}>
-                        {data?.timeStamp}
-                      </Typography>
-                    </Stack>
-                  </TableCell>
-
-                  <TableCell align="center">
-                    <Tooltip title={data?.to}>
-                      <Typography
-                        sx={{
-                          fontWeight: "bold",
-                          fontSize: "14px",
-                          overflow: "hidden",
-                          textOverflow: "ellipsis",
-                          width: "6rem",
-                          color: "#0578EC",
-                        }}
-                      >
-                        {data?.to}
-                      </Typography>
-                    </Tooltip>
-                  </TableCell>
-                  {/* Status================= */}
-                  <TableCell align="left">
-                    <CustomTransactionStat
-                      txtType={data?.isError === "1" ? "Failed" : "Completed"}
-                    />
-                  </TableCell>
-
-                  <TableCell align="left">
-                    <Stack
-                      direction="row"
-                      spacing={1}
-                      sx={{
-                        alignItems: "flex-start",
-                        justifyContent: "start",
-                        display: "flex",
-                      }}
-                    >
-                      <img
-                        width="10px"
-                        alt="ethimg"
-                        height="16px"
-                        src={EthIcon}
-                        style={{
-                          color: "black",
-                          marginTop: "4px",
-                          marginRight: "3px",
-                        }}
+                    </TableCell>
+                    {/* Status================= */}
+                    <TableCell align="left">
+                      <CustomTransactionStat
+                        txtType={data?.isError === "1" ? "Failed" : "Completed"}
                       />
-                      <Typography sx={{ fontWeight: 600 }}>
-                        {" "}
-                        {data?.value / 1000000000000000000}
-                      </Typography>
-                    </Stack>
-                  </TableCell>
+                    </TableCell>
 
-                  <TableCell align="center">
-                    <Tooltip title={data?.hash}>
-                      <Typography
+                    <TableCell align="left">
+                      <Stack
+                        direction="row"
+                        spacing={1}
                         sx={{
-                          fontWeight: "bold",
-                          fontSize: "14px",
-                          overflow: "hidden",
-                          textOverflow: "ellipsis",
-                          width: "6rem",
-                          color: "#0578EC",
+                          alignItems: "flex-start",
+                          justifyContent: "start",
+                          display: "flex",
                         }}
                       >
-                        {data?.hash}
-                      </Typography>
-                    </Tooltip>
-                  </TableCell>
-                </TableRow>
-              ))}
+                        <img
+                          width="10px"
+                          alt="ethimg"
+                          height="16px"
+                          src={EthIcon}
+                          style={{
+                            color: "black",
+                            marginTop: "4px",
+                            marginRight: "3px",
+                          }}
+                        />
+                        <Typography sx={{ fontWeight: 600 }}>
+                          {" "}
+                          {data?.value / 1000000000000000000}
+                        </Typography>
+                      </Stack>
+                    </TableCell>
+
+                    <TableCell align="center">
+                      <Tooltip title={data?.hash}>
+                        <Typography
+                          sx={{
+                            fontWeight: "bold",
+                            fontSize: "14px",
+                            overflow: "hidden",
+                            textOverflow: "ellipsis",
+                            width: "6rem",
+                            color: "#0578EC",
+                          }}
+                        >
+                          {data?.hash}
+                        </Typography>
+                      </Tooltip>
+                    </TableCell>
+                  </TableRow>
+                );
+              })}
             </TableBody>
           </Table>
         </TableContainer>
