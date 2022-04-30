@@ -9,23 +9,30 @@ import FilterAltOutlinedIcon from "@mui/icons-material/FilterAltOutlined";
 import NftCard from "../components/shared/NFT-Card";
 import RecentActivity from "../components/shared/RecentActivity";
 import { _fetch } from "../abi2/connect";
+import Loader from "../components/shared/Loader";
 import { useParams } from "react-router-dom";
 
 export default function HomePage() {
   const [tokens, setToken] = useState([]);
-  // const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(false);
+
   const { category } = useParams();
-  console.log("---category====>", category);
+
   useEffect(() => {
     fetchAllPosts();
-  }, []);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [category]);
 
   async function fetchAllPosts() {
-    // setLoading(true);
-    const getAllToken = await _fetch("getToken");
-    console.log("========>", getAllToken);
-    // setLoading(false);
-    setToken(getAllToken);
+    await setToken([]);
+    setLoading(true);
+    const getAllToken = await _fetch("getCollection");
+    const filterCollection = getAllToken?.filter(
+      (data) =>
+        data?.collection?.toLocaleLowerCase() === category?.toLocaleLowerCase()
+    );
+    await setToken(filterCollection);
+    setLoading(false);
   }
 
   return (
@@ -43,7 +50,7 @@ export default function HomePage() {
           color="text.primary"
           fontSize="40px"
         >
-          Top Selling Art on our Art Gallery
+          Buy/Sell Digital Art on our {category?.toUpperCase()} Gallery
         </Typography>
       </Box>
       <Toolbar style={{ padding: 0 }}>
@@ -66,9 +73,21 @@ export default function HomePage() {
       </Toolbar>
 
       <Grid container spacing={4}>
-        {tokens?.map((item) => (
-          <NftCard tokenId={item} />
-        ))}
+        {tokens && tokens?.length > 0 ? (
+          tokens?.map((item) => (
+            <Grid item xs={12} sm={6} md={2.4}>
+              <NftCard tokenId={item?.token} />
+            </Grid>
+          ))
+        ) : loading ? (
+          <Grid item xs={12} sm={12} md={12}>
+            <Loader count="5" xs={12} sm={6} md={2.4} />
+          </Grid>
+        ) : (
+          <Grid item xs={12} sm={12} md={12}>
+            <h3>No NFT available</h3>
+          </Grid>
+        )}
       </Grid>
 
       <RecentActivity />

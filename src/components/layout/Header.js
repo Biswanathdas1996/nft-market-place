@@ -96,7 +96,7 @@ const Header = () => {
       </MenuItem>
       <MenuItem
         onClick={() => {
-          handleMenuClose("Arts");
+          handleMenuClose("art");
         }}
       >
         <ColorLensIcon sx={{ marginRight: "10px" }} />
@@ -104,7 +104,7 @@ const Header = () => {
       </MenuItem>
       <MenuItem
         onClick={() => {
-          handleMenuClose("Music");
+          handleMenuClose("music");
         }}
       >
         <MusicNoteIcon sx={{ marginRight: "10px" }} />
@@ -112,7 +112,7 @@ const Header = () => {
       </MenuItem>
       <MenuItem
         onClick={() => {
-          handleMenuClose("Sports");
+          handleMenuClose("sports");
         }}
       >
         <SportsSoccerIcon sx={{ marginRight: "10px" }} />

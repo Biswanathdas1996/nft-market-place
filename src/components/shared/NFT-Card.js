@@ -40,8 +40,6 @@ export default function NFTCard({ tokenId, reload = () => null }) {
     setAccount(account);
     const myFev = await JSON.parse(localStorage.getItem("myFevTokens"));
     setFevToken(myFev);
-    console.log(myFev);
-
     await fetch(getAllTokenUri)
       .then((response) => response.json())
       .then((data) => {
