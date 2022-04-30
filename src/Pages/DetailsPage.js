@@ -84,6 +84,7 @@ export default function DetailsPage({ match }) {
                   price={price}
                   buynow={buynow}
                   account={account}
+                  tokenId={tokenId}
                 />
               </Grid>
             </Grid>

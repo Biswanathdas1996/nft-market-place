@@ -15,8 +15,7 @@ import {
 // import MonetizationOnOutlined from "@mui/icons-material/MonetizationOnOutlined";
 // import MaleImg from "../../assets/images/female1.png";
 import EthIcon from "../../assets/icons/eth_icon.svg";
-import CustomButton from "../DetailsPage/CustomButton";
-// import CustomTransactionStat from "./CustomTransactionStat";
+import CustomTransactionStat from "./CustomTransactionStat";
 import { _account } from "../../abi2/connect";
 
 const columns = [
@@ -31,7 +30,7 @@ const columns = [
   },
   {
     id: "type",
-    label: "TYPE",
+    label: "HASH",
     minWidth: 170,
     align: "center",
   },
@@ -61,6 +60,54 @@ const MyTransaction = () => {
       })
       .catch((error) => console.log("error", error));
   };
+
+  // console.log(
+  //   new Intl.DateTimeFormat("en-US", {
+  //     year: "numeric",
+  //     month: "2-digit",
+  //     day: "2-digit",
+  //     hour: "2-digit",
+  //     minute: "2-digit",
+  //     second: "2-digit",
+  //   }).format(1651308763)
+  // );
+
+  const date = 1651308763;
+  const timeZone = "Asia/Kolkata";
+
+  // Potential formatters to use to display date / time
+  const formatters = [
+    new Intl.DateTimeFormat("en-US", {
+      timeStyle: "long",
+      dateStyle: "short",
+      timeZone,
+    }),
+    new Intl.DateTimeFormat("en-US", {
+      timeStyle: "medium",
+      dateStyle: "medium",
+      timeZone,
+    }),
+    new Intl.DateTimeFormat("en-US", {
+      timeStyle: "medium",
+      dateStyle: "medium",
+      hour12: false,
+      timeZone,
+    }),
+    // Using an 'sv' locale will give an ISO-8601 output
+    new Intl.DateTimeFormat("sv", {
+      timeStyle: "medium",
+      dateStyle: "short",
+      timeZone,
+    }),
+    new Intl.DateTimeFormat("en-US", { timeStyle: "short", timeZone }),
+    new Intl.DateTimeFormat("en-US", {
+      timeStyle: "short",
+      hour12: false,
+      timeZone,
+    }),
+  ];
+
+  formatters.forEach((fmt) => console.log(fmt.format(date)));
 
   return (
     <TabPanel
@@ -110,7 +157,7 @@ const MyTransaction = () => {
                         display: "flex",
                       }}
                     >
-                      <Tooltip>
+                      <Tooltip title={data?.from}>
                         <Typography
                           sx={{
                             fontWeight: "bold",
@@ -131,7 +178,7 @@ const MyTransaction = () => {
                   </TableCell>
 
                   <TableCell align="center">
-                    <Tooltip>
+                    <Tooltip title={data?.to}>
                       <Typography
                         sx={{
                           fontWeight: "bold",
@@ -148,8 +195,9 @@ const MyTransaction = () => {
                   </TableCell>
                   {/* Status================= */}
                   <TableCell align="left">
-                    {/* <CustomTransactionStat txtType={row.status} /> */}
-                    {data?.isError === "1" ? "Error" : "Success"}
+                    <CustomTransactionStat
+                      txtType={data?.isError === "1" ? "Failed" : "Completed"}
+                    />
                   </TableCell>
 
                   <TableCell align="left">
@@ -179,8 +227,22 @@ const MyTransaction = () => {
                       </Typography>
                     </Stack>
                   </TableCell>
+
                   <TableCell align="center">
-                    <CustomButton type={`Transfer`} />
+                    <Tooltip title={data?.hash}>
+                      <Typography
+                        sx={{
+                          fontWeight: "bold",
+                          fontSize: "14px",
+                          overflow: "hidden",
+                          textOverflow: "ellipsis",
+                          width: "6rem",
+                          color: "#0578EC",
+                        }}
+                      >
+                        {data?.hash}
+                      </Typography>
+                    </Tooltip>
                   </TableCell>
                 </TableRow>
               ))}

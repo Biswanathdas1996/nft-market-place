@@ -21,7 +21,7 @@ import ManageAccountsIcon from "@mui/icons-material/ManageAccounts";
 
 const countData = ["05", "08", "35", "12"];
 
-const RightContent = ({ nftData, owner, price, buynow, account }) => {
+const RightContent = ({ nftData, owner, price, buynow, account, tokenId }) => {
   const [value, setValue] = React.useState("2");
 
   const handleChange = (event, newValue) => {
@@ -207,7 +207,7 @@ const RightContent = ({ nftData, owner, price, buynow, account }) => {
             </TabList>
           </Box>
           <Attributes attributes={attributes} />
-          <TransactionHistory />
+          <TransactionHistory tokenId={tokenId} />
           <Bid />
         </TabContext>
       </Box>

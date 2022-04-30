@@ -5,6 +5,7 @@ import PercentIcon from "@mui/icons-material/Percent";
 import GavelOutlinedIcon from "@mui/icons-material/GavelOutlined";
 import VerifiedOutlinedIcon from "@mui/icons-material/VerifiedOutlined";
 import TransformOutlinedIcon from "@mui/icons-material/TransformOutlined";
+import SaveAsIcon from "@mui/icons-material/SaveAs";
 
 const CustomButton = ({ type }) => {
   // console.log(type);
@@ -20,6 +21,10 @@ const CustomButton = ({ type }) => {
     buttonName = "Bid";
     buttonColor = "#F9DAFE";
     buttonIcon = <GavelOutlinedIcon />;
+  } else if (type === "Mint") {
+    buttonName = "Mint";
+    buttonColor = "#F9DAFE";
+    buttonIcon = <SaveAsIcon />;
   } else if (type === "Offered") {
     buttonName = "Offered";
     buttonColor = "#FAE9E0";

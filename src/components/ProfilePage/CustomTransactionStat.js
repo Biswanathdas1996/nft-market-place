@@ -9,10 +9,10 @@ const CustomTransactionStat = ({ txtType }) => {
     txtColor = "#379353";
   } else if (txtType === "Pending") {
     txtName = "Pending";
-    txtColor = "#F81E11";
-  } else {
-    txtName = "Cancelled";
     txtColor = "#999999";
+  } else {
+    txtName = "Failed";
+    txtColor = "#F81E11";
   }
   return (
     <>
