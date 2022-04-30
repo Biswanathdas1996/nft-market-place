@@ -12,12 +12,10 @@ import {
   Stack,
   Typography,
 } from "@mui/material";
-// import MonetizationOnOutlined from "@mui/icons-material/MonetizationOnOutlined";
-// import MaleImg from "../../assets/images/female1.png";
 import EthIcon from "../../assets/icons/eth_icon.svg";
 import CustomTransactionStat from "./CustomTransactionStat";
 import { _account } from "../../CONTRACT-ABI/connect";
-
+import { fetchWallatTransction } from "../../functions/fetchWallatTransction";
 const columns = [
   { id: "from", label: "FROM", minWidth: 170 },
   { id: "to", label: "TO", minWidth: 100 },
@@ -44,15 +42,7 @@ const MyTransaction = () => {
   }, []);
   const fetchData = async () => {
     const account = await _account();
-    var requestOptions = {
-      method: "GET",
-      redirect: "follow",
-    };
-
-    fetch(
-      `https://api-rinkeby.etherscan.io/api?module=account&action=txlist&address=${account}&sort=desc&page=1&offset=10&apikey=WCVDU52748WW4F7EKDEDB89HKH41BIA4N2`,
-      requestOptions
-    )
+    await fetchWallatTransction(account)
       .then((response) => response.json())
       .then((result) => {
         settransctions(result.result);
@@ -60,54 +50,6 @@ const MyTransaction = () => {
       })
       .catch((error) => console.log("error", error));
   };
-
-  // console.log(
-  //   new Intl.DateTimeFormat("en-US", {
-  //     year: "numeric",
-  //     month: "2-digit",
-  //     day: "2-digit",
-  //     hour: "2-digit",
-  //     minute: "2-digit",
-  //     second: "2-digit",
-  //   }).format(1651308763)
-  // );
-
-  const date = 1651308763;
-  const timeZone = "Asia/Kolkata";
-
-  // Potential formatters to use to display date / time
-  const formatters = [
-    new Intl.DateTimeFormat("en-US", {
-      timeStyle: "long",
-      dateStyle: "short",
-      timeZone,
-    }),
-    new Intl.DateTimeFormat("en-US", {
-      timeStyle: "medium",
-      dateStyle: "medium",
-      timeZone,
-    }),
-    new Intl.DateTimeFormat("en-US", {
-      timeStyle: "medium",
-      dateStyle: "medium",
-      hour12: false,
-      timeZone,
-    }),
-    // Using an 'sv' locale will give an ISO-8601 output
-    new Intl.DateTimeFormat("sv", {
-      timeStyle: "medium",
-      dateStyle: "short",
-      timeZone,
-    }),
-    new Intl.DateTimeFormat("en-US", { timeStyle: "short", timeZone }),
-    new Intl.DateTimeFormat("en-US", {
-      timeStyle: "short",
-      hour12: false,
-      timeZone,
-    }),
-  ];
-
-  formatters.forEach((fmt) => console.log(fmt.format(date)));
 
   return (
     <TabPanel
