@@ -89,7 +89,7 @@ const MyProfileCard = () => {
         <Typography marginBottom="10px" sx={{ fontSize: 22, fontWeight: 700 }}>
           Hideo Oostenbroek
         </Typography>
-        <Tooltip title={`web3Context.user`}>
+        <Tooltip>
           <Typography
             marginBottom="25px"
             className="address"
@@ -98,9 +98,7 @@ const MyProfileCard = () => {
               textOverflow: "ellipsis",
               width: "10rem",
             }}
-          >
-            {`web3Context.user`}
-          </Typography>
+          ></Typography>
         </Tooltip>
         <Typography sx={{ fontSize: 14 }} marginBottom="25px">
           An AI-driven NFT exhibition brings the innovation of arts, crafts and

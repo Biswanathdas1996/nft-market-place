@@ -1,6 +1,5 @@
 import React from "react";
 import { Route, Routes } from "react-router-dom";
-import Wallettransactions from "./Wallettransactions";
 
 import HomePage from "./components/Body/HomePage2";
 import ArtExplore from "./components/Header/Explores/Art_Explore/ArtExplore";
@@ -32,7 +31,6 @@ class Routing extends React.Component {
         <Route exact path="/home" element={<HomePage />} />
         <Route exact path="/HowItWorks" element={<HowItWorks />} />
         <Route exact path="/profile" element={<Profile />} />
-        <Route exact path="/myTransactions" element={<Wallettransactions />} />
 
         <Route exact path="/loadIPFS" element={<loadIPFS />} />
         <Route exact path="/artPage" element={<ArtExplore />} />
