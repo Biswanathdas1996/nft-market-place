@@ -1,7 +1,6 @@
 import {
   Grid,
   Link,
-  Button,
   Typography,
   Card,
   CardMedia,
@@ -9,9 +8,9 @@ import {
   CardHeader,
   Tooltip,
 } from "@mui/material";
-import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
-import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import { makeStyles } from "@material-ui/core/styles";
+import MarkAsFevourite from "../shared/MarkAsFevourite";
+import RedirectToOpenSea from "../shared/RedirectToOpenSea";
 
 const DetailsHead = [
   "Contract Address:",
@@ -30,7 +29,7 @@ const useStyles = makeStyles({
   },
 });
 
-export default function LeftConrent({ nftData, tokenId }) {
+export default function LeftConrent({ nftData, tokenId, ContractAddress }) {
   const { description, image } = nftData;
   const classes = useStyles();
 
@@ -48,38 +47,9 @@ export default function LeftConrent({ nftData, tokenId }) {
               justifyContent: "space-between",
             }}
           >
-            <Button
-              disabled
-              sx={{
-                borderRadius: "15px",
-                borderColor: "#D9D4D2",
-                maxWidth: "60px",
-                maxHeight: "30px",
-                minWidth: "60px",
-                minHeight: "30px",
-              }}
-              color="inherit"
-              variant="outlined"
-              startIcon={<FavoriteBorderIcon />}
-            >
-              30
-            </Button>
+            <MarkAsFevourite tokenId={tokenId} />
 
-            <Button
-              disabled
-              color="inherit"
-              variant="outlined"
-              sx={{
-                borderRadius: "15px",
-                borderColor: "#D9D4D2",
-                maxWidth: "40px",
-                maxHeight: "30px",
-                minWidth: "40px",
-                minHeight: "30px",
-              }}
-            >
-              <MoreHorizIcon />
-            </Button>
+            <RedirectToOpenSea tokenId={tokenId} />
           </div>
         }
       ></CardHeader>
@@ -122,7 +92,7 @@ export default function LeftConrent({ nftData, tokenId }) {
           <Grid xs={7}>
             <Tooltip title="Contrct Address">
               <Link
-                href="https://rinkeby.etherscan.io/address/0xdfc34335664a0c2c548cf0c837e9b0a9315eeda2"
+                href={`https://rinkeby.etherscan.io/address/${ContractAddress}`}
                 target="_blank"
                 sx={{ textDecoration: "none" }}
               >
@@ -137,7 +107,7 @@ export default function LeftConrent({ nftData, tokenId }) {
                     width: "11rem",
                   }}
                 >
-                  0xdfc34335664a0c2c548cf0c837e9b0a9315eeda2
+                  {ContractAddress}
                 </Typography>
               </Link>
             </Tooltip>

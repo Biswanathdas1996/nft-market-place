@@ -4,15 +4,14 @@ import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
-import { IconButton, Tooltip } from "@mui/material";
+import { Tooltip } from "@mui/material";
 import Avatars from "./Avatars";
-import FavoriteBorderRoundedIcon from "@mui/icons-material/FavoriteBorderRounded";
 import { useNavigate } from "react-router-dom";
 import { _fetch, _account } from "../../abi2/connect";
-import Address from "../../abi2/Address.json";
 import { buyNft } from "../../functions/buyNft";
 import TransctionModal from "./TransctionModal";
-import OfflineShareIcon from "@mui/icons-material/OfflineShare";
+import MarkAsFevourite from "./MarkAsFevourite";
+import RedirectToOpenSea from "./RedirectToOpenSea";
 
 export default function NFTCard({ tokenId, reload = () => null }) {
   const [nftData, setNftData] = useState(null);
@@ -21,7 +20,6 @@ export default function NFTCard({ tokenId, reload = () => null }) {
   const [response, setResponse] = useState(null);
   const [owner, setOwner] = useState(null);
   const [account, setAccount] = useState(null);
-  const [fevToken, setFevToken] = useState([]);
 
   let history = useNavigate();
 
@@ -38,8 +36,7 @@ export default function NFTCard({ tokenId, reload = () => null }) {
     setOwner(getOwner);
     const account = await _account();
     setAccount(account);
-    const myFev = await JSON.parse(localStorage.getItem("myFevTokens"));
-    setFevToken(myFev);
+
     await fetch(getAllTokenUri)
       .then((response) => response.json())
       .then((data) => {
@@ -56,27 +53,6 @@ export default function NFTCard({ tokenId, reload = () => null }) {
   const modalClose = () => {
     setStart(false);
     setResponse(null);
-  };
-
-  const addToFev = (tokenId) => {
-    let tokens = [];
-    const myFev = JSON.parse(localStorage.getItem("myFevTokens"));
-    if (myFev) {
-      tokens = myFev;
-      if (tokens.find((token) => token === tokenId)) {
-        const index = tokens.indexOf(tokenId);
-        if (index > -1) {
-          tokens.splice(index, 1);
-        }
-      } else {
-        tokens.push(tokenId);
-      }
-    } else {
-      tokens.push(tokenId);
-    }
-    setFevToken(tokens);
-    localStorage.setItem("myFevTokens", JSON.stringify(tokens));
-    reload();
   };
 
   return (
@@ -106,42 +82,10 @@ export default function NFTCard({ tokenId, reload = () => null }) {
           >
             <Grid container>
               <Grid xs={2}>
-                <IconButton onClick={() => addToFev(tokenId)}>
-                  <FavoriteBorderRoundedIcon
-                    style={{
-                      borderRadius: "50%",
-                      padding: "3px",
-                      color: fevToken?.find((token) => token === tokenId)
-                        ? "white"
-                        : "#FD6412",
-                      backgroundColor: fevToken?.find(
-                        (token) => token === tokenId
-                      )
-                        ? "#FD6412"
-                        : "white",
-                    }}
-                  />
-                </IconButton>
+                <MarkAsFevourite tokenId={tokenId} reload={reload} />
               </Grid>
               <Grid xs={10} sx={{ textAlign: "right" }}>
-                <a
-                  href={`https://testnets.opensea.io/assets/${Address}/${tokenId}`}
-                  target="_blank"
-                  rel="noreferrer"
-                  title="View on OpenSea"
-                >
-                  <IconButton>
-                    <OfflineShareIcon
-                      style={{
-                        color: "#0578EC",
-                        backgroundColor: "white",
-                        borderRadius: "50%",
-                        padding: "5px",
-                        //   fontSize: "15px",
-                      }}
-                    />
-                  </IconButton>
-                </a>
+                <RedirectToOpenSea tokenId={tokenId} />
               </Grid>
             </Grid>
           </div>

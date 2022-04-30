@@ -4,6 +4,7 @@ import { CssBaseline, Container, Grid } from "@mui/material";
 import RightContent from "../components/DetailsPage/RightContent";
 import LeftConrent from "../components/DetailsPage/LeftConrent";
 import { _fetch, _account } from "../abi2/connect";
+import ContractAddress from "../abi2/Address.json";
 import { useParams } from "react-router-dom";
 import RecentActivity from "../components/shared/RecentActivity";
 import Loader from "../components/shared/Loader";
@@ -69,7 +70,11 @@ export default function DetailsPage({ match }) {
               marginY="50px"
             >
               <Grid item xs={12} md={5}>
-                <LeftConrent nftData={nftData} tokenId={tokenId} />
+                <LeftConrent
+                  nftData={nftData}
+                  tokenId={tokenId}
+                  ContractAddress={ContractAddress}
+                />
               </Grid>
 
               <Grid item xs={12} md={7}>
