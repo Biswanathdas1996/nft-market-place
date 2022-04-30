@@ -23,7 +23,7 @@ export default function CustomBreadCrumbs(props) {
       href="#"
       // onClick={handleClick}
     >
-      Explore
+      Explores
     </Link>,
     <Typography key="3" color="text.primary">
       {props.title}

@@ -104,7 +104,6 @@ export default function NFTCard({ tokenId, reload = () => null }) {
               backgroundSize: "cover",
               backgroundRepeat: "no-repeat",
               margin: "15px 15px 0px 15px",
-              cursor: "pointer",
             }}
           >
             <Grid container>

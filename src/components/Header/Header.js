@@ -162,7 +162,7 @@ const Header = () => {
             color="inherit"
             sx={{ color: "black", fontWeight: "bold", textTransform: "none" }}
           >
-            Explore
+            Explores
           </Button>
 
           {/* // Menu items-------------------------------------------- */}

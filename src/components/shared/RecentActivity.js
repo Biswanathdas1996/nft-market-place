@@ -5,22 +5,22 @@ import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 
 import { Toolbar } from "@mui/material";
-
+import Loader from "./Loader";
 import NftCard from "./NFT-Card";
 import { _fetch } from "../../abi2/connect";
 
 export default function HomePage() {
   const [tokens, setToken] = useState([]);
-  // const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(false);
   useEffect(() => {
     fetchAllPosts();
   }, []);
 
   async function fetchAllPosts() {
-    // setLoading(true);
+    setLoading(true);
     const getAllToken = await _fetch("getToken");
-    // setLoading(false);
-    setToken(getAllToken.slice(Math.max(getAllToken.length - 5, 0)));
+    await setToken(getAllToken.slice(Math.max(getAllToken.length - 5, 0)));
+    setLoading(false);
   }
 
   return (
@@ -39,11 +39,21 @@ export default function HomePage() {
       </Toolbar>
 
       <Grid container spacing={4}>
-        {tokens?.map((item) => (
-          <Grid item xs={12} sm={6} md={2.4}>
-            <NftCard tokenId={item} />
+        {tokens && tokens?.length > 0 ? (
+          tokens?.map((item) => (
+            <Grid item xs={12} sm={6} md={2.4}>
+              <NftCard tokenId={item} />
+            </Grid>
+          ))
+        ) : loading ? (
+          <Grid item xs={12} sm={12} md={12}>
+            <Loader count="5" xs={12} sm={6} md={2.4} />
           </Grid>
-        ))}
+        ) : (
+          <Grid item xs={12} sm={12} md={12}>
+            <h3>No NFT available</h3>
+          </Grid>
+        )}
       </Grid>
     </>
   );

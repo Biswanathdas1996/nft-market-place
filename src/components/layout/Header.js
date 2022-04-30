@@ -58,7 +58,11 @@ const Header = () => {
   const handleMenuClose = (category = "") => {
     setAnchorEl(null);
     handleMobileMenuClose();
-    history(`/category/${category.toLowerCase()}`);
+    if (category !== "all") {
+      history(`/category/${category.toLowerCase()}`);
+    } else {
+      history("/");
+    }
   };
 
   const handleMobileMenuOpen = (event) => {
@@ -84,7 +88,7 @@ const Header = () => {
     >
       <MenuItem
         onClick={() => {
-          handleMenuClose();
+          handleMenuClose("all");
         }}
       >
         <GridViewIcon sx={{ marginRight: "10px" }} />
