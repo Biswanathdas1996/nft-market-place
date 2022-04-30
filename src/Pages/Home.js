@@ -26,7 +26,7 @@ export default function HomePage() {
     setLoading(true);
     const getAllToken = await _fetch("getToken");
 
-    await setToken(getAllToken);
+    await setToken(getAllToken.slice(0, 10));
     setLoading(false);
   }
 
@@ -95,7 +95,7 @@ export default function HomePage() {
       </Grid>
 
       <center>
-        {!loading && (
+        {!loading && tokens?.length > 0 && (
           <Button
             onClick={() => history(`/top-selling`)}
             variant="contained"

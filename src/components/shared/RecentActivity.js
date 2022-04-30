@@ -20,7 +20,7 @@ export default function HomePage() {
     // setLoading(true);
     const getAllToken = await _fetch("getToken");
     // setLoading(false);
-    setToken(getAllToken);
+    setToken(getAllToken.slice(Math.max(getAllToken.length - 5, 0)));
   }
 
   return (

@@ -5,7 +5,7 @@ import { Card, Grid } from "@mui/material";
 import { _transction } from "../../src/abi2/connect";
 import { create } from "ipfs-http-client";
 import Button from "@mui/material/Button";
-// import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import Web3 from "web3";
 import TextareaAutosize from "@mui/material/TextareaAutosize";
 import Switch from "@mui/material/Switch";
@@ -37,7 +37,7 @@ const Mint = () => {
   const handleChange = (event) => {
     setChecked(event.target.checked);
   };
-  //   let history = useNavigate();
+  let history = useNavigate();
 
   const saveData = async ({
     title,
@@ -76,11 +76,12 @@ const Mint = () => {
         "mintNFT",
         `https://ipfs.infura.io/ipfs/${resultsSaveMetaData.path}`,
         web3.utils.toWei(price.toString(), "ether"),
-        royelty
+        royelty,
+        category
       );
     }
     setResponse(responseData);
-    // history("/nft-market");
+
     console.log("responseData", responseData);
   };
 
@@ -102,6 +103,7 @@ const Mint = () => {
   const modalClose = () => {
     setStart(false);
     setResponse(null);
+    history("/");
   };
   return (
     <>

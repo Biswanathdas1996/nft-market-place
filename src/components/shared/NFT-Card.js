@@ -6,12 +6,13 @@ import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
 import { IconButton, Tooltip } from "@mui/material";
 import Avatars from "./Avatars";
-import MoreVertIcon from "@mui/icons-material/MoreVert";
 import FavoriteBorderRoundedIcon from "@mui/icons-material/FavoriteBorderRounded";
 import { useNavigate } from "react-router-dom";
 import { _fetch, _account } from "../../abi2/connect";
+import Address from "../../abi2/Address.json";
 import { buyNft } from "../../functions/buyNft";
 import TransctionModal from "./TransctionModal";
+import OfflineShareIcon from "@mui/icons-material/OfflineShare";
 
 export default function NFTCard({ tokenId, reload = () => null }) {
   const [nftData, setNftData] = useState(null);
@@ -126,17 +127,24 @@ export default function NFTCard({ tokenId, reload = () => null }) {
                 </IconButton>
               </Grid>
               <Grid xs={10} sx={{ textAlign: "right" }}>
-                <IconButton>
-                  <MoreVertIcon
-                    style={{
-                      color: "#0578EC",
-                      backgroundColor: "white",
-                      borderRadius: "50%",
-                      padding: "5px",
-                      //   fontSize: "15px",
-                    }}
-                  />
-                </IconButton>
+                <a
+                  href={`https://testnets.opensea.io/assets/${Address}/${tokenId}`}
+                  target="_blank"
+                  rel="noreferrer"
+                  title="View on OpenSea"
+                >
+                  <IconButton>
+                    <OfflineShareIcon
+                      style={{
+                        color: "#0578EC",
+                        backgroundColor: "white",
+                        borderRadius: "50%",
+                        padding: "5px",
+                        //   fontSize: "15px",
+                      }}
+                    />
+                  </IconButton>
+                </a>
               </Grid>
             </Grid>
           </div>
