@@ -21,12 +21,12 @@ import PwcLogo from "../../assets/images/nft.png";
 
 const pages = [
   {
-    label: "My profile",
-    href: "/profile",
+    label: "Home",
+    href: "/",
   },
   {
-    label: "Activity",
-    href: "#",
+    label: "My profile",
+    href: "/profile",
   },
   {
     label: "How it works",
@@ -204,9 +204,9 @@ const Header = () => {
           >
             {pages.map(({ label, href }) => (
               <Button
-                href={href}
+                type="button"
                 key={label}
-                onClick={handleCloseNavMenu}
+                onClick={() => history(href)}
                 sx={{
                   my: 2,
                   color: "black",
@@ -224,12 +224,13 @@ const Header = () => {
 
           <Box sx={{ display: { xs: "none", md: "flex" } }}>
             <Button
-              href="/publishArt"
+              type="button"
               variant="contained"
               sx={{
                 marginRight: "20px",
                 textTransform: "none",
               }}
+              onClick={() => history("/publishArt")}
             >
               Create
             </Button>
