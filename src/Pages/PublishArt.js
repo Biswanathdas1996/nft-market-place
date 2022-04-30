@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Formik, Form, Field, FieldArray } from "formik";
 // import * as Yup from "yup";
 import { Card, Grid } from "@mui/material";
-import { _transction } from "../../src/abi2/connect";
+import { _transction } from "../../src/CONTRACT-ABI/connect";
 import { create } from "ipfs-http-client";
 import Button from "@mui/material/Button";
 import { useNavigate } from "react-router-dom";

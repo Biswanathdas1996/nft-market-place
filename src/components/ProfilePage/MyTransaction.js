@@ -16,7 +16,7 @@ import {
 // import MaleImg from "../../assets/images/female1.png";
 import EthIcon from "../../assets/icons/eth_icon.svg";
 import CustomTransactionStat from "./CustomTransactionStat";
-import { _account } from "../../abi2/connect";
+import { _account } from "../../CONTRACT-ABI/connect";
 
 const columns = [
   { id: "from", label: "FROM", minWidth: 170 },

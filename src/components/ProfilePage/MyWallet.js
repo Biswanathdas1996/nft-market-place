@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Grid, Card, Typography, Tooltip } from "@material-ui/core";
 import Box from "@mui/material/Box";
 import Web3 from "web3";
-import { _account } from "../../abi2/connect";
+import { _account } from "../../CONTRACT-ABI/connect";
 const styles = {
   card: {
     height: "180px",

@@ -42,11 +42,6 @@ const Header = () => {
   const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
 
-  //for menu items ----
-  const handleCloseNavMenu = () => {
-    // setAnchorElNav(null);
-  };
-
   const handleProfileMenuOpen = (event) => {
     setAnchorEl(event.currentTarget);
   };

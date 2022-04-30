@@ -7,7 +7,7 @@ import Typography from "@mui/material/Typography";
 import { Toolbar } from "@mui/material";
 import Loader from "./Loader";
 import NftCard from "./NFT-Card";
-import { _fetch } from "../../abi2/connect";
+import { _fetch } from "../../CONTRACT-ABI/connect";
 
 export default function HomePage() {
   const [tokens, setToken] = useState([]);

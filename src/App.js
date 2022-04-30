@@ -5,8 +5,7 @@ import Routes from "./Routes";
 import "fontsource-roboto";
 import CssBaseline from "@material-ui/core/CssBaseline";
 
-import Footer from "./components/Footer/Footer";
-// import HomePage from "./components/Body/HomePage";
+import Footer from "./components/layout/Footer";
 import Header from "./components/layout/Header";
 
 const App = () => {

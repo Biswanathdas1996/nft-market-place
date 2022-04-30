@@ -1,18 +1,13 @@
 import React from "react";
 import { Route, Routes } from "react-router-dom";
 
-import HomePage from "./components/Body/HomePage2";
-import ArtExplore from "./components/Header/Explores/Art_Explore/ArtExplore";
-import MusicExplore from "./components/Header/Explores/Music_Explore/MusicExplore";
-import SportsExplore from "./components/Header/Explores/Sports_Explore/SportsExplore";
-import HowItWorks from "./components/Header/HowItWorks/HowITworks";
-
 import Home from "./Pages/Home";
 import PublishArt from "./Pages/PublishArt";
 import DetailsPage from "./Pages/DetailsPage";
 import TopSelling from "./Pages/TopSelling";
 import CategoryWiseList from "./Pages/CategoryWiseList";
 import Profile from "./Pages/Profile";
+import HowITworks from "./Pages/HowITworks";
 
 class Routing extends React.Component {
   render() {
@@ -28,14 +23,8 @@ class Routing extends React.Component {
         />
         <Route exact path="/top-selling" element={<TopSelling />} />
 
-        <Route exact path="/home" element={<HomePage />} />
-        <Route exact path="/HowItWorks" element={<HowItWorks />} />
         <Route exact path="/profile" element={<Profile />} />
-
-        <Route exact path="/loadIPFS" element={<loadIPFS />} />
-        <Route exact path="/artPage" element={<ArtExplore />} />
-        <Route exact path="/sportsPage" element={<SportsExplore />} />
-        <Route exact path="/musicPage" element={<MusicExplore />} />
+        <Route exact path="/HowItWorks" element={<HowITworks />} />
 
         <Route
           render={function () {

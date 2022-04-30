@@ -1,4 +1,4 @@
-import { _fetch, _account, _paid_transction } from "../abi2/connect";
+import { _fetch, _account, _paid_transction } from "../CONTRACT-ABI/connect";
 
 export const buyNft = async (tokenId) => {
   try {

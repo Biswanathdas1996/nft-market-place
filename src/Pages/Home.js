@@ -8,7 +8,7 @@ import { Toolbar, ButtonGroup } from "@mui/material";
 import FilterAltOutlinedIcon from "@mui/icons-material/FilterAltOutlined";
 import NftCard from "../components/shared/NFT-Card";
 import RecentActivity from "../components/shared/RecentActivity";
-import { _fetch } from "../abi2/connect";
+import { _fetch } from "../CONTRACT-ABI/connect";
 import { useNavigate } from "react-router-dom";
 import Loader from "../components/shared/Loader";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";

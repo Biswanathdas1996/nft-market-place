@@ -1,4 +1,4 @@
-import Address from "../abi2/Address.json";
+import Address from "../CONTRACT-ABI/Address.json";
 
 export function frtchAccounttransction() {
   var requestOptions = {

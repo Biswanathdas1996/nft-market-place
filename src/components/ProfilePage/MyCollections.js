@@ -2,7 +2,7 @@
 import { Grid } from "@mui/material";
 import React, { useState, useEffect } from "react";
 import { TabPanel } from "@mui/lab";
-import { _fetch, _account } from "../../abi2/connect";
+import { _fetch, _account } from "../../CONTRACT-ABI/connect";
 import NftCard from "../shared/NFT-Card";
 import NoData from "../shared/NoData";
 import Loader from "../shared/Loader";

@@ -7,7 +7,7 @@ import Typography from "@mui/material/Typography";
 import { Tooltip } from "@mui/material";
 import Avatars from "./Avatars";
 import { useNavigate } from "react-router-dom";
-import { _fetch, _account } from "../../abi2/connect";
+import { _fetch, _account } from "../../CONTRACT-ABI/connect";
 import { buyNft } from "../../functions/buyNft";
 import TransctionModal from "./TransctionModal";
 import MarkAsFevourite from "./MarkAsFevourite";
