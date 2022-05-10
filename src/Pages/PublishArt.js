@@ -69,8 +69,8 @@ const Mint = () => {
       },
       {
         display_type: "date",
-        trait_type: "birthday",
-        value: 1546360800,
+        trait_type: "publish-date",
+        value: new Date(),
       },
     ];
     if (file) {
@@ -146,7 +146,7 @@ const Mint = () => {
                         title: "",
                         text: "",
                         category: "",
-                        royelty: "",
+                        royelty: 0,
                         price: "",
                         attributes: [],
                       }}

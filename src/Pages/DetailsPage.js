@@ -85,6 +85,7 @@ export default function DetailsPage({ match }) {
                   buynow={buynow}
                   account={account}
                   tokenId={tokenId}
+                  fetchNftInfo={fetchNftInfo}
                 />
               </Grid>
             </Grid>

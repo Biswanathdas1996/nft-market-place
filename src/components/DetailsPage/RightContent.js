@@ -18,10 +18,19 @@ import Attributes from "./Attributes";
 import TransactionHistory from "./TransactionHistory";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import ManageAccountsIcon from "@mui/icons-material/ManageAccounts";
+import UpdatePrice from "./UpdatePrice";
 
 const countData = ["05", "08", "35", "12"];
 
-const RightContent = ({ nftData, owner, price, buynow, account, tokenId }) => {
+const RightContent = ({
+  nftData,
+  owner,
+  price,
+  buynow,
+  account,
+  tokenId,
+  fetchNftInfo,
+}) => {
   const [value, setValue] = React.useState("2");
 
   const handleChange = (event, newValue) => {
@@ -164,7 +173,11 @@ const RightContent = ({ nftData, owner, price, buynow, account, tokenId }) => {
         </div>
       ) : (
         <div style={{ marginTop: "30px", marginBottom: "30px" }}>
-          You Own this NFT
+          <UpdatePrice
+            price={price}
+            tokenId={tokenId}
+            fetchNftInfo={fetchNftInfo}
+          />
         </div>
       )}
 
