@@ -26,7 +26,7 @@ const MyCollections = () => {
       const owner = await _fetch("ownerOf", tokenId);
       if (account == owner) {
         tokenOwnedByMe.push(tokenId);
-        setToken(tokenOwnedByMe);
+        setToken([...tokenOwnedByMe]);
       }
     });
     setLoading(false);

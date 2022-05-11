@@ -332,7 +332,7 @@ const Mint = () => {
                                     type="number"
                                     name="royelty"
                                     autoComplete="flase"
-                                    placeholder="Enter royelty amount (%)"
+                                    placeholder="Enter royalty amount (%)"
                                     className={`form-control text-muted ${
                                       touched.royelty && errors.royelty
                                         ? "is-invalid"
