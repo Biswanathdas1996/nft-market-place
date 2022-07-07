@@ -12,7 +12,8 @@ import {
   Stack,
   Typography,
 } from "@mui/material";
-import EthIcon from "../../assets/icons/eth_icon.svg";
+
+import { getIcon } from "../../utils/currencyIcon";
 import CustomTransactionStat from "./CustomTransactionStat";
 import { _account } from "../../CONTRACT-ABI/connect";
 import { fetchWallatTransction } from "../../functions/fetchWallatTransction";
@@ -172,7 +173,7 @@ const MyTransaction = () => {
                           width="10px"
                           alt="ethimg"
                           height="16px"
-                          src={EthIcon}
+                          src={getIcon()}
                           style={{
                             color: "black",
                             marginTop: "4px",

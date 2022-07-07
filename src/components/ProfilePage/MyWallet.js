@@ -3,6 +3,8 @@ import { Grid, Card, Typography, Tooltip } from "@material-ui/core";
 import Box from "@mui/material/Box";
 import Web3 from "web3";
 import { _account } from "../../CONTRACT-ABI/connect";
+import { getSymbol } from "../../utils/currencySymbol";
+
 const styles = {
   card: {
     height: "180px",
@@ -73,7 +75,7 @@ const WalledCard = () => {
           <Card style={styles.card}>
             <Typography>Total Balance</Typography>
             <Typography style={styles.typo2}>
-              {parseFloat(Number(balance)).toFixed(2)} ETH
+              {parseFloat(Number(balance)).toFixed(2)} {getSymbol()}
             </Typography>
           </Card>
         </Grid>

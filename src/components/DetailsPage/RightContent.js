@@ -12,13 +12,15 @@ import {
 import React from "react";
 import TabContext from "@mui/lab/TabContext";
 import TabList from "@mui/lab/TabList";
-import EthIcon from "../../assets/icons/eth_icon.svg";
 import Bid from "./Bid";
 import Attributes from "./Attributes";
 import TransactionHistory from "./TransactionHistory";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import ManageAccountsIcon from "@mui/icons-material/ManageAccounts";
 import UpdatePrice from "./UpdatePrice";
+
+import { getIcon } from "../../utils/currencyIcon";
+import { getSymbol } from "../../utils/currencySymbol";
 
 const countData = ["05", "08", "35", "12"];
 
@@ -108,14 +110,14 @@ const RightContent = ({
         <Grid xs={6}>
           <Stack direction="row" spacing={1}>
             <img
-              width="10px"
-              height="20px"
-              src={EthIcon}
+              width="15px"
+              height="15px"
+              src={getIcon()}
               style={{ marginTop: "4px" }}
               alt="nft"
             />
             <Typography sx={{ fontWeight: "bold", fontSize: "18px" }}>
-              {price / 1000000000000000000} ETH
+              {price / 1000000000000000000} {getSymbol()}
             </Typography>
           </Stack>
         </Grid>
@@ -154,7 +156,7 @@ const RightContent = ({
             }}
             onClick={buynow}
           >
-            Buy for {price / 1000000000000000000} ETH
+            Buy for {price / 1000000000000000000} {getSymbol()}
           </Button>
           <Button
             variant="outlined"

@@ -19,6 +19,12 @@ import { useNavigate } from "react-router-dom";
 import SearchBar from "../shared/SearchBar";
 import PwcLogo from "../../assets/images/nft.png";
 
+import Stack from "@mui/material/Stack";
+import Typography from "@mui/material/Typography";
+
+import { getIcon } from "../../utils/currencyIcon";
+import { getSymbol } from "../../utils/currencySymbol";
+
 const pages = [
   {
     label: "Home",
@@ -237,6 +243,21 @@ const Header = () => {
             >
               Sign In
             </Button>
+
+            <Stack direction="row" spacing={1} style={{ margin: 10 }}>
+              <img
+                width="15px"
+                height="15px"
+                src={getIcon()}
+                style={{ marginTop: "4px" }}
+                alt="nft"
+              />
+              <Typography
+                sx={{ fontWeight: "bold", fontSize: "18px", color: "black" }}
+              >
+                {getSymbol()}
+              </Typography>
+            </Stack>
           </Box>
 
           <Box sx={{ display: { xs: "flex", md: "none" } }}>

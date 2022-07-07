@@ -9,6 +9,10 @@ import Footer from "./components/layout/Footer";
 import Header from "./components/layout/Header";
 
 const App = () => {
+  window?.ethereum.on("chainChanged", (chainId) => {
+    window.location.reload(true);
+  });
+
   return (
     <>
       <CssBaseline />

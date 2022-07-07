@@ -12,6 +12,8 @@ import { buyNft } from "../../functions/buyNft";
 import TransctionModal from "./TransctionModal";
 import MarkAsFevourite from "./MarkAsFevourite";
 import RedirectToOpenSea from "./RedirectToOpenSea";
+import { getIcon } from "../../utils/currencyIcon";
+import { getSymbol } from "../../utils/currencySymbol";
 
 export default function NFTCard({ tokenId, reload = () => null }) {
   const [nftData, setNftData] = useState(null);
@@ -123,9 +125,9 @@ export default function NFTCard({ tokenId, reload = () => null }) {
             <Tooltip title="Ethereum">
               <img
                 alt="nft"
-                width="10px"
-                height="17px"
-                src={`https://ethereum.org/static/a183661dd70e0e5c70689a0ec95ef0ba/cdbe4/eth-diamond-purple.webp`}
+                width="15px"
+                height="15px"
+                src={getIcon()}
                 style={{ marginRight: 5 }}
               ></img>
             </Tooltip>
@@ -134,7 +136,7 @@ export default function NFTCard({ tokenId, reload = () => null }) {
                 Price{" "}
               </span>
               <strong style={{ fontSize: 12, fontWeight: "bold" }}>
-                {price / 1000000000000000000} ETH
+                {price / 1000000000000000000} {getSymbol()}
               </strong>
             </p>
           </div>

@@ -14,8 +14,7 @@ import {
 } from "@mui/material";
 // import MonetizationOnOutlined from "@mui/icons-material/MonetizationOnOutlined";
 // import MaleImg from "../../assets/images/female1.png";
-import EthIcon from "../../assets/icons/eth_icon.svg";
-
+import { getIcon } from "../../utils/currencyIcon";
 import CustomButton from "./CustomButton";
 // import CustomTransactionStat from "./CustomTransactionStat";
 
@@ -173,7 +172,7 @@ const MyTransaction = ({ tokenId }) => {
                             width="10px"
                             alt="ethimg"
                             height="16px"
-                            src={EthIcon}
+                            src={getIcon()}
                             style={{
                               color: "black",
                               marginTop: "4px",

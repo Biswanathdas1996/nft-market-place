@@ -13,6 +13,7 @@ import DeleteOutlineIcon from "@mui/icons-material/Delete";
 
 import { pink } from "@mui/material/colors";
 import TransctionModal from "../components/shared/TransctionModal";
+import { getSymbol } from "../utils/currencySymbol";
 
 const web3 = new Web3(window.ethereum);
 
@@ -215,7 +216,7 @@ const Mint = () => {
                                   type="number"
                                   name="price"
                                   autoComplete="flase"
-                                  placeholder="Enter price in ETH"
+                                  placeholder={`Enter price in ${getSymbol()}`}
                                   className={`form-control text-muted ${
                                     touched.price && errors.price
                                       ? "is-invalid"
