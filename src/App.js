@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./App.css";
 import "./index.css";
 import Routes from "./Routes";
@@ -8,16 +8,41 @@ import CssBaseline from "@material-ui/core/CssBaseline";
 import Footer from "./components/layout/Footer";
 import Header from "./components/layout/Header";
 
+import { getIcon } from "./utils/currencyIcon";
+import { currentNeteork } from "./utils/currentNeteork";
+
+import Web3 from "web3";
+
 const App = () => {
-  window?.ethereum.on("chainChanged", (chainId) => {
+  const [icon, setIcon] = useState(null);
+  const [symbol, setSymbol] = useState(null);
+  const web3 = new Web3(window.ethereum);
+
+  window?.ethereum.on("chainChanged", async (chainId) => {
+    const networkId = await web3?.eth?.accounts?._ethereumCall?.getNetworkId();
+    sessionStorage.setItem("currentyNetwork", networkId);
+    getCurrencyInfo();
     window.location.reload(true);
   });
+
+  window?.ethereum.on("accountsChanged", (accounts) => {
+    window.location.reload(true);
+  });
+
+  useEffect(() => {
+    getCurrencyInfo();
+  }, []);
+
+  const getCurrencyInfo = () => {
+    setIcon(getIcon());
+    setSymbol(currentNeteork());
+  };
 
   return (
     <>
       <CssBaseline />
 
-      <Header />
+      <Header icon={icon} symbol={symbol} />
       <Routes />
       <Footer />
     </>

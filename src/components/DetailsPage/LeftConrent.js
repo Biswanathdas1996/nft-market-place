@@ -11,7 +11,7 @@ import {
 import { makeStyles } from "@material-ui/core/styles";
 import MarkAsFevourite from "../shared/MarkAsFevourite";
 import RedirectToOpenSea from "../shared/RedirectToOpenSea";
-
+import { currentNeteork } from "../../utils/currentNeteork";
 const DetailsHead = [
   "Contract Address:",
   "Token ID:",
@@ -130,7 +130,7 @@ export default function LeftConrent({ nftData, tokenId, ContractAddress }) {
               ERC-721
             </Typography>
             <Typography variant="body2" paragraph item fontWeight="600">
-              Ethereum
+              {currentNeteork()}
             </Typography>
           </Grid>
         </Grid>

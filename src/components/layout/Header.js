@@ -22,9 +22,6 @@ import PwcLogo from "../../assets/images/nft.png";
 import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
 
-import { getIcon } from "../../utils/currencyIcon";
-import { getSymbol } from "../../utils/currencySymbol";
-
 const pages = [
   {
     label: "Home",
@@ -40,9 +37,10 @@ const pages = [
   },
 ];
 
-const Header = () => {
+const Header = ({ icon, symbol }) => {
   // const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorEl, setAnchorEl] = React.useState(null);
+
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
   let history = useNavigate();
   const isMenuOpen = Boolean(anchorEl);
@@ -248,14 +246,14 @@ const Header = () => {
               <img
                 width="15px"
                 height="15px"
-                src={getIcon()}
+                src={icon}
                 style={{ marginTop: "4px" }}
                 alt="nft"
               />
               <Typography
                 sx={{ fontWeight: "bold", fontSize: "18px", color: "black" }}
               >
-                {getSymbol()}
+                {symbol}
               </Typography>
             </Stack>
           </Box>
