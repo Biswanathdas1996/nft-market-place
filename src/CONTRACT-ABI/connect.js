@@ -16,7 +16,7 @@ export const getcurrentNetworkId = async () => {
 };
 
 export const getContractAddress = (networkID) => {
-  if (networkID.toString() === "80001") {
+  if (networkID?.toString() === "80001") {
     return POLYGON_ADDRESS;
   } else {
     return ETH_ADDRESS;

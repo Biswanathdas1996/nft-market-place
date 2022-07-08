@@ -10,16 +10,14 @@ import Header from "./components/layout/Header";
 
 import { getIcon } from "./utils/currencyIcon";
 import { currentNeteork } from "./utils/currentNeteork";
-
-import Web3 from "web3";
+import { getcurrentNetworkId } from "./CONTRACT-ABI/connect";
 
 const App = () => {
   const [icon, setIcon] = useState(null);
   const [symbol, setSymbol] = useState(null);
-  const web3 = new Web3(window.ethereum);
 
   window?.ethereum.on("chainChanged", async (chainId) => {
-    const networkId = await web3?.eth?.accounts?._ethereumCall?.getNetworkId();
+    const networkId = await getcurrentNetworkId();
     sessionStorage.setItem("currentyNetwork", networkId);
     getCurrencyInfo();
     window.location.reload(true);

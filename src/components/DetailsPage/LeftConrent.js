@@ -12,6 +12,8 @@ import { makeStyles } from "@material-ui/core/styles";
 import MarkAsFevourite from "../shared/MarkAsFevourite";
 import RedirectToOpenSea from "../shared/RedirectToOpenSea";
 import { currentNeteork } from "../../utils/currentNeteork";
+import { networkURL } from "../../config";
+
 const DetailsHead = [
   "Contract Address:",
   "Token ID:",
@@ -92,7 +94,7 @@ export default function LeftConrent({ nftData, tokenId, ContractAddress }) {
           <Grid xs={7}>
             <Tooltip title="Contrct Address">
               <Link
-                href={`https://rinkeby.etherscan.io/address/${ContractAddress}`}
+                href={`${networkURL()}/address/${ContractAddress}`}
                 target="_blank"
                 sx={{ textDecoration: "none" }}
               >

@@ -4,12 +4,16 @@ import { CssBaseline, Container, Grid } from "@mui/material";
 import RightContent from "../components/DetailsPage/RightContent";
 import LeftConrent from "../components/DetailsPage/LeftConrent";
 import { _fetch, _account } from "../CONTRACT-ABI/connect";
-import ContractAddress from "../CONTRACT-ABI/Address.json";
 import { useParams } from "react-router-dom";
 import RecentActivity from "../components/shared/RecentActivity";
 import Loader from "../components/shared/Loader";
 import { buyNft } from "../functions/buyNft";
 import TransctionModal from "../components/shared/TransctionModal";
+
+import {
+  getContractAddress,
+  getcurrentNetworkId,
+} from "../CONTRACT-ABI/connect";
 
 const theme = createTheme();
 
@@ -20,13 +24,21 @@ export default function DetailsPage({ match }) {
   const [account, setAccount] = useState(null);
   const [price, setPrice] = useState(null);
   const [response, setResponse] = useState(null);
+  const [address, setAddress] = useState(null);
 
   const { tokenId } = useParams();
 
   useEffect(() => {
     fetchNftInfo();
+    getAddress();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  const getAddress = async () => {
+    const networkIddarta = await getcurrentNetworkId();
+    const cureentAccress = getContractAddress(networkIddarta);
+    setAddress(cureentAccress);
+  };
 
   async function fetchNftInfo() {
     const getAllTokenUri = await _fetch("tokenURI", tokenId);
@@ -73,7 +85,7 @@ export default function DetailsPage({ match }) {
                 <LeftConrent
                   nftData={nftData}
                   tokenId={tokenId}
-                  ContractAddress={ContractAddress}
+                  ContractAddress={address}
                 />
               </Grid>
 

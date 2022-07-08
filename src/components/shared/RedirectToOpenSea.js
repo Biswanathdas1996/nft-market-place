@@ -1,13 +1,29 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { IconButton } from "@mui/material";
 import OfflineShareIcon from "@mui/icons-material/OfflineShare";
-import Address from "../../CONTRACT-ABI/Address.json";
+import {
+  getContractAddress,
+  getcurrentNetworkId,
+} from "../../CONTRACT-ABI/connect";
+
+import { openSeaURI } from "../../config";
 
 export default function RedirectToOpenSea({ tokenId }) {
+  const [address, setAddress] = useState(null);
+
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  useEffect(() => getAddress(), []);
+
+  const getAddress = async () => {
+    const networkIddarta = await getcurrentNetworkId();
+    const cureentAccress = getContractAddress(networkIddarta);
+    setAddress(cureentAccress);
+  };
+
   return (
     <>
       <a
-        href={`https://testnets.opensea.io/assets/${Address}/${tokenId}/?force_update=true`}
+        href={openSeaURI(address, tokenId)}
         target="_blank"
         rel="noreferrer"
         title="View on OpenSea"
