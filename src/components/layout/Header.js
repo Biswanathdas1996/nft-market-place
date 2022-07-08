@@ -244,8 +244,8 @@ const Header = ({ icon, symbol }) => {
 
             <Stack direction="row" spacing={1} style={{ margin: 10 }}>
               <img
-                width="15px"
-                height="15px"
+                width="20px"
+                height="20px"
                 src={icon}
                 style={{ marginTop: "4px" }}
                 alt="nft"

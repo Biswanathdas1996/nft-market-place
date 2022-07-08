@@ -1,4 +1,4 @@
-import EthIcon from "../assets/icons/eth_icon.svg";
+import EthIcon from "../assets/icons/eth-icon.png";
 import MaticIcon from "../assets/icons/polygon_icon.png";
 
 export const getIcon = () => {

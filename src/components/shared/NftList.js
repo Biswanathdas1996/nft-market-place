@@ -1,16 +1,12 @@
 import * as React from "react";
 import Button from "@mui/material/Button";
-import Card from "@mui/material/Card";
-import CardContent from "@mui/material/CardContent";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-import { IconButton, Toolbar, ButtonGroup, Tooltip } from "@mui/material";
-import Avatars from "./Avatars";
-import MoreVertIcon from "@mui/icons-material/MoreVert";
-import FavoriteBorderRoundedIcon from "@mui/icons-material/FavoriteBorderRounded";
+import { Toolbar, ButtonGroup } from "@mui/material";
+
 import FilterAltOutlinedIcon from "@mui/icons-material/FilterAltOutlined";
 import NftCard from "./NFT-Card";
 

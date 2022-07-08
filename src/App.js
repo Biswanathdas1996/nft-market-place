@@ -11,10 +11,13 @@ import Header from "./components/layout/Header";
 import { getIcon } from "./utils/currencyIcon";
 import { currentNeteork } from "./utils/currentNeteork";
 import { getcurrentNetworkId } from "./CONTRACT-ABI/connect";
+import { useLocation } from "react-router-dom";
 
 const App = () => {
   const [icon, setIcon] = useState(null);
   const [symbol, setSymbol] = useState(null);
+  const location = useLocation();
+  console.log("------->", location.pathname);
 
   window?.ethereum.on("chainChanged", async (chainId) => {
     const networkId = await getcurrentNetworkId();
@@ -39,8 +42,7 @@ const App = () => {
   return (
     <>
       <CssBaseline />
-
-      <Header icon={icon} symbol={symbol} />
+      {location.pathname !== "/" && <Header icon={icon} symbol={symbol} />}
       <Routes />
       <Footer />
     </>
