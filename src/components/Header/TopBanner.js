@@ -68,7 +68,7 @@ function HeaderCompound({ children }) {
             Explore
           </Button>
           <Button
-            variant="outlined"
+            // variant="outlined"
             size="large"
             sx={{
               marginX: "15px",
@@ -76,7 +76,8 @@ function HeaderCompound({ children }) {
             }}
             onClick={() => history("/publishArt")}
             style={{
-              border: "2px solid #1976d2",
+              background: "#80808096",
+              color: "white",
               fontSize: 16,
               padding: "17px 24px",
               borderRadius: 12,
