@@ -66,11 +66,11 @@ export default function RecipeReviewCard() {
       <Grid container spacing={2} style={{ marginTop: 20 }}>
         <Grid item xs={12}>
           <Typography
-            component="h1"
+            component="h3"
             variant="h7"
-            align="left"
+            textAlign="left"
             color="text.primary"
-            fontSize="40px"
+            style={{ fontSize: 17, fontWeight: "bold" }}
           >
             BLOGS AND POSTS
           </Typography>

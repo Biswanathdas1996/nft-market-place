@@ -14,6 +14,7 @@ import { useNavigate } from "react-router-dom";
 import Loader from "../components/shared/Loader";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import BlogList from "../components/shared/BlogList";
+import CategoryList from "../components/shared/CategoryList";
 
 export default function HomePage() {
   const [tokens, setToken] = useState([]);
@@ -42,7 +43,9 @@ export default function HomePage() {
             pb: 2,
           }}
         >
-          <Typography
+          <CategoryList />
+
+          {/* <Typography
             component="h1"
             variant="h7"
             align="left"
@@ -50,7 +53,7 @@ export default function HomePage() {
             fontSize="40px"
           >
             Buy/Sell Digital Art on our Art Gallery
-          </Typography>
+          </Typography> */}
         </Box>
         <Toolbar style={{ padding: 0 }}>
           <Typography
@@ -116,6 +119,7 @@ export default function HomePage() {
           )}
         </center>
         <BlogList />
+
         <RecentActivity />
       </Container>
       <div style={{ marginTop: 50 }}></div>
