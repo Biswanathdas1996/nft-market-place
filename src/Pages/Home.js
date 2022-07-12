@@ -118,6 +118,7 @@ export default function HomePage() {
         <BlogList />
         <RecentActivity />
       </Container>
+      <div style={{ marginTop: 50 }}></div>
     </>
   );
 }

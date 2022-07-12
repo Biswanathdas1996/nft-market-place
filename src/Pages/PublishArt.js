@@ -1,78 +1,106 @@
 import React from "react";
-
-import { Card, Grid } from "@mui/material";
-
+import { Card } from "@mui/material";
 import Button from "@mui/material/Button";
-
 import CardActions from "@material-ui/core/CardActions";
 import CardContent from "@material-ui/core/CardContent";
 import { useNavigate } from "react-router-dom";
 import Typography from "@material-ui/core/Typography";
+import CardMedia from "@mui/material/CardMedia";
+import HeaderWrapper from "../components/shared/BackgroundUI";
+import HeaderUI from "../components/shared/HeaderUI";
+
+import NftFreagments from "../assets/images/5543383_watermarknone.jpg";
+import SingleNFT from "../assets/images/blog2.jpeg";
 
 const Mint = () => {
   let history = useNavigate();
   return (
-    <>
-      <Grid
-        container
-        rowSpacing={1}
-        columnSpacing={{ xs: 1, sm: 2, md: 3 }}
-        style={{ height: 500 }}
-      >
-        <Grid item lg={3} md={3} sm={12} xs={12}></Grid>
-        <Grid item lg={6} md={6} sm={12} xs={12}>
-          <div style={{ margin: 20 }}>
-            <h4 style={{ margin: 20 }}>Create and publish NFT</h4>
-            <Grid container>
-              <Grid item lg={6} md={6} sm={12} xs={12}>
-                <div
-                  style={{
-                    padding: "20px",
-                  }}
-                >
-                  <Card onClick={() => history(`/nft-mint`)}>
-                    <CardContent>
-                      <Typography variant="h5" component="h2">
-                        NFT
-                      </Typography>
-                      <Typography color="textSecondary">
-                        Mint single NFT
-                      </Typography>
-                    </CardContent>
-                    <CardActions>
-                      <Button size="small">Create Now</Button>
-                    </CardActions>
-                  </Card>
-                </div>
-              </Grid>
-              <Grid item lg={6} md={6} sm={12} xs={12}>
-                <div
-                  style={{
-                    padding: "20px",
-                    background: "white",
-                  }}
-                >
-                  <Card onClick={() => history(`/fractional-nft-mint`)}>
-                    <CardContent>
-                      <Typography variant="h5" component="h2">
-                        Fractional NFT
-                      </Typography>
-                      <Typography color="textSecondary">
-                        Mint fractional nft{" "}
-                      </Typography>
-                    </CardContent>
-                    <CardActions>
-                      <Button size="small">Create Now</Button>
-                    </CardActions>
-                  </Card>
-                </div>
-              </Grid>
-            </Grid>
-          </div>
-        </Grid>
-        <Grid item lg={3} md={3} sm={12} xs={12}></Grid>
-      </Grid>
-    </>
+    <HeaderWrapper className="header-wrapper-create">
+      <HeaderUI>
+        <center
+          style={{
+            marginTop: 30,
+            display: "flex",
+            justifyContent: "space-around",
+          }}
+        >
+          <Card sx={{ maxWidth: 345 }}>
+            <CardMedia
+              component="img"
+              height="240"
+              image={SingleNFT}
+              alt="green iguana"
+            />
+            <CardContent>
+              <Typography gutterBottom variant="h5" component="div">
+                Create Single NFT
+              </Typography>
+              <Typography variant="body2" color="text.secondary">
+                Lizards are a widespread group of squamate reptiles, with over
+                6,000 species, ranging across all continents except Antarctica
+              </Typography>
+            </CardContent>
+            <CardActions>
+              <Button
+                variant="contained"
+                size="medium"
+                sx={{
+                  marginX: "15px",
+                  marginBottom: "15px",
+                }}
+                onClick={() => history("/nft-mint")}
+                style={{
+                  border: "2px solid #1976d2",
+                  fontSize: 16,
+
+                  borderRadius: 12,
+                }}
+              >
+                Create Now
+              </Button>
+            </CardActions>
+          </Card>
+
+          <Card sx={{ maxWidth: 345 }}>
+            <CardMedia
+              component="img"
+              height="240"
+              image={NftFreagments}
+              alt="green iguana"
+            />
+            <CardContent>
+              <Typography gutterBottom variant="h5" component="div">
+                Create Fractional NFT
+              </Typography>
+              <Typography variant="body2" color="text.secondary">
+                Lizards are a widespread group of squamate reptiles, with over
+                6,000 species, ranging across all continents except Antarctica
+              </Typography>
+            </CardContent>
+            <CardActions>
+              <Button
+                variant="outlined"
+                size="medium"
+                sx={{
+                  marginX: "15px",
+                  marginBottom: "15px",
+                }}
+                onClick={() => history("/fractional-nft-mint")}
+                style={{
+                  border: "2px solid #1976d2",
+                  fontSize: 16,
+                  borderRadius: 12,
+                }}
+              >
+                Create Now
+              </Button>
+              <small>*Work in progress</small>
+            </CardActions>
+          </Card>
+        </center>
+        <div style={{ marginTop: 60 }}></div>
+      </HeaderUI>
+    </HeaderWrapper>
   );
 };
 export default Mint;

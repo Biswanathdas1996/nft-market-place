@@ -1,7 +1,19 @@
-/* ############### Header Section ############### */
-
-.header-wrapper-home {
-  background: url("../../assets/images/banners.png");
+.header-wrapper-create {
+  background: url("../assets/images/home-bg.jpg");
+  /* background-position: top left; */
+  position: relative;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+.header-wrapper-form {
+  background: url("../assets/images/back.png");
+  /* background-position: top left; */
+  position: relative;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+.header-wrapper-frac-form {
+  background: url("../assets/images/back.png");
   /* background-position: top left; */
   position: relative;
   background-size: cover;
@@ -10,6 +22,13 @@
 
 .layer {
   background-color: rgb(36 36 36 / 59%);
+  background-position: top left;
+  background-size: cover;
+  background-repeat: no-repeat;
+  padding: 14px 6px;
+}
+.form-layer {
+  background-color: rgb(40 40 40 / 95%);
   background-position: top left;
   background-size: cover;
   background-repeat: no-repeat;

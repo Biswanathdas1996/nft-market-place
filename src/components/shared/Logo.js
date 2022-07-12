@@ -1,5 +1,5 @@
 import React from "react";
-import "./HeaderStyles.css";
+import "../../styles/background.css";
 import PwcLogo from "../../assets/images/nft.png";
 function Logo({ children, ...restProps }) {
   return (

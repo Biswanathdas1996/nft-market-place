@@ -21,7 +21,7 @@ import Blog3 from "../../assets/images/banners.png";
 import Blog4 from "../../assets/images/art_nft.jpeg";
 
 export default function RecipeReviewCard() {
-  const cardUI = (text, img, user) => {
+  const cardUI = (text, img, user, height) => {
     return (
       <Card>
         <CardHeader
@@ -38,7 +38,12 @@ export default function RecipeReviewCard() {
           title="Shrimp and Chorizo Paella"
           subheader="September 14, 2016"
         />
-        <CardMedia component="img" height="350" image={img} alt="Paella dish" />
+        <CardMedia
+          component="img"
+          height={height || "350"}
+          image={img}
+          alt="Paella dish"
+        />
         <CardContent>
           <Typography variant="body2" color="text.secondary">
             {text}
