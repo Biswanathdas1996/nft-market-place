@@ -1,5 +1,7 @@
 export const EtherscanBaseAPI = `https://api-rinkeby.etherscan.io/api`;
+export const PolyscanscanBaseAPI = `https://api-testnet.polygonscan.com/api`;
 export const EtherscanAPIKEY = `WCVDU52748WW4F7EKDEDB89HKH41BIA4N2`;
+export const PolyscanscanAPIKEY = `G2FQ3WI7SWZDIEQE8CCCSZHJ1M97NXNYAE`;
 
 export const RinkebyStorageAddress =
   "0xE2648EFc2b1705a808057ac381e89A36af49f14b";
@@ -29,4 +31,15 @@ export const networkURL = () => {
     network = "https://rinkeby.etherscan.io";
   }
   return network;
+};
+
+export const getTransctionListAPI = (account) => {
+  const networkId = sessionStorage.getItem("currentyNetwork");
+  let URI;
+  if (networkId === "80001") {
+    URI = `${PolyscanscanBaseAPI}?module=account&action=txlist&address=${account}&sort=desc&apikey=${PolyscanscanAPIKEY}`;
+  } else if (networkId === "4") {
+    URI = `${EtherscanBaseAPI}?module=account&action=txlist&address=${account}&sort=desc&page=1&offset=10&apikey=${EtherscanAPIKEY}`;
+  }
+  return URI;
 };
