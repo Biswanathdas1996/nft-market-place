@@ -56,21 +56,6 @@ const Mint = () => {
 
     const dummyAttrribute = [
       {
-        display_type: "boost_number",
-        trait_type: "Aqua Power",
-        value: 40,
-      },
-      {
-        display_type: "boost_percentage",
-        trait_type: "Stamina Increase",
-        value: 10,
-      },
-      {
-        display_type: "number",
-        trait_type: "Generation",
-        value: 2,
-      },
-      {
         display_type: "date",
         trait_type: "publish-date",
         value: new Date(),
