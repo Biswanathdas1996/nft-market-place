@@ -133,13 +133,16 @@ const Mint = () => {
             <Grid item lg={3} md={3} sm={12} xs={12}></Grid>
             <Grid item lg={6} md={6} sm={12} xs={12}>
               <div style={{ margin: 20 }}>
-                <Card>
+                <Card
+                  style={{
+                    background: "#ffffff9e",
+                  }}
+                >
                   <Grid container>
                     <Grid item lg={12} md={12} sm={12} xs={12}>
                       <div
                         style={{
                           padding: "20px",
-                          background: "white",
                         }}
                       >
                         <h4>Create NFT</h4>
