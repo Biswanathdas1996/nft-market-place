@@ -49,7 +49,7 @@ const WalledCard = () => {
     const balance = await web3?.eth?.getBalance(account);
     const balnceInETH = await web3?.utils?.fromWei(balance, "ether");
     setBalance(balnceInETH);
-
+    console.log("---------------------->", networkId);
     switch (networkId) {
       case 1:
         setNetwork("Mainnet");
@@ -62,6 +62,9 @@ const WalledCard = () => {
         break;
       case 4:
         setNetwork("Rinkeby");
+        break;
+      case 80001:
+        setNetwork("Polygon");
         break;
       default:
         setNetwork("Unknown");

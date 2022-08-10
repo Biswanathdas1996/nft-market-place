@@ -91,6 +91,7 @@ export default function HomePage() {
       </Grid>
 
       <RecentActivity />
+      <div style={{ marginTop: 50 }}></div>
     </Container>
   );
 }

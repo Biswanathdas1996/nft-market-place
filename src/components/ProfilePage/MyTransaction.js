@@ -170,9 +170,9 @@ const MyTransaction = () => {
                         }}
                       >
                         <img
-                          width="10px"
+                          width="15px"
                           alt="ethimg"
-                          height="16px"
+                          height="15px"
                           src={getIcon()}
                           style={{
                             color: "black",

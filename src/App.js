@@ -17,7 +17,6 @@ const App = () => {
   const [icon, setIcon] = useState(null);
   const [symbol, setSymbol] = useState(null);
   const location = useLocation();
-  console.log("------->", location.pathname);
 
   window?.ethereum.on("chainChanged", async (chainId) => {
     const networkId = await getcurrentNetworkId();
@@ -39,10 +38,13 @@ const App = () => {
     setSymbol(currentNeteork());
   };
 
+  const navBarLessRoutes = ["/"];
   return (
     <>
       <CssBaseline />
-      {location.pathname !== "/" && <Header icon={icon} symbol={symbol} />}
+      {navBarLessRoutes.indexOf(location.pathname) === -1 && (
+        <Header icon={icon} symbol={symbol} />
+      )}
       <Routes />
       <Footer />
     </>
