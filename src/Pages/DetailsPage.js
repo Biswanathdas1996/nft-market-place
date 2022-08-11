@@ -52,7 +52,7 @@ export default function DetailsPage({ match }) {
     await fetch(getAllTokenUri)
       .then((response) => response.json())
       .then((data) => {
-        console.log(data);
+        console.log("oooooooooooooooooo------>", data);
         setNftData(data);
       });
   }

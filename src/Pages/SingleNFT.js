@@ -3,7 +3,7 @@ import { Formik, Form, Field, FieldArray } from "formik";
 // import * as Yup from "yup";
 import { Card, Grid } from "@mui/material";
 import { _transction } from "../../src/CONTRACT-ABI/connect";
-import { create } from "ipfs-http-client";
+
 import Button from "@mui/material/Button";
 import { useNavigate } from "react-router-dom";
 import Web3 from "web3";
@@ -17,9 +17,15 @@ import HeaderWrapper from "../components/shared/BackgroundUI";
 import { getSymbol } from "../utils/currencySymbol";
 import "../styles/background.css";
 
+// import { getFilesFromPath } from "web3.storage";
+import { Web3Storage } from "web3.storage/dist/bundle.esm.min.js";
+
 const web3 = new Web3(window.ethereum);
 
-const client = create("https://ipfs.infura.io:5001/api/v0");
+const client = new Web3Storage({
+  token:
+    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJkaWQ6ZXRocjoweDEzMkRhNjE2N2U0OTY2Y2M2ODBlMjNlNzdjMmM5NjI2YWZFQjkyNzMiLCJpc3MiOiJ3ZWIzLXN0b3JhZ2UiLCJpYXQiOjE2NjAxOTIxNjI3MDEsIm5hbWUiOiJ0ZXN0In0.nrWyG-RPCty28GQLPOfjCacYoOoURarCyo6nh3t0QCY",
+});
 
 // const VendorSchema = Yup.object().shape({
 //   name: Yup.string().required("Name is required"),
@@ -62,23 +68,38 @@ const Mint = () => {
       },
     ];
     if (file) {
-      const results = await client.add(file);
-      console.log("--img fingerpring-->", results.path);
+      const fileInput = document.querySelector('input[type="file"]');
+
+      const results = await client.put(fileInput.files, {});
+      console.log("---results-->", results);
+
+      // --------------------------------------------
+      console.log("---file->", file.name);
+
       const metaData = {
         name: title,
         author: authorname,
         category: category,
-        image: `https://ipfs.infura.io/ipfs/${results.path}`,
+        image: `https://ipfs.io/ipfs/${results}/${file.name}`,
         description: description,
         attributes: attributes.concat(dummyAttrribute),
       };
 
-      const resultsSaveMetaData = await client.add(JSON.stringify(metaData));
-      console.log("---metadta-->", resultsSaveMetaData.path);
+      const blob = new Blob([JSON.stringify(metaData)], {
+        type: "application/json",
+      });
+
+      const files = [
+        new File(["contents-of-file-1"], "plain-utf8.txt"),
+        new File([blob], "ipfs.json"),
+      ];
+
+      const resultsSaveMetaData = await client.put(files, {});
+      console.log("---metadta-->", resultsSaveMetaData);
 
       responseData = await _transction(
         "mintNFT",
-        `https://ipfs.infura.io/ipfs/${resultsSaveMetaData.path}`,
+        `https://ipfs.io/ipfs/${resultsSaveMetaData}/ipfs.json`,
         web3.utils.toWei(price.toString(), "ether"),
         royelty,
         category
