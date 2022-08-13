@@ -16,7 +16,7 @@ import ColorLensIcon from "@mui/icons-material/ColorLens";
 import GridViewIcon from "@mui/icons-material/GridView";
 import Link from "@material-ui/core/Link";
 import { useNavigate } from "react-router-dom";
-import SearchBar from "../shared/SearchBar";
+
 import PwcLogo from "../../assets/images/nft.png";
 
 import Stack from "@mui/material/Stack";
@@ -173,10 +173,6 @@ const Header = ({ icon, symbol }) => {
             alt="logo"
             onClick={() => history("/")}
           />
-
-          <Button disabled>
-            <SearchBar />
-          </Button>
 
           {/* Explore menu list========================================= */}
           <Button
