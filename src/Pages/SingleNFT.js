@@ -80,7 +80,7 @@ const Mint = () => {
         name: title,
         author: authorname,
         category: category,
-        image: `https://ipfs.io/ipfs/${results}/${file.name}`,
+        image: `https://${results}.ipfs.dweb.link/${file.name}`,
         description: description,
         attributes: attributes.concat(dummyAttrribute),
       };
@@ -99,7 +99,7 @@ const Mint = () => {
 
       responseData = await _transction(
         "mintNFT",
-        `https://ipfs.io/ipfs/${resultsSaveMetaData}/ipfs.json`,
+        `https://${resultsSaveMetaData}.ipfs.dweb.link/ipfs.json`,
         web3.utils.toWei(price.toString(), "ether"),
         royelty,
         category

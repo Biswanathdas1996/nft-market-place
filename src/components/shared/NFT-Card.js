@@ -56,112 +56,123 @@ export default function NFTCard({ tokenId, reload = () => null }) {
     setStart(false);
     setResponse(null);
   };
-
+  console.log("----------->", nftData);
   return (
     <>
       {start && <TransctionModal response={response} modalClose={modalClose} />}
 
-      <Card
-        sx={{
-          height: "100%",
-          // width: "100%",
-          display: "flex",
-          flexDirection: "column",
-          backgroundColor: "white",
-          border: "0.01px solid rgba(0, 0, 0, 0.09)",
-        }}
-      >
-        <Tooltip title="Nefrofeel by Pablo Picasso">
-          <div
-            style={{
-              backgroundImage: `url(${nftData?.image})`,
-              height: "150px",
-              borderRadius: 5,
-              backgroundSize: "cover",
-              backgroundRepeat: "no-repeat",
-              margin: "15px 15px 0px 15px",
-            }}
-          >
-            <Grid container>
-              <Grid xs={2}>
-                <MarkAsFevourite tokenId={tokenId} reload={reload} />
+      {nftData?.image && (
+        <Card
+          sx={{
+            height: "100%",
+            // width: "100%",
+            display: "flex",
+            flexDirection: "column",
+            backgroundColor: "white",
+            border: "0.01px solid rgba(0, 0, 0, 0.09)",
+          }}
+        >
+          {/* <Tooltip title="Nefrofeel by Pablo Picasso"> */}
+          {/* <div
+              style={{
+                backgroundImage: `url(${nftData?.image})`,
+                height: "150px",
+                borderRadius: 5,
+                backgroundSize: "cover",
+                backgroundRepeat: "no-repeat",
+                margin: "15px 15px 0px 15px",
+              }}
+            >
+              <Grid container>
+                <Grid xs={2}>
+                  <MarkAsFevourite tokenId={tokenId} reload={reload} />
+                </Grid>
+                <Grid xs={10} sx={{ textAlign: "right" }}>
+                  <RedirectToOpenSea tokenId={tokenId} />
+                </Grid>
               </Grid>
-              <Grid xs={10} sx={{ textAlign: "right" }}>
-                <RedirectToOpenSea tokenId={tokenId} />
-              </Grid>
+            </div> */}
+          <Grid container>
+            <Grid xs={2}>
+              <MarkAsFevourite tokenId={tokenId} reload={reload} />
             </Grid>
-          </div>
-        </Tooltip>
+            <Grid xs={10} sx={{ textAlign: "right" }}>
+              <RedirectToOpenSea tokenId={tokenId} />
+            </Grid>
+          </Grid>
+          <img src={nftData?.image} alt="NFT img" height="150" />
+          {/* </Tooltip> */}
 
-        <CardContent style={{ paddingBottom: 0 }}>
-          <Avatars />
-          <Typography
-            style={{ fontSize: 14, cursor: "pointer" }}
-            variant="body2"
-            paragraph
-            item
-            fontWeight="600"
-            sx={{
-              overflow: "hidden",
-              textOverflow: "ellipsis",
-              width: "11rem",
-            }}
-            onClick={(e) => {
-              e.stopPropagation();
-              e.nativeEvent.stopImmediatePropagation();
-              history(`/details/${tokenId}`);
-              return;
-            }}
-          >
-            {nftData?.name} #{tokenId}
-          </Typography>
+          <CardContent style={{ paddingBottom: 0 }}>
+            <Avatars />
+            <Typography
+              style={{ fontSize: 14, cursor: "pointer" }}
+              variant="body2"
+              paragraph
+              item
+              fontWeight="600"
+              sx={{
+                overflow: "hidden",
+                textOverflow: "ellipsis",
+                width: "11rem",
+              }}
+              onClick={(e) => {
+                e.stopPropagation();
+                e.nativeEvent.stopImmediatePropagation();
+                history(`/details/${tokenId}`);
+                return;
+              }}
+            >
+              {nftData?.name} #{tokenId}
+            </Typography>
 
-          <div
-            style={{
-              display: "flex",
-              justifyContent: "flex-start",
-            }}
-          >
-            <Tooltip title="Ethereum">
-              <img
-                alt="nft"
-                width="15px"
-                height="15px"
-                src={getIcon()}
-                style={{ marginRight: 5 }}
-              ></img>
-            </Tooltip>
-            <p>
-              <span className="text-secondary" style={{ color: "grey" }}>
-                Price{" "}
-              </span>
-              <strong style={{ fontSize: 12, fontWeight: "bold" }}>
-                {price / 1000000000000000000} {getSymbol()}
-              </strong>
-            </p>
-          </div>
-        </CardContent>
+            <div
+              style={{
+                display: "flex",
+                justifyContent: "flex-start",
+              }}
+            >
+              <Tooltip title="Ethereum">
+                <img
+                  alt="nft"
+                  width="15px"
+                  height="15px"
+                  src={getIcon()}
+                  style={{ marginRight: 5 }}
+                ></img>
+              </Tooltip>
+              <p>
+                <span className="text-secondary" style={{ color: "grey" }}>
+                  Price{" "}
+                </span>
+                <strong style={{ fontSize: 12, fontWeight: "bold" }}>
+                  {price / 1000000000000000000} {getSymbol()}
+                </strong>
+              </p>
+            </div>
+          </CardContent>
 
-        {owner !== account && (
-          <Button
-            variant="outlined"
-            size="small"
-            sx={{
-              marginX: "15px",
-              marginBottom: "15px",
-            }}
-            onClick={() => buynow()}
-            style={{
-              border: "2px solid #1976d2",
-              fontSize: 10,
-              fontWeight: "bold",
-              padding: 8,
-            }}
-          >
-            Buy Now
-          </Button>
-        )}
-      </Card>
+          {owner !== account && (
+            <Button
+              variant="outlined"
+              size="small"
+              sx={{
+                marginX: "15px",
+                marginBottom: "15px",
+              }}
+              onClick={() => buynow()}
+              style={{
+                border: "2px solid #1976d2",
+                fontSize: 10,
+                fontWeight: "bold",
+                padding: 8,
+              }}
+            >
+              Buy Now
+            </Button>
+          )}
+        </Card>
+      )}
     </>
   );
 }
