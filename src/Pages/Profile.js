@@ -11,6 +11,7 @@ import MyWallet from "../components/ProfilePage/MyWallet";
 import MyCollections from "../components/ProfilePage/MyCollections";
 import MyFavorites from "../components/ProfilePage/MyFavorites";
 import TabPanel from "@mui/lab/TabPanel";
+import UserCertificate from "../components/ProfilePage/UserCertificate";
 
 const ProfilePage = () => {
   const [value, setValue] = React.useState("2");
@@ -88,6 +89,16 @@ const ProfilePage = () => {
                       }}
                       //   disabled
                     />
+                    <Tab
+                      label="Document"
+                      value="5"
+                      sx={{
+                        textTransform: "none",
+                        fontWeight: "bold",
+                        color: "#000000",
+                      }}
+                      //   disabled
+                    />
                   </TabList>
                 </Box>
                 <TabPanel value="1">
@@ -104,6 +115,10 @@ const ProfilePage = () => {
                 <TabPanel value="4">
                   {" "}
                   <MyFavorites />
+                </TabPanel>
+                <TabPanel value="5">
+                  {" "}
+                  <UserCertificate />
                 </TabPanel>
               </TabContext>
             </Box>

@@ -20,10 +20,12 @@
     "ethers": "^5.6.9",
     "fontsource-roboto": "^4.0.0",
     "formik": "^2.2.9",
+    "html2canvas": "^1.4.1",
     "ipfs": "^0.63.5",
     "ipfs-car": "^0.8.1",
     "ipfs-http-client": "^56.0.2",
     "ipfs-mini": "^1.1.5",
+    "jspdf": "^2.5.1",
     "lodash": "^4.17.21",
     "minimist": "^1.2.5",
     "react": "^17.0.2",
@@ -39,7 +41,7 @@
   },
   "scripts": {
     "start": "set NODE_OPTIONS=--max_old_space_size=4096 && react-scripts start",
-    "build": "set NODE_OPTIONS=--max_old_space_size=4096 && react-scripts build",
+    "build": "set NODE_OPTIONS=--max_old_space_size=4096 & react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
