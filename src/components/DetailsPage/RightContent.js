@@ -12,13 +12,13 @@ import {
 import React from "react";
 import TabContext from "@mui/lab/TabContext";
 import TabList from "@mui/lab/TabList";
-import Bid from "./Bid";
+// import Bid from "./Bid";
 import Attributes from "./Attributes";
 import TransactionHistory from "./TransactionHistory";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import ManageAccountsIcon from "@mui/icons-material/ManageAccounts";
 import UpdatePrice from "./UpdatePrice";
-
+import PrivetContent from "./PrivetContent";
 import { getIcon } from "../../utils/currencyIcon";
 import { getSymbol } from "../../utils/currencySymbol";
 
@@ -211,7 +211,7 @@ const RightContent = ({
                 }}
               />
               <Tab
-                label="Bid"
+                label="Document"
                 value="3"
                 sx={{
                   textTransform: "none",
@@ -223,7 +223,8 @@ const RightContent = ({
           </Box>
           <Attributes attributes={attributes} />
           <TransactionHistory tokenId={tokenId} />
-          <Bid />
+          <PrivetContent tokenId={tokenId} attributes={attributes} />
+          {/* <Bid /> */}
         </TabContext>
       </Box>
     </Container>

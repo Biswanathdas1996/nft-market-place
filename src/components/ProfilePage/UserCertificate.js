@@ -192,7 +192,7 @@ export default function Certificate({ tokenId, attributes = [] }) {
                 <Grid item xs={12} md={12} sm={12} lg={12}>
                   <p style={{ marginTop: 20, textAlign: "left", fontSize: 17 }}>
                     This is to certify that the user {<b>{account}</b>} owns the
-                    bello NFT(s) of contact address of{" "}
+                    bellow NFT(s) of contact address of{" "}
                     <b>{getContractAddress()}</b>.
                   </p>
                 </Grid>
