@@ -2,8 +2,6 @@
 import * as React from "react";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
-import CardMedia from "@mui/material/CardMedia";
-import StampPapetImg from "../../assets/images/stamp-paper.jpg";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
@@ -25,6 +23,8 @@ import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 
 import { Stack, Typography } from "@mui/material";
+
+import "../../styles/certificate.css";
 
 export default function Certificate({ tokenId, attributes }) {
   const [owner, setOwner] = React.useState(null);
@@ -71,18 +71,12 @@ export default function Certificate({ tokenId, attributes }) {
           </Button>
         </Grid>
         <Grid item xs={12} md={8} sm={12} lg={12} id="divToPrint">
-          <Card>
-            <CardMedia
-              component="img"
-              // height="140"
-              image={StampPapetImg}
-              alt="green iguana"
-            />
+          <Card className="border linear-repeating">
             <CardContent>
               <Grid container spacing={2}>
                 <Grid item xs={12} md={12} sm={12} lg={12}>
                   <h3 style={{ fontWeight: "bold", textAlign: "center" }}>
-                    Ownership of Token #{tokenId}
+                    Ownership Certificate of Token #{tokenId}
                   </h3>
                 </Grid>
                 <Grid item xs={12} md={12} sm={12} lg={12}>
