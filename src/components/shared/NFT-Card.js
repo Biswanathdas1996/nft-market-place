@@ -14,6 +14,7 @@ import MarkAsFevourite from "./MarkAsFevourite";
 import RedirectToOpenSea from "./RedirectToOpenSea";
 import { getIcon } from "../../utils/currencyIcon";
 import { getSymbol } from "../../utils/currencySymbol";
+import { get_url_extension, allowableVideoFormat } from "../../utils/fileInfo"
 
 export default function NFTCard({ tokenId, reload = () => null }) {
   const [nftData, setNftData] = useState(null);
@@ -100,7 +101,19 @@ export default function NFTCard({ tokenId, reload = () => null }) {
               <RedirectToOpenSea tokenId={tokenId} />
             </Grid>
           </Grid>
-          <img src={nftData?.image} alt="NFT img" height="150" />
+
+          {allowableVideoFormat.includes(get_url_extension(nftData?.image)) ?
+            (
+              <video height="150" controls>
+                <source src={nftData?.image} type="video/mp4" />
+                <source src={nftData?.image} type="video/ogg" />
+                Your browser does not support HTML video.
+              </video>
+            ) : (
+              <img src={nftData?.image} alt="NFT img" height="150" />
+            )}
+
+
           {/* </Tooltip> */}
 
           <CardContent style={{ paddingBottom: 0 }}>

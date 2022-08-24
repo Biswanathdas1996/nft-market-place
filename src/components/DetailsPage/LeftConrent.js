@@ -13,6 +13,7 @@ import MarkAsFevourite from "../shared/MarkAsFevourite";
 import RedirectToOpenSea from "../shared/RedirectToOpenSea";
 import { currentNeteork } from "../../utils/currentNeteork";
 import { networkURL } from "../../config";
+import { get_url_extension, allowableVideoFormat } from "../../utils/fileInfo"
 
 const DetailsHead = [
   "Contract Address:",
@@ -30,6 +31,8 @@ const useStyles = makeStyles({
     padding: 20,
   },
 });
+
+
 
 export default function LeftConrent({ nftData, tokenId, ContractAddress }) {
   const { description, image } = nftData;
@@ -55,15 +58,26 @@ export default function LeftConrent({ nftData, tokenId, ContractAddress }) {
           </div>
         }
       ></CardHeader>
-      <CardMedia
-        className={classes.image}
-        component="img"
-        image={image}
-        alt="Loading"
-        height="370"
-        width="100%"
-        sx={{ backgroundSize: "cover" }}
-      />
+
+      {allowableVideoFormat.includes(get_url_extension(image)) ?
+        (
+          <video width="500" controls>
+            <source src={image} type="video/mp4" />
+            <source src={image} type="video/ogg" />
+            Your browser does not support HTML video.
+          </video>
+        ) : (
+          <CardMedia
+            className={classes.image}
+            component="img"
+            image={image}
+            alt="Loading"
+            height="370"
+            width="100%"
+            sx={{ backgroundSize: "cover" }}
+          />
+        )}
+
       <CardContent sx={{ pl: 3 }}>
         <Typography
           variant="subtitle1"

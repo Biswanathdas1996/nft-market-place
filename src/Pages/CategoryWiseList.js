@@ -7,7 +7,7 @@ import Container from "@mui/material/Container";
 import { Toolbar, ButtonGroup } from "@mui/material";
 import FilterAltOutlinedIcon from "@mui/icons-material/FilterAltOutlined";
 import NftCard from "../components/shared/NFT-Card";
-import RecentActivity from "../components/shared/RecentActivity";
+
 import { _fetch } from "../CONTRACT-ABI/connect";
 import Loader from "../components/shared/Loader";
 import { useParams } from "react-router-dom";
@@ -90,7 +90,7 @@ export default function HomePage() {
         )}
       </Grid>
 
-      <RecentActivity />
+
       <div style={{ marginTop: 50 }}></div>
     </Container>
   );

@@ -7,7 +7,6 @@ import Container from "@mui/material/Container";
 import { Toolbar, ButtonGroup } from "@mui/material";
 import FilterAltOutlinedIcon from "@mui/icons-material/FilterAltOutlined";
 import NftCard from "../components/shared/NFT-Card";
-import RecentActivity from "../components/shared/RecentActivity";
 import { _fetch } from "../CONTRACT-ABI/connect";
 import Loader from "../components/shared/Loader";
 
@@ -27,7 +26,7 @@ export default function HomePage() {
   }
 
   return (
-    <Container>
+    <Container style={{ marginBottom: 30 }}>
       <Box
         sx={{
           pt: 4,
@@ -81,7 +80,7 @@ export default function HomePage() {
         )}
       </Grid>
 
-      <RecentActivity />
+
     </Container>
   );
 }
