@@ -21,7 +21,7 @@ import UpdatePrice from "./UpdatePrice";
 import PrivetContent from "./PrivetContent";
 import { getIcon } from "../../utils/currencyIcon";
 import { getSymbol } from "../../utils/currencySymbol";
-
+import { networkURL } from "../../config";
 const countData = ["05", "08", "35", "12"];
 
 const RightContent = ({
@@ -68,7 +68,7 @@ const RightContent = ({
             </Typography>
             <Tooltip title="Contrct Address">
               <Link
-                href="https://rinkeby.etherscan.io/address/0xdfc34335664a0c2c548cf0c837e9b0a9315eeda2"
+                href={`${networkURL()}/address/${owner}`}
                 target="_blank"
                 sx={{ textDecoration: "none" }}
               >

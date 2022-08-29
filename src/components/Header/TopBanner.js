@@ -11,6 +11,7 @@ import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
 import { getIcon } from "../../utils/currencyIcon";
 import { currentNeteork } from "../../utils/currentNeteork";
+import { currentNetworkName } from "../../utils/currentNetworkName";
 
 function HeaderCompound({ children }) {
   let history = useNavigate();
@@ -30,11 +31,16 @@ function HeaderCompound({ children }) {
                 style={{ marginRight: 10 }}
                 alt="nft"
               />
-              <Typography
-                sx={{ fontWeight: "bold", fontSize: "18px", color: "white" }}
-              >
-                {currentNeteork()}
-              </Typography>
+              <div>
+                <Typography
+                  sx={{ fontWeight: "bold", fontSize: "18px", color: "white" }}
+                >
+                  {currentNeteork()}
+                </Typography>
+                <Typography sx={{ fontSize: "10px", color: "white" }}>
+                  <small>{currentNetworkName()}</small>
+                </Typography>
+              </div>
             </div>
           </Stack>
         </NavBar>

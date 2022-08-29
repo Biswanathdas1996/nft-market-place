@@ -2,6 +2,7 @@ import _ from "lodash";
 import Web3 from "web3";
 import ABI from "./NFT.json";
 import ETH_ADDRESS from "./Address.json";
+import ETH_GOERLI_ADDRESS from "./AddressGoerli.json";
 import POLYGON_ADDRESS from "./AddressPolygon.json";
 
 window?.ethereum?.request({
@@ -18,6 +19,8 @@ export const getcurrentNetworkId = async () => {
 export const getContractAddress = (networkID) => {
   if (networkID?.toString() === "80001") {
     return POLYGON_ADDRESS;
+  } else if (networkID?.toString() === "5") {
+    return ETH_GOERLI_ADDRESS;
   } else {
     return ETH_ADDRESS;
   }

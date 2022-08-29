@@ -63,6 +63,9 @@ const WalledCard = () => {
       case 4:
         setNetwork("Rinkeby");
         break;
+      case 5:
+        setNetwork("goerli");
+        break;
       case 80001:
         setNetwork("Polygon");
         break;

@@ -32,7 +32,7 @@ contract MyNFT is ERC721URIStorage, Ownable {
     mapping(uint256 => Price) internal _prices;
     Collection[] public collections;
 
-    constructor() ERC721("Biswanath", "BIS") {}
+    constructor() ERC721("NFTMALL", "MALL") {}
 
 
     function mintNFT(string memory tokenURI, uint amount, uint royelrtPercentage, string memory category)

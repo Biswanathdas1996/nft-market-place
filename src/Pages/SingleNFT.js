@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Formik, Form, Field, FieldArray } from "formik";
-// import * as Yup from "yup";
+import * as Yup from "yup";
 import { Card, Grid } from "@mui/material";
 import { _transction } from "../../src/CONTRACT-ABI/connect";
 
@@ -27,13 +27,12 @@ const client = new Web3Storage({
     "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJkaWQ6ZXRocjoweDEzMkRhNjE2N2U0OTY2Y2M2ODBlMjNlNzdjMmM5NjI2YWZFQjkyNzMiLCJpc3MiOiJ3ZWIzLXN0b3JhZ2UiLCJpYXQiOjE2NjAxOTIxNjI3MDEsIm5hbWUiOiJ0ZXN0In0.nrWyG-RPCty28GQLPOfjCacYoOoURarCyo6nh3t0QCY",
 });
 
-// const VendorSchema = Yup.object().shape({
-//   name: Yup.string().required("Name is required"),
-//   authorname: Yup.string().required("Authorname is required"),
-//   price: Yup.string().required("Price is required"),
-//   royelty: Yup.string().required("Royelty amount is required"),
-// });
-// WCVDU52748WW4F7EKDEDB89HKH41BIA4N2
+const VendorSchema = Yup.object().shape({
+  title: Yup.string().required("Title is required"),
+  authorname: Yup.string().required("Authorname is required"),
+  price: Yup.string().required("Price is required"),
+  royelty: Yup.number().max(15),
+});
 
 const Mint = () => {
   const [start, setStart] = useState(false);
@@ -162,7 +161,7 @@ const Mint = () => {
                             price: "",
                             attributes: [],
                           }}
-                          // validationSchema={VendorSchema}
+                          validationSchema={VendorSchema}
                           onSubmit={(values, { setSubmitting }) => {
                             console.log("values=======>", values);
                             saveData(values);
