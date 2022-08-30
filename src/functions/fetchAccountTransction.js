@@ -3,7 +3,7 @@ import {
   getcurrentNetworkId,
 } from "../CONTRACT-ABI/connect";
 
-import { EtherscanBaseAPI, EtherscanAPIKEY } from "../config";
+import { getContractTransctionListAPI } from "../config";
 
 export async function frtchAccounttransction() {
   const networkIddarta = await getcurrentNetworkId();
@@ -13,8 +13,5 @@ export async function frtchAccounttransction() {
     redirect: "follow",
   };
 
-  return fetch(
-    `${EtherscanBaseAPI}?module=account&action=tokennfttx&contractaddress=${cureentAccress}&page=1&offset=10000&sort=asc&apikey=${EtherscanAPIKEY}`,
-    requestOptions
-  );
+  return fetch(getContractTransctionListAPI(cureentAccress), requestOptions);
 }

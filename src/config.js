@@ -39,14 +39,23 @@ export const networkURL = () => {
 };
 
 export const getTransctionListAPI = (account) => {
+  return `${getBaseApiUrl()}?module=account&action=txlist&address=${account}&sort=desc&page=1&offset=10&apikey=${EtherscanAPIKEY}`;
+};
+
+export const getContractTransctionListAPI = (contractAddress) => {
+  return `${getBaseApiUrl()}?module=account&action=tokennfttx&contractaddress=${contractAddress}&page=1&offset=10000&sort=asc&apikey=${EtherscanAPIKEY}`;
+};
+
+export const getBaseApiUrl = () => {
   const networkId = sessionStorage.getItem("currentyNetwork");
-  let URI;
-  if (networkId === "80001") {
-    URI = `${PolyscanscanBaseAPI}?module=account&action=txlist&address=${account}&sort=desc&apikey=${PolyscanscanAPIKEY}`;
-  } else if (networkId === "4") {
-    URI = `${EtherscanBaseAPI}?module=account&action=txlist&address=${account}&sort=desc&page=1&offset=10&apikey=${EtherscanAPIKEY}`;
-  } else if (networkId === "5") {
-    URI = `${EtherscanGoerliBaseAPI}?module=account&action=txlist&address=${account}&sort=desc&page=1&offset=10&apikey=${EtherscanAPIKEY}`;
+  switch (networkId) {
+    case "80001":
+      return PolyscanscanBaseAPI;
+    case "4":
+      return EtherscanBaseAPI;
+    case "5":
+      return EtherscanGoerliBaseAPI;
+    default:
+    // code block
   }
-  return URI;
 };
