@@ -11,7 +11,7 @@ import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
 import { getIcon } from "../../utils/currencyIcon";
 import { currentNeteork } from "../../utils/currentNeteork";
-import { currentNetworkName } from "../../utils/currentNetworkName";
+import { getNetworkName } from "../../config";
 
 function HeaderCompound({ children }) {
   let history = useNavigate();
@@ -38,7 +38,7 @@ function HeaderCompound({ children }) {
                   {currentNeteork()}
                 </Typography>
                 <Typography sx={{ fontSize: "10px", color: "white" }}>
-                  <small>{currentNetworkName()}</small>
+                  <small>{getNetworkName()}</small>
                 </Typography>
               </div>
             </div>
