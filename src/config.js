@@ -1,9 +1,14 @@
+import { getConfigData } from "./getConfigaration";
+const getConfigDataVaues = getConfigData();
+
 const EtherscanBaseAPI = `https://api-rinkeby.etherscan.io/api`;
 const EtherscanGoerliBaseAPI = `https://api-goerli.etherscan.io/api`;
 const PolyscanscanBaseAPI = `https://api-testnet.polygonscan.com/api`;
 
-const EtherscanAPIKEY = `WCVDU52748WW4F7EKDEDB89HKH41BIA4N2`;
-const PolyscanscanAPIKEY = `G2FQ3WI7SWZDIEQE8CCCSZHJ1M97NXNYAE`;
+// const EtherscanAPIKEY = `WCVDU52748WW4F7EKDEDB89HKH41BIA4N2`;
+// const PolyscanscanAPIKEY = `G2FQ3WI7SWZDIEQE8CCCSZHJ1M97NXNYAE`;
+const EtherscanAPIKEY = getConfigDataVaues?.EtherscanAPIKEY;
+const PolyscanscanAPIKEY = getConfigDataVaues?.PolyscanscanAPIKEY;
 
 const openseaBaseUrl = "https://testnets.opensea.io";
 
@@ -32,8 +37,9 @@ export const getBaseApiUrl = () => {
   }
 };
 
-export const getNetworkName = () => {
-  const networkId = sessionStorage.getItem("currentyNetwork");
+export const getNetworkName = (
+  networkId = sessionStorage.getItem("currentyNetwork")
+) => {
   switch (networkId) {
     case "80001":
       return "mumbai";
