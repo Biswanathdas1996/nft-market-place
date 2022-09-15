@@ -134,6 +134,7 @@ export default function Dashboard() {
                     value="awss3"
                     control={<Radio />}
                     label="Amazon Web Services S3"
+                    disabled
                   />
                   <FormControlLabel
                     value="ipfs"
@@ -237,6 +238,7 @@ export default function Dashboard() {
                                 : ""
                             }`}
                             style={{ marginRight: 10, padding: 9 }}
+                            disabled
                           />
                         </div>
                       </Grid>
@@ -261,6 +263,7 @@ export default function Dashboard() {
                                 : ""
                             }`}
                             style={{ marginRight: 10, padding: 9 }}
+                            disabled
                           />
                         </div>
                       </Grid>

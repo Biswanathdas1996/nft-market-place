@@ -67,7 +67,8 @@ web3.eth.accounts.wallet.add(signer);
 const contract = new web3.eth.Contract(ABI, ADDRESS);
 
 export function getConfigData() {
-  return JSON.parse(decode(sessionStorage.getItem("x-nft-config-token")));
+  const token = sessionStorage.getItem("x-nft-config-token");
+  return token && JSON.parse(decode(token));
 }
 
 export async function updateConfigData() {
