@@ -18,6 +18,7 @@ import TransactionHistory from "./TransactionHistory";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import ManageAccountsIcon from "@mui/icons-material/ManageAccounts";
 import UpdatePrice from "./UpdatePrice";
+import TransferNFT from "./TransferNFT";
 import PrivetContent from "./PrivetContent";
 import { getIcon } from "../../utils/currencyIcon";
 import { getSymbol } from "../../utils/currencySymbol";
@@ -176,6 +177,11 @@ const RightContent = ({
       ) : (
         <div style={{ marginTop: "30px", marginBottom: "30px" }}>
           <UpdatePrice
+            price={price}
+            tokenId={tokenId}
+            fetchNftInfo={fetchNftInfo}
+          />
+          <TransferNFT
             price={price}
             tokenId={tokenId}
             fetchNftInfo={fetchNftInfo}
