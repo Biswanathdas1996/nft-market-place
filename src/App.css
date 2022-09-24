@@ -48,3 +48,24 @@
   color: "white";
   background-color: "#FD6412";
 }
+
+.loader_ui {
+  position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    transform: -webkit-translate(-50%, -50%);
+    transform: -moz-translate(-50%, -50%);
+    transform: -ms-translate(-50%, -50%);
+    color: rgb(16, 10, 10);
+    overflow: hidden;
+}
+
+.loader_background {
+  background-position: bottom;
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 20vh;
+  width: 60%;
+  overflow: hidden;
+}

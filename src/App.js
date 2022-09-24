@@ -19,6 +19,7 @@ const App = () => {
   const [icon, setIcon] = useState(null);
   const [symbol, setSymbol] = useState(null);
   const [accessable, setAccessable] = useState(false);
+  const [loading, setLoading] = useState(false);
   const [configNetwork, setConfigNetwork] = useState(null);
   const location = useLocation();
 
@@ -39,6 +40,7 @@ const App = () => {
   }, []);
 
   const getConfig = async () => {
+    setLoading(true);
     await updateConfigData();
     const getConfigDataVaues = getConfigData();
     const currentNetworkId = await getcurrentNetworkId();
@@ -51,6 +53,7 @@ const App = () => {
     } else {
       setAccessable(true);
     }
+    setLoading(false);
   };
 
   const getCurrencyInfo = () => {
@@ -69,10 +72,19 @@ const App = () => {
         <Routes />
       ) : (
         <>
-          <h2 style={{ textAlign: "center", margin: "12.5rem" }}>
-            Please change the blockchain network to{" "}
-            <b>{getNetworkName(configNetwork).toUpperCase()}</b>
-          </h2>
+          {!loading ? (
+            <h2 style={{ textAlign: "center", margin: "12.5rem" }}>
+              Please change the blockchain network to{" "}
+              <b>{getNetworkName(configNetwork).toUpperCase()}</b>
+            </h2>
+          ) : (
+            <div
+              style={{ textAlign: "center", margin: "12.5rem" }}
+              className="loader_background"
+            >
+              <h1 className="loader_ui">Loading configurations...</h1>
+            </div>
+          )}
         </>
       )}
       <Footer />

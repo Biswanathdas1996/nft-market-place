@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Formik, Form, Field } from "formik";
 import * as Yup from "yup";
-import { Grid } from "@mui/material";
+import { Card } from "@mui/material";
 import { _transction, _account } from "../../CONTRACT-ABI/connect";
 import TransctionModal from "../shared/TransctionModal";
 import Web3 from "web3";
@@ -42,43 +42,46 @@ const UpdatePrice = ({ price, tokenId, fetchNftInfo }) => {
           background: "white",
         }}
       >
-        <Formik
-          initialValues={{
-            to: "",
-          }}
-          validationSchema={VendorSchema}
-          onSubmit={(values, { setSubmitting }) => {
-            saveData(values);
-            setSubmitting(false);
-          }}
-        >
-          {({ touched, errors, isSubmitting, values }) => (
-            <Form>
-              <div className="form-group">
-                <Field
-                  type="text"
-                  name="to"
-                  autoComplete="flase"
-                  placeholder={`Enter Wallet Address ( example: 0x9A13... )`}
-                  className={`form-control text-muted ${
-                    touched.to && errors.to ? "is-invalid" : ""
-                  }`}
-                  style={{ marginRight: 10, padding: 6 }}
-                />
-              </div>
-
-              <div className="form-group" style={{ marginTop: 20 }}>
-                <span className="input-group-btn">
-                  <input
-                    className="btn btn-default btn-primary"
-                    type="submit"
-                    value={"Transfer"}
+        <Card style={{ padding: 15 }}>
+          <p>Transfer your NFT</p>
+          <Formik
+            initialValues={{
+              to: "",
+            }}
+            validationSchema={VendorSchema}
+            onSubmit={(values, { setSubmitting }) => {
+              saveData(values);
+              setSubmitting(false);
+            }}
+          >
+            {({ touched, errors, isSubmitting, values }) => (
+              <Form>
+                <div className="form-group">
+                  <Field
+                    type="text"
+                    name="to"
+                    autoComplete="flase"
+                    placeholder={`Enter Wallet Address ( example: 0x9A13... )`}
+                    className={`form-control text-muted ${
+                      touched.to && errors.to ? "is-invalid" : ""
+                    }`}
+                    style={{ marginRight: 10, padding: 6 }}
                   />
-                </span>
-              </div>
-            </Form>
-          )}
-        </Formik>
+                </div>
+
+                <div className="form-group" style={{ marginTop: 20 }}>
+                  <span className="input-group-btn">
+                    <input
+                      className="btn btn-default btn-primary"
+                      type="submit"
+                      value={"Transfer"}
+                    />
+                  </span>
+                </div>
+              </Form>
+            )}
+          </Formik>
+        </Card>
       </div>
     </>
   );

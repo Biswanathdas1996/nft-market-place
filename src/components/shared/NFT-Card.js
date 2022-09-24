@@ -39,7 +39,7 @@ export default function NFTCard({ tokenId, reload = () => null }) {
     setOwner(getOwner);
     const account = await _account();
     setAccount(account);
-    console.log("---getAllTokenUri--->", getAllTokenUri);
+    // console.log("---getAllTokenUri--->", getAllTokenUri);
     await fetch(getAllTokenUri)
       .then((response) => response.json())
       .then((data) => {
@@ -57,7 +57,7 @@ export default function NFTCard({ tokenId, reload = () => null }) {
     setStart(false);
     setResponse(null);
   };
-  console.log("----------->", nftData);
+  // console.log("----------->", nftData);
   return (
     <>
       {start && <TransctionModal response={response} modalClose={modalClose} />}
@@ -73,26 +73,6 @@ export default function NFTCard({ tokenId, reload = () => null }) {
             border: "0.01px solid rgba(0, 0, 0, 0.09)",
           }}
         >
-          {/* <Tooltip title="Nefrofeel by Pablo Picasso"> */}
-          {/* <div
-              style={{
-                backgroundImage: `url(${nftData?.image})`,
-                height: "150px",
-                borderRadius: 5,
-                backgroundSize: "cover",
-                backgroundRepeat: "no-repeat",
-                margin: "15px 15px 0px 15px",
-              }}
-            >
-              <Grid container>
-                <Grid xs={2}>
-                  <MarkAsFevourite tokenId={tokenId} reload={reload} />
-                </Grid>
-                <Grid xs={10} sx={{ textAlign: "right" }}>
-                  <RedirectToOpenSea tokenId={tokenId} />
-                </Grid>
-              </Grid>
-            </div> */}
           <Grid container>
             <Grid xs={2}>
               <MarkAsFevourite tokenId={tokenId} reload={reload} />

@@ -12,7 +12,7 @@ import Typography from "@mui/material/Typography";
 import { getIcon } from "../../utils/currencyIcon";
 import { currentNeteork } from "../../utils/currentNeteork";
 import { getNetworkName } from "../../config";
-
+import LeadEntryModal from "../shared/LeadModal";
 function HeaderCompound({ children }) {
   let history = useNavigate();
   return (
@@ -22,6 +22,7 @@ function HeaderCompound({ children }) {
           <Logo />
 
           <Stack direction="row" spacing={1} style={{ margin: 10 }}>
+            <LeadEntryModal />
             <SigninButton>Account</SigninButton>
             <div style={{ margin: 10, display: "flex" }}>
               <img

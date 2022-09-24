@@ -22,7 +22,7 @@ function SigninButton({ children, ...restProps }) {
         //   borderRadius: 12,
         // }}
       >
-        Account
+        {children}
       </Button>
     </div>
   );
