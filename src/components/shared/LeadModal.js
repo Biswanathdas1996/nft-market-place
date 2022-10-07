@@ -11,8 +11,11 @@ import swal from "sweetalert";
 import LoadingButton from "@mui/lab/LoadingButton";
 import SaveIcon from "@mui/icons-material/Save";
 import { _account } from "../../CONTRACT-ABI/connect";
+import { getConfigData } from "../../getConfigaration";
 
-const msDynamicsBaseUrl = "https://dynamicswrapper.azurewebsites.net/api";
+const getConfigDataVaues = getConfigData();
+
+const msDynamicsBaseUrl = getConfigDataVaues?.ms_dynamics_base_url;
 
 const VendorSchema = Yup.object().shape({
   firstname: Yup.string().required("Firstname is required"),
@@ -35,7 +38,7 @@ const style = {
 
 const getAuthToken = async () => {
   var myHeaders = new Headers();
-  myHeaders.append("clientid", "6599b26b-951b-4a5b-887c-4af57c57f63f");
+  myHeaders.append("clientid", getConfigDataVaues?.ms_dynamics_client_id);
 
   var requestOptions = {
     method: "GET",

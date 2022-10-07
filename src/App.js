@@ -10,8 +10,7 @@ import { getIcon } from "./utils/currencyIcon";
 import { currentNeteork } from "./utils/currentNeteork";
 import { getcurrentNetworkId } from "./CONTRACT-ABI/connect";
 import { useLocation } from "react-router-dom";
-import { updateConfigData, getConfigData } from "./getConfigaration";
-import { getNetworkName } from "./config";
+import { fetchConfigData, getConfigData } from "./getConfigaration";
 
 export const ConfigContext = createContext(null);
 
@@ -20,7 +19,7 @@ const App = () => {
   const [symbol, setSymbol] = useState(null);
   const [accessable, setAccessable] = useState(false);
   const [loading, setLoading] = useState(false);
-  const [configNetwork, setConfigNetwork] = useState(null);
+  const [activeNetwork, setActiveNetwork] = useState(null);
   const location = useLocation();
 
   window?.ethereum.on("chainChanged", async (chainId) => {
@@ -41,13 +40,14 @@ const App = () => {
 
   const getConfig = async () => {
     setLoading(true);
-    await updateConfigData();
+
+    await fetchConfigData();
     const getConfigDataVaues = getConfigData();
     const currentNetworkId = await getcurrentNetworkId();
-    setConfigNetwork(getConfigDataVaues?.networkId);
-
+    console.log("--->currentNetworkId", currentNetworkId);
+    setActiveNetwork(getConfigDataVaues?.network_name);
     if (
-      currentNetworkId.toString() !== getConfigDataVaues?.networkId.toString()
+      currentNetworkId.toString() !== getConfigDataVaues?.network_id?.toString()
     ) {
       setAccessable(false);
     } else {
@@ -61,6 +61,7 @@ const App = () => {
     setSymbol(currentNeteork());
   };
 
+  console.log("----activeNetwork>", activeNetwork);
   const navBarLessRoutes = ["/"];
   return (
     <ConfigContext.Provider value="dark">
@@ -75,7 +76,7 @@ const App = () => {
           {!loading ? (
             <h2 style={{ textAlign: "center", margin: "12.5rem" }}>
               Please change the blockchain network to{" "}
-              <b>{getNetworkName(configNetwork).toUpperCase()}</b>
+              <b>{activeNetwork?.toUpperCase()}</b>
             </h2>
           ) : (
             <div

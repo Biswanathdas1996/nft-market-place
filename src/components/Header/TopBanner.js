@@ -64,14 +64,18 @@ function HeaderCompound({ children }) {
               marginX: "15px",
               marginBottom: "15px",
             }}
-            onClick={() => history("/top-selling")}
+            onClick={() =>
+              window
+                .open(`https://nft-mall-meta.netlify.app/`, "_blank")
+                .focus()
+            }
             style={{
               fontSize: 16,
               padding: "17px 24px",
               borderRadius: 12,
             }}
           >
-            Explore
+            Explore Metaverse
           </Button>
           <Button
             size="large"

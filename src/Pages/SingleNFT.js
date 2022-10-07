@@ -62,7 +62,17 @@ const Mint = () => {
     ];
     if (file) {
       const fileInput = document.querySelector('input[type="file"]');
-      const results = await uploadFileToIpfs(fileInput.files);
+
+      let results;
+      try {
+        results = await uploadFileToIpfs(fileInput.files);
+      } catch (err) {
+        alert("upload File To Ipfs Failed, please try again");
+        console.error("upload File To Ipfs Failed", err);
+        setStart(false);
+        return;
+      }
+
       console.log("---results-->", results);
 
       const metaData = {
@@ -74,16 +84,31 @@ const Mint = () => {
         attributes: attributes.concat(dummyAttrribute),
       };
 
-      const resultsSaveMetaData = await createAnduploadFileToIpfs(metaData);
+      let resultsSaveMetaData;
+      try {
+        resultsSaveMetaData = await createAnduploadFileToIpfs(metaData);
+      } catch (err) {
+        alert("upload File To Ipfs Failed, please try again");
+        console.error("upload File To Ipfs Failed", err);
+        setStart(false);
+        return;
+      }
       console.log("---metadta-->", resultsSaveMetaData);
 
-      responseData = await _transction(
-        "mintNFT",
-        resultsSaveMetaData,
-        web3.utils.toWei(price.toString(), "ether"),
-        royelty,
-        category
-      );
+      try {
+        responseData = await _transction(
+          "mintNFT",
+          resultsSaveMetaData,
+          web3.utils.toWei(price.toString(), "ether"),
+          royelty,
+          category
+        );
+      } catch (err) {
+        alert("Mint NFT failed Failed, please try again");
+        console.error("Mint NFT failed Failed", err);
+        setStart(false);
+        return;
+      }
     }
     setResponse(responseData);
 

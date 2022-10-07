@@ -1,55 +1,18 @@
 import { getConfigData } from "./getConfigaration";
 const getConfigDataVaues = getConfigData();
 
-const EtherscanBaseAPI = `https://api-rinkeby.etherscan.io/api`;
-const EtherscanGoerliBaseAPI = `https://api-goerli.etherscan.io/api`;
-const PolyscanscanBaseAPI = `https://api-testnet.polygonscan.com/api`;
+const openseaBaseUrl = getConfigDataVaues?.opensea_base_url;
 
-// const EtherscanAPIKEY = `WCVDU52748WW4F7EKDEDB89HKH41BIA4N2`;
-// const PolyscanscanAPIKEY = `G2FQ3WI7SWZDIEQE8CCCSZHJ1M97NXNYAE`;
-const EtherscanAPIKEY = getConfigDataVaues?.EtherscanAPIKEY;
-const PolyscanscanAPIKEY = getConfigDataVaues?.PolyscanscanAPIKEY;
-
-const openseaBaseUrl = "https://testnets.opensea.io";
-
-// --------------------------------------------------------------------------------
 export const getApiKey = () => {
-  const networkId = sessionStorage.getItem("currentyNetwork");
-  switch (networkId) {
-    case "80001":
-      return PolyscanscanAPIKEY;
-    default:
-      return EtherscanAPIKEY;
-  }
+  return getConfigDataVaues?.ChainExplorerAPIKEY;
 };
 
 export const getBaseApiUrl = () => {
-  const networkId = sessionStorage.getItem("currentyNetwork");
-  switch (networkId) {
-    case "80001":
-      return PolyscanscanBaseAPI;
-    case "4":
-      return EtherscanBaseAPI;
-    case "5":
-      return EtherscanGoerliBaseAPI;
-    default:
-    // code block
-  }
+  return getConfigDataVaues?.blockchain_base_api;
 };
 
-export const getNetworkName = (
-  networkId = sessionStorage.getItem("currentyNetwork")
-) => {
-  switch (networkId) {
-    case "80001":
-      return "mumbai";
-    case "4":
-      return "rinkeby";
-    case "5":
-      return "goerli";
-    default:
-      return "unknown";
-  }
+export const getNetworkName = () => {
+  return getConfigDataVaues?.network_name;
 };
 
 export const openSeaURI = (address, tokenId) => {
@@ -57,13 +20,7 @@ export const openSeaURI = (address, tokenId) => {
 };
 
 export const networkURL = () => {
-  const networkId = sessionStorage.getItem("currentyNetwork");
-  switch (networkId) {
-    case "80001":
-      return `https://${getNetworkName()}.polygonscan.com`;
-    default:
-      return `https://${getNetworkName()}.etherscan.io`;
-  }
+  return getConfigDataVaues?.network_url;
 };
 
 export const getTransctionListAPI = (account) => {

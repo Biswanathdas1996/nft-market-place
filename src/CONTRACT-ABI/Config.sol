@@ -10,7 +10,7 @@ contract Config {
 
     ConfigData public collections;
 
-    constructor() {}
+    constructor() {}  
 
      function _setNftCollection(
         string memory data

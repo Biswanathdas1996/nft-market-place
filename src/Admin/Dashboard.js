@@ -10,7 +10,7 @@ import RadioGroup from "@mui/material/RadioGroup";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import FormControl from "@mui/material/FormControl";
 import FormLabel from "@mui/material/FormLabel";
-import { setConfigData, getConfigData } from "../getConfigaration";
+import { getConfigData } from "../getConfigaration";
 import TransctionModal from "../components/shared/TransctionModal";
 
 import { Formik, Form, Field } from "formik";
@@ -47,13 +47,13 @@ export default function Dashboard() {
 
   const onChangeNetworkInfo = async (value) => {
     setStart(true);
-    await setConfigData({ ...config, networkId: value });
+    // await setConfigData({ ...config, networkId: value });
     window.location.reload();
   };
 
   const onChangeFileStorageInfo = async (value) => {
     setStart(true);
-    await setConfigData({ ...config, fileStorage: value });
+    // await setConfigData({ ...config, fileStorage: value });
     window.location.reload();
   };
 
@@ -65,14 +65,14 @@ export default function Dashboard() {
     web3StorageToken,
   }) => {
     setStart(true);
-    await setConfigData({
-      ...config,
-      EtherscanAPIKEY,
-      PolyscanscanAPIKEY,
-      awsAccessKeyId,
-      awsSecretAccessKey,
-      web3StorageToken,
-    });
+    // await setConfigData({
+    //   ...config,
+    //   EtherscanAPIKEY,
+    //   PolyscanscanAPIKEY,
+    //   awsAccessKeyId,
+    //   awsSecretAccessKey,
+    //   web3StorageToken,
+    // });
     window.location.reload();
   };
 
