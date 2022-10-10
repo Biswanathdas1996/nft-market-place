@@ -56,6 +56,7 @@ export default function NFTCard({ tokenId, reload = () => null }) {
     setStart(true);
     const responseData = await buyNft(Number(tokenId));
     setResponse(responseData);
+    fetchNftInfo();
   };
 
   const modalClose = () => {

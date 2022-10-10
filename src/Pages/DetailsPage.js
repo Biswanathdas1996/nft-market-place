@@ -75,6 +75,7 @@ export default function DetailsPage({ match }) {
     setStart(true);
     const responseData = await buyNft(Number(tokenId));
     setResponse(responseData);
+    fetchNftInfo();
   };
 
   const modalClose = () => {
