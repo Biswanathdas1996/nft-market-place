@@ -25,12 +25,6 @@ const columns = [
   { id: "to", label: "TO", minWidth: 100 },
 
   {
-    id: "price",
-    label: "PRICE",
-    minWidth: 170,
-    align: "center",
-  },
-  {
     id: "type",
     label: "TYPE",
     minWidth: 170,
@@ -158,33 +152,6 @@ const MyTransaction = ({ tokenId }) => {
                         </Tooltip>
                       </TableCell>
 
-                      <TableCell align="left">
-                        <Stack
-                          direction="row"
-                          spacing={1}
-                          sx={{
-                            alignItems: "flex-start",
-                            justifyContent: "start",
-                            display: "flex",
-                          }}
-                        >
-                          <img
-                            width="10px"
-                            alt="ethimg"
-                            height="16px"
-                            src={getIcon()}
-                            style={{
-                              color: "black",
-                              marginTop: "4px",
-                              marginRight: "3px",
-                            }}
-                          />
-                          <Typography sx={{ fontWeight: 600 }}>
-                            {" "}
-                            {data?.value / 1000000000000000000}
-                          </Typography>
-                        </Stack>
-                      </TableCell>
                       <TableCell align="center">
                         <CustomButton
                           type={

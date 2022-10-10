@@ -70,10 +70,17 @@ const caeateLead = async (requestData) => {
     };
     return await fetch(`${msDynamicsBaseUrl}/Leads/Create`, requestOptions)
       .then((response) => response.json())
-      .then((result) => result)
-      .catch((error) => error);
+      .then((result) => true)
+      .catch((error) =>
+        swal("Network issue!", "Please re-submit again", "warning").then(
+          (value) => {
+            return false;
+          }
+        )
+      );
   } else {
     swal("Sorry!", "Some error occured", "error");
+    return false;
   }
 };
 
@@ -92,12 +99,14 @@ export default function BasicModal() {
       subject: "Contact us",
       website: window.location.href,
     };
-    await caeateLead(requestData);
-    swal("Thank you!", "Our team will contact you soon", "success").then(
-      (value) => {
-        handleClose();
-      }
-    );
+    if (await caeateLead(requestData)) {
+      swal("Thank you!", "Our team will contact you soon", "success").then(
+        (value) => {
+          handleClose();
+        }
+      );
+    }
+
     setLoading(false);
   };
 

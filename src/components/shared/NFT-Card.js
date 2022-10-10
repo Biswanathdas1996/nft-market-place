@@ -15,6 +15,7 @@ import RedirectToOpenSea from "./RedirectToOpenSea";
 import { getIcon } from "../../utils/currencyIcon";
 import { getSymbol } from "../../utils/currencySymbol";
 import { get_url_extension, allowableVideoFormat } from "../../utils/fileInfo";
+import imgNotFound from "../../assets/images/default-placeholder.png";
 
 export default function NFTCard({ tokenId, reload = () => null }) {
   const [nftData, setNftData] = useState(null);
@@ -32,19 +33,23 @@ export default function NFTCard({ tokenId, reload = () => null }) {
   }, []);
 
   async function fetchNftInfo() {
-    const getAllTokenUri = await _fetch("tokenURI", tokenId);
-    const price = await _fetch("getNftPrice", tokenId);
-    setPrice(price);
-    const getOwner = await _fetch("ownerOf", tokenId);
-    setOwner(getOwner);
-    const account = await _account();
-    setAccount(account);
-    // console.log("---getAllTokenUri--->", getAllTokenUri);
-    await fetch(getAllTokenUri)
-      .then((response) => response.json())
-      .then((data) => {
-        setNftData(data);
-      });
+    try {
+      const getAllTokenUri = await _fetch("tokenURI", tokenId);
+      const price = await _fetch("getNftPrice", tokenId);
+      setPrice(price);
+      const getOwner = await _fetch("ownerOf", tokenId);
+      setOwner(getOwner);
+      const account = await _account();
+      setAccount(account);
+      // console.log("---getAllTokenUri--->", getAllTokenUri);
+      await fetch(getAllTokenUri)
+        .then((response) => response.json())
+        .then((data) => {
+          setNftData(data);
+        });
+    } catch (err) {
+      console.error("Unable to fetch data from IPFS", err);
+    }
   }
 
   const buynow = async () => {
@@ -89,7 +94,14 @@ export default function NFTCard({ tokenId, reload = () => null }) {
               Your browser does not support HTML video.
             </video>
           ) : (
-            <img src={nftData?.image} alt="NFT img" height="150" />
+            <img
+              src={nftData?.image}
+              alt="NFT img"
+              height="150"
+              onError={(e) => {
+                e.currentTarget.src = imgNotFound;
+              }}
+            />
           )}
 
           {/* </Tooltip> */}

@@ -18,6 +18,7 @@ import {
   uploadFileToIpfs,
   createAnduploadFileToIpfs,
 } from "../utils/uploadFileToIpfs";
+import swal from "sweetalert";
 
 const web3 = new Web3(window.ethereum);
 
@@ -67,10 +68,19 @@ const Mint = () => {
       try {
         results = await uploadFileToIpfs(fileInput.files);
       } catch (err) {
-        alert("upload File To Ipfs Failed, please try again");
-        console.error("upload File To Ipfs Failed", err);
-        setStart(false);
-        return;
+        swal({
+          title: "Server issue!",
+          text: "Upload File To Ipfs Failed, please try again",
+          icon: "warning",
+          buttons: true,
+          dangerMode: true,
+        }).then((willDelete) => {
+          if (willDelete) {
+            console.error("upload File To Ipfs Failed", err);
+            setStart(false);
+            return;
+          }
+        });
       }
 
       console.log("---results-->", results);
@@ -104,10 +114,19 @@ const Mint = () => {
           category
         );
       } catch (err) {
-        alert("Mint NFT failed Failed, please try again");
-        console.error("Mint NFT failed Failed", err);
-        setStart(false);
-        return;
+        swal({
+          title: "Server issue!",
+          text: "Mint NFT failed Failed, please try again",
+          icon: "warning",
+          buttons: true,
+          dangerMode: true,
+        }).then((willDelete) => {
+          if (willDelete) {
+            console.error("Mint NFT failed Failed", err);
+            setStart(false);
+            return;
+          }
+        });
       }
     }
     setResponse(responseData);

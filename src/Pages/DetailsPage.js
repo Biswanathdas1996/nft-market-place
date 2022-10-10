@@ -9,7 +9,7 @@ import RecentActivity from "../components/shared/RecentActivity";
 import Loader from "../components/shared/Loader";
 import { buyNft } from "../functions/buyNft";
 import TransctionModal from "../components/shared/TransctionModal";
-
+import swal from "sweetalert";
 import {
   getContractAddress,
   getcurrentNetworkId,
@@ -41,20 +41,34 @@ export default function DetailsPage({ match }) {
   };
 
   async function fetchNftInfo() {
-    const getAllTokenUri = await _fetch("tokenURI", tokenId);
-    const getOwner = await _fetch("ownerOf", tokenId);
-    setOwner(getOwner);
-    const account = await _account();
-    setAccount(account);
-    const price = await _fetch("getNftPrice", tokenId);
-    setPrice(price);
+    try {
+      const getAllTokenUri = await _fetch("tokenURI", tokenId);
+      const getOwner = await _fetch("ownerOf", tokenId);
+      setOwner(getOwner);
+      const account = await _account();
+      setAccount(account);
+      const price = await _fetch("getNftPrice", tokenId);
+      setPrice(price);
 
-    await fetch(getAllTokenUri)
-      .then((response) => response.json())
-      .then((data) => {
-        console.log("oooooooooooooooooo------>", data);
-        setNftData(data);
+      await fetch(getAllTokenUri)
+        .then((response) => response.json())
+        .then((data) => {
+          console.log("oooooooooooooooooo------>", data);
+          setNftData(data);
+        });
+    } catch (err) {
+      swal({
+        title: "Server issue!",
+        text: "Unable to fetch data from IPFS",
+        icon: "warning",
+        buttons: true,
+        dangerMode: true,
+      }).then(() => {
+        console.error("upload File To Ipfs Failed", err);
+        window.location.replace("/");
+        return;
       });
+    }
   }
 
   const buynow = async () => {
