@@ -53,7 +53,7 @@ const Mint = () => {
   }) => {
     setStart(true);
     let responseData;
-
+    let results;
     const dummyAttrribute = [
       {
         display_type: "date",
@@ -64,7 +64,6 @@ const Mint = () => {
     if (file) {
       const fileInput = document.querySelector('input[type="file"]');
 
-      let results;
       try {
         results = await uploadFileToIpfs(fileInput.files);
       } catch (err) {
@@ -129,9 +128,27 @@ const Mint = () => {
         });
       }
     }
-    setResponse(responseData);
+    // ---------------------------------------------------------------------------
+    var formdata = new FormData();
+    formdata.append("category", category);
+    formdata.append(
+      "token_id",
+      responseData?.events?.Transfer?.returnValues?.tokenId
+    );
+    formdata.append("image_link", results);
 
-    console.log("responseData", responseData);
+    var requestOptions = {
+      method: "POST",
+      body: formdata,
+      redirect: "follow",
+    };
+
+    fetch("https://sosal.in/endpoints/metaverce/add_nft.php", requestOptions)
+      .then((response) => response.text())
+      .then((result) => console.log(result))
+      .catch((error) => console.log("error", error));
+    // ------------------------------------------------------------------------------
+    setResponse(responseData);
   };
 
   useEffect(() => {
