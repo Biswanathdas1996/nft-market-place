@@ -6,10 +6,17 @@ window?.ethereum?.request({
   method: "eth_requestAccounts",
 });
 
-const web3 = new Web3(window.ethereum);
+const web3 = new Web3(window?.ethereum);
 
 export const getcurrentNetworkId = async () => {
-  const networkId = await web3?.eth?.accounts?._ethereumCall?.getNetworkId();
+  let networkId;
+  try {
+    networkId = await web3?.eth?.accounts?._ethereumCall?.getNetworkId();
+  } catch (err) {
+    networkId = undefined;
+    console.error("___web3 not found___", err);
+  }
+
   return networkId;
 };
 

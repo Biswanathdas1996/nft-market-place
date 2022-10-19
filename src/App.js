@@ -22,14 +22,14 @@ const App = () => {
   const [activeNetwork, setActiveNetwork] = useState(null);
   const location = useLocation();
 
-  window?.ethereum.on("chainChanged", async (chainId) => {
+  window?.ethereum?.on("chainChanged", async (chainId) => {
     const networkId = await getcurrentNetworkId();
     sessionStorage.setItem("currentyNetwork", networkId);
     getCurrencyInfo();
     window.location.reload(true);
   });
 
-  window?.ethereum.on("accountsChanged", (accounts) => {
+  window?.ethereum?.on("accountsChanged", (accounts) => {
     window.location.reload(true);
   });
 

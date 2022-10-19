@@ -19,6 +19,7 @@ import {
   createAnduploadFileToIpfs,
 } from "../utils/uploadFileToIpfs";
 import swal from "sweetalert";
+import { addNftImageToDatabase } from "../functions/addNftImageToDatabase";
 
 const web3 = new Web3(window.ethereum);
 
@@ -129,25 +130,8 @@ const Mint = () => {
       }
     }
     // ---------------------------------------------------------------------------
-    var formdata = new FormData();
-    formdata.append("category", category);
-    formdata.append(
-      "token_id",
-      responseData?.events?.Transfer?.returnValues?.tokenId
-    );
-    formdata.append("image_link", results);
-
-    var requestOptions = {
-      method: "POST",
-      body: formdata,
-      redirect: "follow",
-    };
-
-    fetch("https://sosal.in/endpoints/metaverce/add_nft.php", requestOptions)
-      .then((response) => response.text())
-      .then((result) => console.log(result))
-      .catch((error) => console.log("error", error));
-    // ------------------------------------------------------------------------------
+    await addNftImageToDatabase(category, responseData, results);
+    // ---------------------------------------------------------------------------
     setResponse(responseData);
   };
 
