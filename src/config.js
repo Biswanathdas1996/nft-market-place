@@ -20,7 +20,9 @@ export const openSeaURI = (address, tokenId) => {
 };
 
 export const networkURL = () => {
-  return getConfigDataVaues?.network_url;
+  return (
+    getConfigDataVaues?.network_url || "https://goerli.etherscan.io/address/"
+  );
 };
 
 export const getTransctionListAPI = (account) => {

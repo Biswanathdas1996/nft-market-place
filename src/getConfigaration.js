@@ -6,7 +6,14 @@ const mockToken =
 
 export function getConfigData() {
   const token = sessionStorage.getItem("x-nft-config-token");
-  return token && JSON.parse(decode(token));
+  if (token) {
+    return JSON.parse(decode(token));
+  } else {
+    fetchConfigData();
+    setTimeout(() => {
+      window.location.reload();
+    }, 1000);
+  }
 }
 
 export async function fetchConfigData() {
