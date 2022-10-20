@@ -136,7 +136,10 @@ const Mint = () => {
       }
     }
     // ---------------------------------------------------------------------------
-    // await addNftImageToDatabase(category, responseData, results);
+    if (responseData?.events?.Transfer?.returnValues?.tokenId) {
+      console.log("______data_added_to_metaverse_______");
+      // await addNftImageToDatabase(category, responseData, results);
+    }
     // ---------------------------------------------------------------------------
     setResponse(responseData);
   };
