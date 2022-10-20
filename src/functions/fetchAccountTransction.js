@@ -5,7 +5,7 @@ import {
 
 import { getContractTransctionListAPI } from "../config";
 
-export async function frtchAccounttransction() {
+export async function frtchAccounttransction(configs) {
   const networkIddarta = await getcurrentNetworkId();
   const cureentAccress = getContractAddress(networkIddarta);
   var requestOptions = {
@@ -13,5 +13,8 @@ export async function frtchAccounttransction() {
     redirect: "follow",
   };
 
-  return fetch(getContractTransctionListAPI(cureentAccress), requestOptions);
+  return fetch(
+    getContractTransctionListAPI(configs, cureentAccress),
+    requestOptions
+  );
 }

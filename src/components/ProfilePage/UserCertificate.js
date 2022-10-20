@@ -22,11 +22,14 @@ import {
   getContractAddress,
 } from "../../CONTRACT-ABI/connect";
 import { Stack, Typography } from "@mui/material";
+import { ConfigContext } from "../../App";
 import "../../styles/certificate.css";
 
 export default function Certificate({ tokenId, attributes = [] }) {
   const [tokens, setToken] = React.useState([]);
   const [account, setAccount] = React.useState(null);
+  const configs = React.useContext(ConfigContext);
+
   const printDocument = () => {
     const input = document.getElementById("divToPrint");
     html2canvas(input).then((canvas) => {
@@ -45,7 +48,7 @@ export default function Certificate({ tokenId, attributes = [] }) {
     fetchAllPosts();
   }, []);
   const fetchData = async () => {
-    await frtchAccounttransction()
+    await frtchAccounttransction(configs)
       .then((response) => response.json())
       .then((result) => {
         // console.log("--------->", result);

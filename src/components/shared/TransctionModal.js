@@ -12,6 +12,7 @@ import ListItem from "@mui/material/ListItem";
 import Divider from "@mui/material/Divider";
 import ListItemText from "@mui/material/ListItemText";
 import { networkURL } from "../../config";
+import { ConfigContext } from "../../App";
 const steps = ["Initiating", "Waiting for confirmation", "Transction complete"];
 
 const style = {
@@ -28,7 +29,7 @@ const style = {
 
 export default function TransctionModal({ response, setStart, modalClose }) {
   const [open, setOpen] = React.useState(true);
-
+  const configs = React.useContext(ConfigContext);
   const handleClose = () => {
     setOpen(false);
     modalClose();
@@ -81,7 +82,7 @@ export default function TransctionModal({ response, setStart, modalClose }) {
                     secondary={
                       <React.Fragment>
                         <a
-                          href={`${networkURL()}/tx/${
+                          href={`${networkURL(configs)}/tx/${
                             domData?.transactionHash
                           }`}
                           target="_blank"

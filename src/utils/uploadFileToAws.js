@@ -1,18 +1,12 @@
 import AWS from "aws-sdk";
 import { v4 as uuidv4 } from "uuid";
-import { getConfigData } from "../getConfigaration";
-const getConfigDataVaues = getConfigData();
 
 const S3_BUCKET = "pwc-nft-storage";
 const REGION = "us-east-2";
 
-// AWS.config.update({
-//   accessKeyId: "AKIAYHIOXQAZYDY4BF2V",
-//   secretAccessKey: "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",
-// });
 AWS.config.update({
-  accessKeyId: getConfigDataVaues?.awsAccessKeyId,
-  secretAccessKey: getConfigDataVaues?.awsSecretAccessKey,
+  accessKeyId: "AKIAYHIOXQAZYDY4BF2V",
+  secretAccessKey: "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",
 });
 
 const myBucket = new AWS.S3({

@@ -14,8 +14,6 @@ import TopSelling from "./Pages/TopSelling";
 import CategoryWiseList from "./Pages/CategoryWiseList";
 import Profile from "./Pages/Profile";
 import HowITworks from "./Pages/HowITworks";
-import Login from "./Admin/Login";
-import Dashboard from "./Admin/Dashboard";
 
 class Routing extends React.Component {
   render() {
@@ -47,9 +45,6 @@ class Routing extends React.Component {
 
         <Route exact path="/profile" element={<Profile />} />
         <Route exact path="/HowItWorks" element={<HowITworks />} />
-
-        <Route exact path="/admin-login" element={<Login />} />
-        <Route exact path="/dashboard" element={<Dashboard />} />
 
         <Route
           render={function () {

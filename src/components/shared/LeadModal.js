@@ -11,11 +11,8 @@ import swal from "sweetalert";
 import LoadingButton from "@mui/lab/LoadingButton";
 import SaveIcon from "@mui/icons-material/Save";
 import { _account } from "../../CONTRACT-ABI/connect";
-import { getConfigData } from "../../getConfigaration";
 
-const getConfigDataVaues = getConfigData();
-
-const msDynamicsBaseUrl = getConfigDataVaues?.ms_dynamics_base_url;
+import { ConfigContext } from "../../App";
 
 const VendorSchema = Yup.object().shape({
   firstname: Yup.string().required("Firstname is required"),
@@ -36,9 +33,10 @@ const style = {
   p: 4,
 };
 
-const getAuthToken = async () => {
+const getAuthToken = async (configs) => {
   var myHeaders = new Headers();
-  myHeaders.append("clientid", getConfigDataVaues?.ms_dynamics_client_id);
+
+  myHeaders.append("clientid", configs?.ms_dynamics_client_id);
 
   var requestOptions = {
     method: "GET",
@@ -47,7 +45,7 @@ const getAuthToken = async () => {
   };
 
   return await fetch(
-    `${msDynamicsBaseUrl}/Accounts/GetAuthToken`,
+    `${configs?.ms_dynamics_base_url}/Accounts/GetAuthToken`,
     requestOptions
   )
     .then((response) => response.json())
@@ -55,8 +53,8 @@ const getAuthToken = async () => {
     .catch((error) => error);
 };
 
-const caeateLead = async (requestData) => {
-  const getAuth = await getAuthToken();
+const caeateLead = async (requestData, configs) => {
+  const getAuth = await getAuthToken(configs);
   if (getAuth?.statusCode === 200) {
     var myHeaders = new Headers();
     myHeaders.append("Auth-Token", getAuth?.data);
@@ -68,7 +66,10 @@ const caeateLead = async (requestData) => {
       body: raw,
       redirect: "follow",
     };
-    return await fetch(`${msDynamicsBaseUrl}/Leads/Create`, requestOptions)
+    return await fetch(
+      `${configs?.ms_dynamics_base_url}/Leads/Create`,
+      requestOptions
+    )
       .then((response) => response.json())
       .then((result) => true)
       .catch((error) =>
@@ -89,6 +90,7 @@ export default function BasicModal() {
   const [loading, setLoading] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
+  const configs = React.useContext(ConfigContext);
 
   const saveData = async (data) => {
     setLoading(true);
@@ -99,7 +101,7 @@ export default function BasicModal() {
       subject: "Contact us",
       website: window.location.href,
     };
-    if (await caeateLead(requestData)) {
+    if (await caeateLead(requestData, configs)) {
       swal("Thank you!", "Our team will contact you soon", "success").then(
         (value) => {
           handleClose();

@@ -1,3 +1,4 @@
+import React from "react";
 import {
   Grid,
   Link,
@@ -15,7 +16,7 @@ import { currentNeteork } from "../../utils/currentNeteork";
 import { networkURL } from "../../config";
 import { get_url_extension, allowableVideoFormat } from "../../utils/fileInfo";
 import imgNotFound from "../../assets/images/default-placeholder.png";
-
+import { ConfigContext } from "../../App";
 const DetailsHead = [
   "Contract Address:",
   "Token ID:",
@@ -34,6 +35,7 @@ const useStyles = makeStyles({
 });
 
 export default function LeftConrent({ nftData, tokenId, ContractAddress }) {
+  const configs = React.useContext(ConfigContext);
   const { description, image } = nftData;
   const classes = useStyles();
 
@@ -109,7 +111,7 @@ export default function LeftConrent({ nftData, tokenId, ContractAddress }) {
           <Grid xs={7}>
             <Tooltip title="Contrct Address">
               <Link
-                href={`${networkURL()}/address/${ContractAddress}`}
+                href={`${networkURL(configs)}/address/${ContractAddress}`}
                 target="_blank"
                 sx={{ textDecoration: "none" }}
               >

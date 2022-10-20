@@ -12,7 +12,7 @@ import {
   Stack,
   Typography,
 } from "@mui/material";
-
+import { ConfigContext } from "../../App";
 import { getIcon } from "../../utils/currencyIcon";
 import CustomTransactionStat from "./CustomTransactionStat";
 import { _account } from "../../CONTRACT-ABI/connect";
@@ -37,13 +37,13 @@ const columns = [
 
 const MyTransaction = () => {
   const [transctions, settransctions] = useState([]);
-
+  const configs = React.useContext(ConfigContext);
   useEffect(() => {
     fetchData();
   }, []);
   const fetchData = async () => {
     const account = await _account();
-    await fetchWallatTransction(account)
+    await fetchWallatTransction(configs, account)
       .then((response) => response.json())
       .then((result) => {
         settransctions(result.result);

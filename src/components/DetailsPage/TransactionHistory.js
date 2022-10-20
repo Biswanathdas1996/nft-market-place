@@ -19,6 +19,7 @@ import CustomButton from "./CustomButton";
 // import CustomTransactionStat from "./CustomTransactionStat";
 
 import { frtchAccounttransction } from "../../functions/fetchAccountTransction";
+import { ConfigContext } from "../../App";
 
 const columns = [
   { id: "from", label: "FROM", minWidth: 170 },
@@ -34,12 +35,12 @@ const columns = [
 
 const MyTransaction = ({ tokenId }) => {
   const [transctions, settransctions] = useState([]);
-
+  const configs = React.useContext(ConfigContext);
   useEffect(() => {
     fetchData();
   }, []);
   const fetchData = async () => {
-    await frtchAccounttransction()
+    await frtchAccounttransction(configs)
       .then((response) => response.json())
       .then((result) => {
         console.log("--------->", result);
