@@ -13,7 +13,10 @@ import { getIcon } from "../../utils/currencyIcon";
 import { currentNeteork } from "../../utils/currentNeteork";
 import { getNetworkName } from "../../config";
 import LeadEntryModal from "../shared/LeadModal";
+import { ConfigContext } from "../../App";
+
 function HeaderCompound({ children }) {
+  const configs = React.useContext(ConfigContext);
   let history = useNavigate();
   return (
     <HeaderWrapper className="header-wrapper-home">
@@ -39,7 +42,7 @@ function HeaderCompound({ children }) {
                   {currentNeteork()}
                 </Typography>
                 <Typography sx={{ fontSize: "10px", color: "white" }}>
-                  <small>{getNetworkName()}</small>
+                  <small>{getNetworkName(configs)}</small>
                 </Typography>
               </div>
             </div>

@@ -20,6 +20,7 @@ import {
 } from "../utils/uploadFileToIpfs";
 import swal from "sweetalert";
 import { addNftImageToDatabase } from "../functions/addNftImageToDatabase";
+import { ConfigContext } from "../App";
 
 const web3 = new Web3(window.ethereum);
 
@@ -31,6 +32,8 @@ const VendorSchema = Yup.object().shape({
 });
 
 const Mint = () => {
+  const configs = React.useContext(ConfigContext);
+
   const [start, setStart] = useState(false);
   const [response, setResponse] = useState(null);
   const [file, setFile] = useState(null);
@@ -66,7 +69,7 @@ const Mint = () => {
       const fileInput = document.querySelector('input[type="file"]');
 
       try {
-        results = await uploadFileToIpfs(fileInput.files);
+        results = await uploadFileToIpfs(configs, fileInput.files);
       } catch (err) {
         swal({
           title: "Server issue!",
@@ -96,7 +99,10 @@ const Mint = () => {
 
       let resultsSaveMetaData;
       try {
-        resultsSaveMetaData = await createAnduploadFileToIpfs(metaData);
+        resultsSaveMetaData = await createAnduploadFileToIpfs(
+          configs,
+          metaData
+        );
       } catch (err) {
         alert("upload File To Ipfs Failed, please try again");
         console.error("upload File To Ipfs Failed", err);
@@ -130,7 +136,7 @@ const Mint = () => {
       }
     }
     // ---------------------------------------------------------------------------
-    await addNftImageToDatabase(category, responseData, results);
+    // await addNftImageToDatabase(category, responseData, results);
     // ---------------------------------------------------------------------------
     setResponse(responseData);
   };

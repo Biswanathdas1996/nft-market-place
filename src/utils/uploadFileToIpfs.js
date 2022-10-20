@@ -1,12 +1,10 @@
 import { Web3Storage } from "web3.storage/dist/bundle.esm.min.js";
-import { getConfigData } from "../getConfigaration";
-const getConfigDataVaues = getConfigData();
 
-const client = new Web3Storage({
-  token: getConfigDataVaues?.Web3Storage,
-});
+export const uploadFileToIpfs = async (configs, file) => {
+  const client = new Web3Storage({
+    token: configs?.Web3Storage,
+  });
 
-export const uploadFileToIpfs = async (file) => {
   const fileName = file[0].name;
   const results = await client.put(file, {});
 
@@ -14,7 +12,10 @@ export const uploadFileToIpfs = async (file) => {
   return `https://${results}.ipfs.dweb.link/${fileName}`;
 };
 
-export const createAnduploadFileToIpfs = async (metaData) => {
+export const createAnduploadFileToIpfs = async (configs, metaData) => {
+  const client = new Web3Storage({
+    token: configs?.Web3Storage,
+  });
   const blob = new Blob([JSON.stringify(metaData)], {
     type: "application/json",
   });

@@ -7,8 +7,10 @@ import {
 } from "../../CONTRACT-ABI/connect";
 
 import { openSeaURI } from "../../config";
+import { ConfigContext } from "../../App";
 
 export default function RedirectToOpenSea({ tokenId }) {
+  const configs = React.useContext(ConfigContext);
   const [address, setAddress] = useState(null);
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -23,7 +25,7 @@ export default function RedirectToOpenSea({ tokenId }) {
   return (
     <>
       <a
-        href={openSeaURI(address, tokenId)}
+        href={openSeaURI(configs, address, tokenId)}
         target="_blank"
         rel="noreferrer"
         title="View on OpenSea"

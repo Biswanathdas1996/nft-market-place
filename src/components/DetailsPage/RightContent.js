@@ -23,6 +23,7 @@ import PrivetContent from "./PrivetContent";
 import { getIcon } from "../../utils/currencyIcon";
 import { getSymbol } from "../../utils/currencySymbol";
 import { networkURL } from "../../config";
+import { ConfigContext } from "../../App";
 const countData = ["05", "08", "35", "12"];
 
 const RightContent = ({
@@ -35,7 +36,7 @@ const RightContent = ({
   fetchNftInfo,
 }) => {
   const [value, setValue] = React.useState("2");
-
+  const configs = React.useContext(ConfigContext);
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
@@ -69,7 +70,7 @@ const RightContent = ({
             </Typography>
             <Tooltip title="Contrct Address">
               <Link
-                href={`${networkURL()}/address/${owner}`}
+                href={`${networkURL(configs)}/address/${owner}`}
                 target="_blank"
                 sx={{ textDecoration: "none" }}
               >

@@ -10,7 +10,7 @@ import { getIcon } from "./utils/currencyIcon";
 import { currentNeteork } from "./utils/currentNeteork";
 import { getcurrentNetworkId } from "./CONTRACT-ABI/connect";
 import { useLocation } from "react-router-dom";
-import { fetchConfigData, getConfigData } from "./getConfigaration";
+import { fetchConfigData, configMapping } from "./getConfigaration";
 
 export const ConfigContext = createContext(null);
 
@@ -20,6 +20,7 @@ const App = () => {
   const [accessable, setAccessable] = useState(false);
   const [loading, setLoading] = useState(false);
   const [activeNetwork, setActiveNetwork] = useState(null);
+  const [config, setConfig] = useState(null);
   const location = useLocation();
 
   window?.ethereum?.on("chainChanged", async (chainId) => {
@@ -41,14 +42,13 @@ const App = () => {
   const getConfig = async () => {
     setLoading(true);
 
-    await fetchConfigData();
-    const getConfigDataVaues = getConfigData();
+    const configResponce = await fetchConfigData();
+    const decodedConfig = configMapping(configResponce);
+    console.log("--configResponce--->", decodedConfig);
+    setConfig(decodedConfig);
     const currentNetworkId = await getcurrentNetworkId();
-    console.log("--->currentNetworkId", currentNetworkId);
-    setActiveNetwork(getConfigDataVaues?.network_name);
-    if (
-      currentNetworkId.toString() !== getConfigDataVaues?.network_id?.toString()
-    ) {
+    setActiveNetwork(decodedConfig?.network_name);
+    if (currentNetworkId.toString() !== decodedConfig?.network_id?.toString()) {
       setAccessable(false);
     } else {
       setAccessable(true);
@@ -64,7 +64,7 @@ const App = () => {
   console.log("----activeNetwork>", activeNetwork);
   const navBarLessRoutes = ["/"];
   return (
-    <ConfigContext.Provider value="dark">
+    <ConfigContext.Provider value={config}>
       <CssBaseline />
       {navBarLessRoutes.indexOf(location.pathname) === -1 && (
         <Header icon={icon} symbol={symbol} />

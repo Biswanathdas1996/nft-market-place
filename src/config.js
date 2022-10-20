@@ -1,34 +1,37 @@
-import { getConfigData } from "./getConfigaration";
-const getConfigDataVaues = getConfigData();
-
-const openseaBaseUrl = getConfigDataVaues?.opensea_base_url;
-
-export const getApiKey = () => {
-  return getConfigDataVaues?.ChainExplorerAPIKEY;
+export const getApiKey = (configs) => {
+  return configs?.ChainExplorerAPIKEY;
 };
 
-export const getBaseApiUrl = () => {
-  return getConfigDataVaues?.blockchain_base_api;
+export const getBaseApiUrl = (configs) => {
+  return configs?.blockchain_base_api;
 };
 
-export const getNetworkName = () => {
-  return getConfigDataVaues?.network_name;
+export const getNetworkName = (configs) => {
+  return configs?.network_name;
 };
 
-export const openSeaURI = (address, tokenId) => {
-  return `${openseaBaseUrl}/assets/${getNetworkName()}/${address}/${tokenId}/?force_update=true`;
+export const openSeaURI = (configs, address, tokenId) => {
+  return `${configs?.opensea_base_url}/assets/${getNetworkName(
+    configs
+  )}/${address}/${tokenId}/?force_update=true`;
 };
 
-export const networkURL = () => {
-  return (
-    getConfigDataVaues?.network_url || "https://goerli.etherscan.io/address/"
-  );
+export const networkURL = (configs) => {
+  return configs?.network_url || "https://goerli.etherscan.io/address/";
 };
 
-export const getTransctionListAPI = (account) => {
-  return `${getBaseApiUrl()}?module=account&action=txlist&address=${account}&sort=desc&page=1&offset=10&apikey=${getApiKey()}`;
+export const getTransctionListAPI = (configs, account) => {
+  return `${getBaseApiUrl(
+    configs
+  )}?module=account&action=txlist&address=${account}&sort=desc&page=1&offset=10&apikey=${getApiKey(
+    configs
+  )}`;
 };
 
-export const getContractTransctionListAPI = (contractAddress) => {
-  return `${getBaseApiUrl()}?module=account&action=tokennfttx&contractaddress=${contractAddress}&page=1&offset=10000&sort=asc&apikey=${getApiKey()}`;
+export const getContractTransctionListAPI = (configs, contractAddress) => {
+  return `${getBaseApiUrl(
+    configs
+  )}?module=account&action=tokennfttx&contractaddress=${contractAddress}&page=1&offset=10000&sort=asc&apikey=${getApiKey(
+    configs
+  )}`;
 };

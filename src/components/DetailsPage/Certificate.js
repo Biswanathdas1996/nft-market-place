@@ -23,10 +23,11 @@ import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 
 import { Stack, Typography } from "@mui/material";
-
+import { ConfigContext } from "../../App";
 import "../../styles/certificate.css";
 
 export default function Certificate({ tokenId, attributes }) {
+  const configs = React.useContext(ConfigContext);
   const [owner, setOwner] = React.useState(null);
   const printDocument = () => {
     const input = document.getElementById("divToPrint");
@@ -47,7 +48,7 @@ export default function Certificate({ tokenId, attributes }) {
   const fetchData = async () => {
     const getOwner = await _fetch("ownerOf", tokenId);
     setOwner(getOwner);
-    await frtchAccounttransction()
+    await frtchAccounttransction(configs)
       .then((response) => response.json())
       .then((result) => {
         // console.log("--------->", result);
@@ -279,15 +280,15 @@ export default function Certificate({ tokenId, attributes }) {
                 </Grid>
                 <Grid item xs={12} md={6} sm={12} lg={6}>
                   <a
-                    href={`${networkURL()}/token/${getContractAddress(
-                      sessionStorage.getItem("currentyNetwork")
+                    href={`${networkURL(configs)}/token/${getContractAddress(
+                      configs?.network_id
                     )}?a=${tokenId}`}
                     target="_blank"
                     rel="noreferrer"
                   >
                     <QRCode
-                      value={`${networkURL()}/token/${getContractAddress(
-                        sessionStorage.getItem("currentyNetwork")
+                      value={`${networkURL(configs)}/token/${getContractAddress(
+                        configs?.network_id
                       )}?a=${tokenId}`}
                       size="100"
                       style={{ float: "right" }}
