@@ -1,17 +1,20 @@
 import _ from "lodash";
-import Web3 from "web3";
 import ABI from "./NFT.json";
 import Address from "./Address";
+import { web3Utils, web3Raw } from "../utils/web3Util";
+import { ethers } from "ethers";
+
 window?.ethereum?.request({
   method: "eth_requestAccounts",
 });
 
-const web3 = new Web3(window?.ethereum);
+// console.log("=============={{{{{{{{>", web3Utils);
 
 export const getcurrentNetworkId = async () => {
   let networkId;
   try {
-    networkId = await web3?.eth?.accounts?._ethereumCall?.getNetworkId();
+    let network = await web3Utils?.getNetwork();
+    networkId = network?.chainId;
   } catch (err) {
     networkId = undefined;
     console.error("___web3 not found___", err);
@@ -28,64 +31,70 @@ export const getContractAddress = (networkID) => {
       return Address.goerli;
     case "4":
       return Address.rinkeby;
+    case "14333":
+      return Address.pwcPrivetNetwork;
     default:
     // code block
   }
 };
 
 const getContract = async () => {
-  const networkId = await web3?.eth?.accounts?._ethereumCall?.getNetworkId();
+  let network = await web3Utils?.getNetwork();
+  const signer = web3Utils.getSigner();
+
+  const networkId = network?.chainId;
   sessionStorage.setItem("currentyNetwork", networkId);
   const ADDRESS = getContractAddress(networkId);
-  const contract = ADDRESS && new web3.eth.Contract(ABI, ADDRESS);
+  const contract = ADDRESS && new ethers.Contract(ADDRESS, ABI, signer);
   return contract;
 };
 
 export const _transction = async (service, ...props) => {
-  const callService = _.get(await getContract(), ["methods", service]);
-  const accounts = await web3.eth.getAccounts();
+  const contract = await getContract();
+  const callService = _.get(contract, [service]);
   const responseData = await callService(...props)
-    .send({
-      from: accounts[0],
-      value: 0,
+    .then((data) => {
+      return data;
     })
-    .then((data) => data)
     .catch((error) => {
       const errorData = { error };
       return { error: errorData.error };
     });
+
   return responseData;
 };
 
 export const _paid_transction = async (cost, service, ...props) => {
-  const callService = _.get(await getContract(), ["methods", service]);
-  const accounts = await web3.eth.getAccounts();
-  const responseData = await callService(...props)
-    .send({
-      from: accounts[0],
-      value: cost,
+  const contract = await getContract();
+  const callService = _.get(contract, [service]);
+  const responseData = await callService(...props, {
+    gasPrice: 839996565107,
+    value: cost,
+  })
+    .then((data) => {
+      return data;
     })
-    .then((data) => data)
     .catch((error) => {
       const errorData = { error };
       return { error: errorData.error };
     });
+
   return responseData;
 };
 
 export const _account = async () => {
-  const accounts = await web3.eth.getAccounts();
+  const accounts = await web3Utils.listAccounts();
   return accounts[0];
 };
 
 export const _fetch = async (service, ...props) => {
-  const callService = _.get(await getContract(), ["methods", service]);
+  const contract = await getContract();
+  const callService = _.get(contract, [service]);
   let data;
   if (props) {
-    data = await callService(...props).call();
+    data = await callService(...props);
   } else {
-    data = await callService().call();
+    data = await callService();
   }
-
   return data;
 };

@@ -5,7 +5,6 @@ import { Card, Grid } from "@mui/material";
 import { _transction } from "../../src/CONTRACT-ABI/connect";
 import Button from "@mui/material/Button";
 import { useNavigate } from "react-router-dom";
-import Web3 from "web3";
 import TextareaAutosize from "@mui/material/TextareaAutosize";
 import Switch from "@mui/material/Switch";
 import DeleteOutlineIcon from "@mui/icons-material/Delete";
@@ -19,10 +18,9 @@ import {
   createAnduploadFileToIpfs,
 } from "../utils/uploadFileToIpfs";
 import swal from "sweetalert";
-import { addNftImageToDatabase } from "../functions/addNftImageToDatabase";
 import { ConfigContext } from "../App";
-
-const web3 = new Web3(window.ethereum);
+import { convertEthToWei } from "../utils/web3Util";
+import { addNftImageToDatabase } from "../functions/addNftImageToDatabase";
 
 const VendorSchema = Yup.object().shape({
   title: Yup.string().required("Title is required"),
@@ -115,7 +113,7 @@ const Mint = () => {
         responseData = await _transction(
           "mintNFT",
           resultsSaveMetaData,
-          web3.utils.toWei(price.toString(), "ether"),
+          convertEthToWei(price),
           royelty,
           category
         );

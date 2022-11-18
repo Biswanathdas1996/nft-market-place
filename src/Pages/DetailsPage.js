@@ -81,6 +81,7 @@ export default function DetailsPage({ match }) {
   const modalClose = () => {
     setStart(false);
     setResponse(null);
+    fetchNftInfo();
   };
 
   return (

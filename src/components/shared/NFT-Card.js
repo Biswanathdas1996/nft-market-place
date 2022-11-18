@@ -62,6 +62,7 @@ export default function NFTCard({ tokenId, reload = () => null }) {
   const modalClose = () => {
     setStart(false);
     setResponse(null);
+    fetchNftInfo();
   };
   // console.log("----------->", nftData);
   return (
@@ -127,7 +128,7 @@ export default function NFTCard({ tokenId, reload = () => null }) {
                 return;
               }}
             >
-              {nftData?.name} #{tokenId}
+              {nftData?.name} #{tokenId.toString()}
             </Typography>
 
             <div

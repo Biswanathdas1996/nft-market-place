@@ -4,10 +4,6 @@ import * as Yup from "yup";
 import { Card } from "@mui/material";
 import { _transction, _account } from "../../CONTRACT-ABI/connect";
 import TransctionModal from "../shared/TransctionModal";
-import Web3 from "web3";
-import { getSymbol } from "../../utils/currencySymbol";
-
-const web3 = new Web3(window.ethereum);
 
 const VendorSchema = Yup.object().shape({
   to: Yup.string().required("Wallet address is required"),
@@ -30,6 +26,7 @@ const UpdatePrice = ({ price, tokenId, fetchNftInfo }) => {
   const modalClose = () => {
     setStart(false);
     setResponse(null);
+    fetchNftInfo();
   };
 
   return (

@@ -1,13 +1,11 @@
 import React, { useState } from "react";
 import { Formik, Form, Field } from "formik";
 import * as Yup from "yup";
-import { Grid } from "@mui/material";
+import { Grid, Card } from "@mui/material";
 import { _transction } from "../../CONTRACT-ABI/connect";
 import TransctionModal from "../shared/TransctionModal";
-import Web3 from "web3";
 import { getSymbol } from "../../utils/currencySymbol";
-
-const web3 = new Web3(window.ethereum);
+import { convertEthToWei, convertEthFromWei } from "../../utils/web3Util";
 
 const VendorSchema = Yup.object().shape({
   amount: Yup.string().required("Amount is required"),
@@ -24,7 +22,7 @@ const UpdatePrice = ({ price, tokenId, fetchNftInfo }) => {
     responseData = await _transction(
       "_setNftPrice",
       tokenId,
-      web3.utils.toWei(amount.toString(), "ether")
+      convertEthToWei(amount)
     );
 
     setResponse(responseData);
@@ -32,6 +30,7 @@ const UpdatePrice = ({ price, tokenId, fetchNftInfo }) => {
   };
 
   const modalClose = () => {
+    fetchNftInfo();
     setStart(false);
     setResponse(null);
   };
@@ -42,52 +41,50 @@ const UpdatePrice = ({ price, tokenId, fetchNftInfo }) => {
 
       <div
         style={{
-          padding: "20px",
+          paddingBottom: "20px",
           background: "white",
         }}
       >
-        <Formik
-          initialValues={{
-            amount: web3.utils.fromWei(price.toString(), "ether"),
-          }}
-          validationSchema={VendorSchema}
-          onSubmit={(values, { setSubmitting }) => {
-            saveData(values);
-            setSubmitting(false);
-          }}
-        >
-          {({ touched, errors, isSubmitting, values }) => (
-            <Form>
-              <Grid container spacing={1}>
-                <Grid item xs={12} sm={6} md={6} lg={6}>
-                  <div className="form-group" style={{ float: "right" }}>
-                    <Field
-                      type="text"
-                      name="amount"
-                      autoComplete="flase"
-                      placeholder={`Enter amount (${getSymbol()})`}
-                      className={`form-control text-muted ${
-                        touched.amount && errors.amount ? "is-invalid" : ""
-                      }`}
-                      style={{ marginRight: 10, padding: 6 }}
+        <Card style={{ padding: 15 }}>
+          <p>Update Price</p>
+          <Formik
+            initialValues={{
+              amount: convertEthFromWei(price),
+            }}
+            validationSchema={VendorSchema}
+            onSubmit={(values, { setSubmitting }) => {
+              saveData(values);
+              setSubmitting(false);
+            }}
+          >
+            {({ touched, errors, isSubmitting, values }) => (
+              <Form>
+                <div className="form-group">
+                  <Field
+                    type="text"
+                    name="amount"
+                    autoComplete="flase"
+                    placeholder={`Enter amount (${getSymbol()})`}
+                    className={`form-control text-muted ${
+                      touched.amount && errors.amount ? "is-invalid" : ""
+                    }`}
+                    style={{ marginRight: 10, padding: 6 }}
+                  />
+                </div>
+
+                <div className="form-group" style={{ marginTop: 20 }}>
+                  <span className="input-group-btn">
+                    <input
+                      className="btn btn-default btn-primary"
+                      type="submit"
+                      value={"Update"}
                     />
-                  </div>
-                </Grid>
-                <Grid item xs={12} sm={6} md={6} lg={6}>
-                  <div className="form-group" style={{ float: "left" }}>
-                    <span className="input-group-btn">
-                      <input
-                        className="btn btn-default btn-primary"
-                        type="submit"
-                        value={"Update"}
-                      />
-                    </span>
-                  </div>
-                </Grid>
-              </Grid>
-            </Form>
-          )}
-        </Formik>
+                  </span>
+                </div>
+              </Form>
+            )}
+          </Formik>
+        </Card>
       </div>
     </>
   );

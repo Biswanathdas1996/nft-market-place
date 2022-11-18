@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { Grid, Card, Typography, Tooltip } from "@material-ui/core";
 import Box from "@mui/material/Box";
-import Web3 from "web3";
 import { _account } from "../../CONTRACT-ABI/connect";
 import { getSymbol } from "../../utils/currencySymbol";
+import { web3Utils } from "../../utils/web3Util";
 
 const styles = {
   card: {
@@ -39,15 +39,14 @@ const WalledCard = () => {
   }, []);
 
   const fetchInfo = async () => {
-    const web3 = new Web3(window.ethereum);
-    // const account = await web3?.eth?.accounts?._provider?.selectedAddress;
     const account = await _account();
     console.log("------account---->", account);
     setAccount(account);
-    const networkId = await web3?.eth?.accounts?._ethereumCall?.getNetworkId();
+    const networkId =
+      await web3Utils?.eth?.accounts?._ethereumCall?.getNetworkId();
     setNetworkId(networkId);
-    const balance = await web3?.eth?.getBalance(account);
-    const balnceInETH = await web3?.utils?.fromWei(balance, "ether");
+    const balance = await web3Utils?.eth?.getBalance(account);
+    const balnceInETH = await web3Utils?.utils?.fromWei(balance, "ether");
     setBalance(balnceInETH);
     console.log("---------------------->", networkId);
     switch (networkId) {

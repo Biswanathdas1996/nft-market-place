@@ -11,7 +11,7 @@ import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import Divider from "@mui/material/Divider";
 import ListItemText from "@mui/material/ListItemText";
-import { networkURL } from "../../config";
+import { networkURL, getBaseApiUrl, getApiKey } from "../../config";
 import { ConfigContext } from "../../App";
 const steps = ["Initiating", "Waiting for confirmation", "Transction complete"];
 
@@ -29,13 +29,47 @@ const style = {
 
 export default function TransctionModal({ response, setStart, modalClose }) {
   const [open, setOpen] = React.useState(true);
+  const [loading, setLoading] = React.useState(true);
   const configs = React.useContext(ConfigContext);
+  const domData = response?.error ? response.error.receipt : response;
+
   const handleClose = () => {
     setOpen(false);
     modalClose();
   };
 
-  const domData = response?.error ? response.error.receipt : response;
+  let interval;
+  if (domData?.hash) {
+    interval = setInterval(function () {
+      fetchData();
+    }, 9000);
+  }
+
+  const fetchData = () => {
+    var requestOptions = {
+      method: "GET",
+      redirect: "follow",
+    };
+
+    fetch(
+      `${getBaseApiUrl(
+        configs
+      )}?module=transaction&action=gettxreceiptstatus&txhash=${
+        domData?.hash
+      }&apikey=${getApiKey(configs)}`,
+      requestOptions
+    )
+      .then((response) => response.json())
+      .then((result) => {
+        console.log(result?.result?.status);
+        if (result?.result?.status === "1") {
+          setLoading(false);
+          clearInterval(interval);
+        }
+      })
+      .catch((error) => console.log("error", error));
+  };
+
   return (
     <div>
       <Modal
@@ -59,8 +93,12 @@ export default function TransctionModal({ response, setStart, modalClose }) {
               style={{ marginTop: 30 }}
             >
               {domData ? (
-                domData?.status ? (
-                  <b style={{ color: "green" }}>Transction complete</b>
+                domData?.hash ? (
+                  <b style={{ color: "green" }}>
+                    {!loading
+                      ? "Transction complete"
+                      : "Transction Confirmed! Fetching info..."}
+                  </b>
                 ) : (
                   <b style={{ color: "red" }}>Transction failed</b>
                 )
@@ -69,12 +107,12 @@ export default function TransctionModal({ response, setStart, modalClose }) {
               )}
             </Typography>
             <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-              {domData
+              {domData?.hash
                 ? "Transactions request complete."
                 : "Transactions have been initiated. Waiting for confirmation."}
             </Typography>
 
-            {domData && (
+            {domData?.hash && (
               <List sx={{ width: "100%", bgcolor: "background.paper" }}>
                 <ListItem alignItems="flex-start">
                   <ListItemText
@@ -82,13 +120,11 @@ export default function TransctionModal({ response, setStart, modalClose }) {
                     secondary={
                       <React.Fragment>
                         <a
-                          href={`${networkURL(configs)}/tx/${
-                            domData?.transactionHash
-                          }`}
+                          href={`${networkURL(configs)}/tx/${domData?.hash}`}
                           target="_blank"
                           rel="noreferrer"
                         >
-                          {domData?.transactionHash}
+                          {domData?.hash}
                         </a>
                       </React.Fragment>
                     }
@@ -97,19 +133,17 @@ export default function TransctionModal({ response, setStart, modalClose }) {
                 <Divider variant="inset" component="li" />
                 <ListItem alignItems="flex-start">
                   <ListItemText
-                    primary="Block hash"
+                    primary="Nonce"
                     secondary={
-                      <React.Fragment>{domData?.blockHash}</React.Fragment>
+                      <React.Fragment>{domData?.nonce}</React.Fragment>
                     }
                   />
                 </ListItem>
                 <Divider variant="inset" component="li" />
                 <ListItem alignItems="flex-start">
                   <ListItemText
-                    primary="Block number"
-                    secondary={
-                      <React.Fragment>{domData?.blockNumber}</React.Fragment>
-                    }
+                    primary="Transction From"
+                    secondary={<React.Fragment>{domData?.from}</React.Fragment>}
                   />
                 </ListItem>
                 <Divider variant="inset" component="li" />
@@ -130,13 +164,13 @@ export default function TransctionModal({ response, setStart, modalClose }) {
               </List>
             )}
 
-            {domData ? (
+            {domData && !loading ? (
               <Button
                 variant="contained"
                 onClick={(e) => handleClose()}
                 style={{ marginTop: 20 }}
               >
-                Close
+                {!loading ? "Close" : "Please wait ..."}
               </Button>
             ) : response?.error?.code === 4001 ? (
               <>
