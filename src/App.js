@@ -10,7 +10,6 @@ import { getIcon } from "./utils/currencyIcon";
 import { currentNeteork } from "./utils/currentNeteork";
 import { getcurrentNetworkId } from "./CONTRACT-ABI/connect";
 import { useLocation } from "react-router-dom";
-import { fetchConfigData, getConfigData } from "./getConfigaration";
 
 export const ConfigContext = createContext(null);
 
@@ -41,18 +40,7 @@ const App = () => {
   const getConfig = async () => {
     setLoading(true);
 
-    await fetchConfigData();
-    const getConfigDataVaues = getConfigData();
-    const currentNetworkId = await getcurrentNetworkId();
-    console.log("--->currentNetworkId", currentNetworkId);
-    setActiveNetwork(getConfigDataVaues?.network_name);
-    if (
-      currentNetworkId.toString() !== getConfigDataVaues?.network_id?.toString()
-    ) {
-      setAccessable(false);
-    } else {
-      setAccessable(true);
-    }
+    setAccessable(true);
     setLoading(false);
   };
 

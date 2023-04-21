@@ -18,7 +18,7 @@ export const addNftImageToDatabase = async (
   };
 
   return fetch(
-    "https://sosal.in/endpoints/metaverce/add_nft.php",
+    "https://endpoints.in/endpoints/metaverce/add_nft.php",
     requestOptions
   )
     .then((response) => response.text())

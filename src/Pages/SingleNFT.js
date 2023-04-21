@@ -108,7 +108,7 @@ const Mint = () => {
       try {
         responseData = await _transction(
           "mintNFT",
-          resultsSaveMetaData,
+          resultsSaveMetaData?.link,
           web3.utils.toWei(price.toString(), "ether"),
           royelty,
           category

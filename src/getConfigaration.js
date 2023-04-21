@@ -27,16 +27,16 @@ export async function fetchConfigData() {
       })
       .catch((error) => {
         console.log("error", error);
-        swal("Configration failed!", "Please contact admin", "warning").then(
-          (value) => {
-            sessionStorage.setItem("x-nft-config-token", mockToken);
-            // return mockToken;
-            setTimeout(() => {
-              window.location.reload();
-            }, 2000);
-            return false;
-          }
-        );
+        // swal("Configration failed!", "Please contact admin", "warning").then(
+        //   (value) => {
+        //     sessionStorage.setItem("x-nft-config-token", mockToken);
+        //     // return mockToken;
+        //     setTimeout(() => {
+        //       window.location.reload();
+        //     }, 2000);
+        //     return false;
+        //   }
+        // );
       });
   } else {
     return false;

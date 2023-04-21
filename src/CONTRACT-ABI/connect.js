@@ -28,6 +28,8 @@ export const getContractAddress = (networkID) => {
       return Address.goerli;
     case "4":
       return Address.rinkeby;
+    case "11155111":
+      return Address.sapolia;
     default:
     // code block
   }

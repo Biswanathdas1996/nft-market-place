@@ -1,9 +1,8 @@
 import { Web3Storage } from "web3.storage/dist/bundle.esm.min.js";
-import { getConfigData } from "../getConfigaration";
-const getConfigDataVaues = getConfigData();
 
 const client = new Web3Storage({
-  token: getConfigDataVaues?.Web3Storage,
+  token:
+    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJkaWQ6ZXRocjoweDEzMkRhNjE2N2U0OTY2Y2M2ODBlMjNlNzdjMmM5NjI2YWZFQjkyNzMiLCJpc3MiOiJ3ZWIzLXN0b3JhZ2UiLCJpYXQiOjE2NjAxOTIxNjI3MDEsIm5hbWUiOiJ0ZXN0In0.nrWyG-RPCty28GQLPOfjCacYoOoURarCyo6nh3t0QCY",
 });
 
 export const uploadFileToIpfs = async (file) => {
@@ -11,17 +10,39 @@ export const uploadFileToIpfs = async (file) => {
   const results = await client.put(file, {});
 
   // return `https://ipfs.io/ipfs/${results}/${fileName}`;
-  return `https://${results}.ipfs.dweb.link/${fileName}`;
+  return `https://ipfs.io/ipfs/${results}/${fileName}`;
 };
 
+// export const createAnduploadFileToIpfs = async (metaData) => {
+//   const blob = new Blob([JSON.stringify(metaData)], {
+//     type: "application/json",
+//   });
+//   const files = [new File([blob], "ipfs.json")];
+//   const resultsSaveMetaData = await client.put(files, {});
+//   // return `https://ipfs.io/ipfs/${resultsSaveMetaData}/ipfs.json`;
+//   return `https://${resultsSaveMetaData}.ipfs.dweb.link/ipfs.json`;
+// };
+
 export const createAnduploadFileToIpfs = async (metaData) => {
-  const blob = new Blob([JSON.stringify(metaData)], {
-    type: "application/json",
-  });
-  const files = [new File([blob], "ipfs.json")];
-  const resultsSaveMetaData = await client.put(files, {});
-  // return `https://ipfs.io/ipfs/${resultsSaveMetaData}/ipfs.json`;
-  return `https://${resultsSaveMetaData}.ipfs.dweb.link/ipfs.json`;
+  var formdata = new FormData();
+  formdata.append("data", JSON.stringify(metaData));
+
+  var requestOptions = {
+    method: "POST",
+    body: formdata,
+    redirect: "follow",
+  };
+
+  return fetch(
+    "https://endpoints.in/endpoints/ipfs/add-Ipfs.php",
+    requestOptions
+  )
+    .then((response) => response.json())
+    .then((result) => ({
+      path: result,
+      link: `https://endpoints.in/endpoints/ipfs/fetch-ipfs.php?id=${result}`,
+    }))
+    .catch((error) => console.log("error", error));
 };
 
 export const getIpfsUrI = (fingerprint) => {

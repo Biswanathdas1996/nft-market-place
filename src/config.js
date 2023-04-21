@@ -1,18 +1,18 @@
 import { getConfigData } from "./getConfigaration";
-const getConfigDataVaues = getConfigData();
+// const getConfigDataVaues = getConfigData();
 
-const openseaBaseUrl = getConfigDataVaues?.opensea_base_url;
+const openseaBaseUrl = "https://testnets.opensea.io";
 
 export const getApiKey = () => {
-  return getConfigDataVaues?.ChainExplorerAPIKEY;
+  return "WCVDU52748WW4F7EKDEDB89HKH41BIA4N2";
 };
 
 export const getBaseApiUrl = () => {
-  return getConfigDataVaues?.blockchain_base_api;
+  return "https://api-sepolia.etherscan.io/api";
 };
 
 export const getNetworkName = () => {
-  return getConfigDataVaues?.network_name;
+  return "sepolia";
 };
 
 export const openSeaURI = (address, tokenId) => {
@@ -20,9 +20,7 @@ export const openSeaURI = (address, tokenId) => {
 };
 
 export const networkURL = () => {
-  return (
-    getConfigDataVaues?.network_url || "https://goerli.etherscan.io/address/"
-  );
+  return "https://sepolia.etherscan.io";
 };
 
 export const getTransctionListAPI = (account) => {
